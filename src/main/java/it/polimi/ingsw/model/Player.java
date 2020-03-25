@@ -6,20 +6,24 @@ public class Player {
     private int age;
     private Worker worker1;
     private Worker worker2;
-    private God god;
+    private God godCard;
 
-    public void setPlayer(String name, int age) {
-        this.name=name;
-        this.age=age;
 
-    }
-
-    public String getName() {
+    public String getPlayerName() {
         return name;
     }
 
-    public int getAge() {
+    public void setPlayerName(String name) {
+        this.name = name;
+    }
+
+
+    public int getPlayerAge() {
         return age;
+    }
+
+    public void setPlayerAge(int age) {
+        this.age = age;
     }
 
 }

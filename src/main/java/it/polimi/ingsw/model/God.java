@@ -1,5 +1,10 @@
 package it.polimi.ingsw.model;
 
-public enum God {
-    APOLLO, ARTEMIS, ATHENA, ATLAS, DEMETER, HEPHAESTEUS, MINOTAUR, PAN, PROMETHEUS;
+public interface God {
+
+    enum godNames {
+        APOLLO, ARTEMIS, ATHENA, ATLAS, DEMETER, HEPHAESTUS, MINOTAUR, PAN, PROMETHEUS;
+    }
+
+    void GodPower(String God);
 }
