@@ -6,7 +6,7 @@ public class Player {
     private int age;
     private Worker worker1;
     private Worker worker2;
-    private God godCard;
+    private GodTypes godCard;
 
 
     public String getPlayerName() {
@@ -17,7 +17,6 @@ public class Player {
         this.name = name;
     }
 
-
     public int getPlayerAge() {
         return age;
     }
@@ -25,6 +24,7 @@ public class Player {
     public void setPlayerAge(int age) {
         this.age = age;
     }
+
 
 }
 

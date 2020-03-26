@@ -8,8 +8,8 @@ import java.util.Observable;
 public class Model extends Observable implements Cloneable {
 
     private Board board;
-    List<Player> players = new ArrayList<Player>();
-    ArrayList<God> gods = new ArrayList<God>();
+    private List<Player> players = new ArrayList<Player>();
+    private List<GodTypes> gods = new ArrayList<GodTypes>();
 
     @Override
     public Model clone() {
