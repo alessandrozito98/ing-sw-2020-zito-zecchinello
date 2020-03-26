@@ -33,11 +33,11 @@ public class Cell {
             this.worker = worker;
             occupied = true;
         }
-
     }
 
     public void removeWorker() {
         this.worker = null;
+        occupied = false;
     }
 
     public void buildLevel1 () {
@@ -45,18 +45,21 @@ public class Cell {
     }
 
     public void buildLevel2 () {
+
         if(level1 != null && level2 == null) {
             level2 = BlockType.LEVEL2;
         }
     }
 
     public void buildLevel3 () {
+
         if(level2 != null && level3 == null) {
             level3 = BlockType.LEVEL3;
         }
     }
 
     public void buildDome () {
+
         if (level3 != null && dome == null) {
             dome = BlockType.DOME;
         }
