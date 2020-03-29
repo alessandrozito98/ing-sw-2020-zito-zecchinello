@@ -8,4 +8,7 @@ public class Board {
         return board;
     }
 
+    public Cell getCell(int x, int y) {
+        return board[x][y];
+    }
 }

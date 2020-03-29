@@ -1,0 +1,7 @@
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
+
+#custom ignore
+target
+.idea
+ing-sw-2019-35.iml

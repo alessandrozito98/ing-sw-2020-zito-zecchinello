@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public class Model extends Observable implements Cloneable {
+public class Game extends Observable implements Cloneable {
 
     private Board board;
     private List<Player> players = new ArrayList<Player>();
     private List<GodTypes> gods = new ArrayList<GodTypes>();
 
     @Override
-    public Model clone() {
-        Model model = new Model();
+    public Game clone() {
+        Game model = new Game();
         model.board = board;
         model.players.set(0, players.get(0));
         model.players.set(1, players.get(1));
@@ -25,13 +25,17 @@ public class Model extends Observable implements Cloneable {
     }
 
 
-    public List<Player> getPlayers() {
-        return players;
+    public ArrayList<Player> getPlayers() {
+        return (ArrayList<Player>) players;
     }
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 
+    public void createBoard() {
+        Board board = new Board();
+
+    }
 
 }
