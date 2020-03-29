@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c06a803c-1eac-485c-bc19-84a0fe2ad955" name="Default Changelist" comment="Update of Model.java">
+    <list default="true" id="c06a803c-1eac-485c-bc19-84a0fe2ad955" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +103,7 @@
       <workItem from="1585176321088" duration="3807000" />
       <workItem from="1585235618043" duration="9401000" />
       <workItem from="1585425666288" duration="5964000" />
-      <workItem from="1585492743457" duration="2889000" />
+      <workItem from="1585492743457" duration="3130000" />
     </task>
     <task id="LOCAL-00001" summary="Creation GodType, WorkerColor + Update of Cell">
       <created>1585249671990</created>
@@ -111,7 +112,21 @@
       <option name="project" value="LOCAL" />
       <updated>1585249671990</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update of Model.java">
+      <created>1585505103129</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1585505103129</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update of Model.java">
+      <created>1585505148738</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585505148738</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,7 +135,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Model" />
     <MESSAGE value="Creation GodType, WorkerColor + Update of Cell" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creation GodType, WorkerColor + Update of Cell" />
+    <MESSAGE value="Update of Model.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update of Model.java" />
   </component>
   <component name="WindowStateProjectService">
     <state x="485" y="71" key="#App" timestamp="1584892168707">
@@ -159,10 +175,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1584899646760" />
-    <state x="337" y="7" key="CommitChangelistDialog2" timestamp="1585505101913">
+    <state x="337" y="7" key="CommitChangelistDialog2" timestamp="1585505148013">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="337" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1585505101913" />
+    <state x="337" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1585505148013" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1585504699671">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
