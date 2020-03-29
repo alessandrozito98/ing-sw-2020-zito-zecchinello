@@ -38,6 +38,7 @@ public class Cell {
         return north;
     }
 
+<<<<<<< HEAD
     public void setNorth(boolean north) {
         this.north = north;
     }
@@ -48,12 +49,24 @@ public class Cell {
 
     public void setSouth(boolean south) {
         this.south = south;
+=======
+        if(!occupied) {
+            this.worker = worker;
+            occupied = true;
+        }
+    }
+
+    public void removeWorker() {
+        this.worker = null;
+        occupied = false;
+>>>>>>> 9ef946d9e96fc63a98b9e3a2256dd3cd7f7115ff
     }
 
     public boolean isEast() {
         return east;
     }
 
+<<<<<<< HEAD
     public void setEast(boolean east) {
         this.east = east;
     }
@@ -67,6 +80,19 @@ public class Cell {
         if(!occupied) {
             this.worker = worker;
             occupied = true;
+=======
+    public void buildLevel2 () {
+
+        if(level1 != null && level2 == null) {
+            level2 = BlockType.LEVEL2;
+        }
+    }
+
+    public void buildLevel3 () {
+
+        if(level2 != null && level3 == null) {
+            level3 = BlockType.LEVEL3;
+>>>>>>> 9ef946d9e96fc63a98b9e3a2256dd3cd7f7115ff
         }
 
     }
@@ -74,6 +100,7 @@ public class Cell {
         this.worker = null;
     }
 
+<<<<<<< HEAD
 
     public void build () {
         if (!occupied) {
@@ -96,6 +123,12 @@ public class Cell {
                     }
                 }
             }
+=======
+    public void buildDome () {
+
+        if (level3 != null && dome == null) {
+            dome = BlockType.DOME;
+>>>>>>> 9ef946d9e96fc63a98b9e3a2256dd3cd7f7115ff
         }
     }
 }
