@@ -1,12 +1,14 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.God.AbstractGod;
+
 public class Player {
 
     private String name;
     private int age;
     private Worker worker1;
     private Worker worker2;
-    private GodTypes godCard;
+    private AbstractGod godCard;
 
 
     public String getPlayerName() {

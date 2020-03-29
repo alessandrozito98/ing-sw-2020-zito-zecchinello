@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 
+import it.polimi.ingsw.model.God.AbstractGod;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -9,7 +11,7 @@ public class Game extends Observable implements Cloneable {
 
     private Board board;
     private List<Player> players = new ArrayList<Player>();
-    private List<GodTypes> gods = new ArrayList<GodTypes>();
+    private ArrayList<AbstractGod> gods = new ArrayList<AbstractGod>();
 
     @Override
     public Game clone() {
