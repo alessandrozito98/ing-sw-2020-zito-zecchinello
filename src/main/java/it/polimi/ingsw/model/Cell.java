@@ -24,6 +24,49 @@ public class Cell {
         return y;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
+    }
+
+    public Block getLevel(){
+        return this.level;
+    }
+
+    public void setLevel(Block level) {
+        this.level = level;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+
+    public void addWorker(Worker worker) {
+
+        if (!occupied) {
+            this.worker = worker;
+            occupied = true;
+        }
+    }
+
+    public void removeWorker() {
+        this.worker = null;
+        occupied = false;
+    }
+
+
     public void build() {
         if (level == null) {
             level = Block.LEVEL1;
@@ -41,27 +84,6 @@ public class Cell {
             }
         }
 
-    }
-
-    public void addWorker(Worker worker) {
-
-        if (!occupied) {
-            this.worker = worker;
-            occupied = true;
-        }
-    }
-
-    public void removeWorker() {
-        this.worker = null;
-        occupied = false;
-    }
-
-    public boolean getOccupied(){
-        return this.occupied;
-    }
-
-    public Block getLevel(){
-        return this.level;
     }
 
 
