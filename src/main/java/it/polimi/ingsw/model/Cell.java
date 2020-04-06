@@ -8,7 +8,7 @@ public class Cell {
     private Block level;
     private Worker worker;
 
-    public Cell(int x, int y) {
+    public Cell(int x, int y, boolean occupied, Block level, Worker worker) {
         this.x = x;
         this.y = y;
         this.occupied = false;
