@@ -2,10 +2,8 @@ package it.polimi.ingsw.model.God;
 
 import it.polimi.ingsw.model.Player;
 
-public class Atlas implements AbstractGod {
+public class Atlas {
 
-    @Override
-    public void useGod(Player player) {
-
-    }
+    private final String name = "Atlas";
+    private final String power = "Your Build: Your Worker may build a dome at any level.";
 }

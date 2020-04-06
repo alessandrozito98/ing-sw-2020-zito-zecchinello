@@ -1,17 +1,14 @@
 package it.polimi.ingsw.model;
 
 
-import it.polimi.ingsw.model.God.AbstractGod;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 public class Model extends Observable {
 
     private Board board;
     private ArrayList<Player> players = new ArrayList<Player>();
-    private ArrayList<AbstractGod> gods = new ArrayList<AbstractGod>();
+    private ArrayList<WinGod> gods = new ArrayList<WinGod>();
 
 
     public ArrayList<Player> getPlayers() {

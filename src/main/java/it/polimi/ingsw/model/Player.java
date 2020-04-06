@@ -1,13 +1,11 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.God.AbstractGod;
-
 public class Player {
 
     private String name;
     private Worker worker1;
     private Worker worker2;
-    private AbstractGod godCard;
+    private WinGod godCard;
 
 
     public String getName() {
@@ -46,11 +44,11 @@ public class Player {
         this.worker2 = worker2;
     }
 
-    public AbstractGod getGodCard() {
+    public WinGod getGodCard() {
         return godCard;
     }
 
-    public void setGodCard(AbstractGod godCard) {
+    public void setGodCard(WinGod godCard) {
         this.godCard = godCard;
     }
 

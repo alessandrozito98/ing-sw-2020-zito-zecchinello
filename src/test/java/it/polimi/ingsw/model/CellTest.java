@@ -23,7 +23,7 @@ public class CellTest {
     @Test
     public void removeWorker() {
         Worker workerTest = new Worker();
-        Cell cellTest = new Cell(1,1,false,null,null);
+        Cell cellTest = new Cell(1,1,false,null,workerTest);
         cellTest.removeWorker();
         assertNull(cellTest.getWorker());
         assertFalse(cellTest.isOccupied());
