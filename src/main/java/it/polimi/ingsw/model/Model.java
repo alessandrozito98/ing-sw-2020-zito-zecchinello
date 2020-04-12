@@ -8,7 +8,6 @@ public class Model extends Observable {
 
     private Board board;
     private ArrayList<Player> players = new ArrayList<Player>();
-    private ArrayList<WinGod> gods = new ArrayList<WinGod>();
 
 
     public ArrayList<Player> getPlayers() {

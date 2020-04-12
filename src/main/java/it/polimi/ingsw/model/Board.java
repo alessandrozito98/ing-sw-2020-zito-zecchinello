@@ -1,18 +1,10 @@
 package it.polimi.ingsw.model;
 
-public class Board implements Cloneable {
+import java.util.ArrayList;
+
+public class Board {
 
     private Cell[][] board = new Cell[5][5];
-
-
-    @Override
-    protected final Board clone() {
-        final Board result = new Board();
-        for (int i = 0; i < 3; i++) {
-            result.board[i] = board[i].clone();
-        }
-        return result;
-    }
 
 
     public Cell getCell(int row, int column) {
@@ -22,6 +14,19 @@ public class Board implements Cloneable {
             throw new RuntimeException();
         }
     }
+
+
+    // returns all the squares a player can move to, given his coordinates
+    public ArrayList<Cell> checkMovement(Worker worker, ArrayList<Cell> cells){
+
+        Cell workerCell = worker.getPosition();
+
+
+
+
+        return cells;
+    }
+
 
 
 

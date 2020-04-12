@@ -1,11 +1,14 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.God.God;
+
+import java.util.ArrayList;
+
 public class Player {
 
     private String name;
-    private Worker worker1;
-    private Worker worker2;
-    private WinGod godCard;
+    private ArrayList<Worker> workers;
+    private God godCard;
 
 
     public String getName() {
@@ -16,41 +19,16 @@ public class Player {
         this.name = name;
     }
 
-    public String getPlayerName() {
-        return name;
+    public ArrayList<Worker> getWorkers() {
+        return workers;
     }
 
-    public void setPlayerName(String name) {
-        this.name = name;
+    public void setWorkers(ArrayList<Worker> workers) {
+        this.workers = workers;
     }
 
-    public Worker getPlayerWorker1() {
-        return worker1;
-    }
-
-    public Worker getWorker1() {
-        return worker1;
-    }
-
-    public void setWorker1(Worker worker1) {
-        this.worker1 = worker1;
-    }
-
-    public Worker getWorker2() {
-        return worker2;
-    }
-
-    public void setWorker2(Worker worker2) {
-        this.worker2 = worker2;
-    }
-
-    public WinGod getGodCard() {
-        return godCard;
-    }
-
-    public void setGodCard(WinGod godCard) {
-        this.godCard = godCard;
-    }
 
 }
+
+
 

@@ -5,10 +5,10 @@ public class Cell {
     private int x;
     private int y;
     private boolean occupied;
-    private Block level;
+    private Level level;
     private Worker worker;
 
-    public Cell(int x, int y, boolean occupied, Block level, Worker worker) {
+    public Cell(int x, int y, boolean occupied, Level level, Worker worker) {
         this.x = x;
         this.y = y;
         this.occupied = false;
@@ -40,11 +40,11 @@ public class Cell {
         this.occupied = occupied;
     }
 
-    public Block getLevel(){
+    public Level getLevel(){
         return this.level;
     }
 
-    public void setLevel(Block level) {
+    public void setLevel(Level level) {
         this.level = level;
     }
 
@@ -67,24 +67,6 @@ public class Cell {
     }
 
 
-    public void build() {
-        if (level == null) {
-            level = Block.LEVEL1;
-        } else {
-            if (level == Block.LEVEL1) {
-                level = Block.LEVEL2;
-            } else {
-                if (level == Block.LEVEL2) {
-                    level = Block.LEVEL3;
-                } else {
-                    if (level == Block.LEVEL3) {
-                        level = Block.DOME;
-                    }
-                }
-            }
-        }
-
-    }
 
 
 }
