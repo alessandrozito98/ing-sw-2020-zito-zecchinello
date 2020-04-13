@@ -4,9 +4,9 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class Model extends Observable {
+public class Game extends Observable {
 
-    private Board board;
+    private Board board = new Board();
     private ArrayList<Player> players = new ArrayList<Player>();
 
 
@@ -16,11 +16,6 @@ public class Model extends Observable {
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
-    }
-
-    public void createBoard() {
-        Board board = new Board();
-
     }
 
 }
