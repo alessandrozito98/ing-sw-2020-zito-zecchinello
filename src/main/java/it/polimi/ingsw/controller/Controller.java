@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.view.View;
 
 import java.util.Observable;
@@ -8,11 +8,11 @@ import java.util.Observer;
 
 public class Controller implements Observer {
 
-    private Model model;
+    private Game game;
     private View view;
 
-    public Controller(Model model, View view) {
-        this.model=model;
+    public Controller(Game game, View view) {
+        this.game = game;
         this.view=view;
     }
 
