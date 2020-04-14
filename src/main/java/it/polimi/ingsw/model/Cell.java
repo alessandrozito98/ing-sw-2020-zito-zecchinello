@@ -4,15 +4,13 @@ public class Cell {
 
     private int x;
     private int y;
-    private boolean occupied;
     private Level level;
     private Worker worker;
 
-    public Cell(int x, int y, boolean occupied, Level level, Worker worker) {
+    public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.occupied = false;
-        this.level = null;
+        this.level = Level.GROUND;
         this.worker = null;
     }
 
@@ -32,14 +30,6 @@ public class Cell {
         this.y = y;
     }
 
-    public boolean isOccupied() {
-        return occupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
-    }
-
     public Level getLevel(){
         return this.level;
     }
@@ -55,15 +45,13 @@ public class Cell {
 
     public void addWorker(Worker worker) {
 
-        if (!occupied) {
+        if (this.worker == null) {
             this.worker = worker;
-            occupied = true;
         }
     }
 
     public void removeWorker() {
         this.worker = null;
-        occupied = false;
     }
 
 

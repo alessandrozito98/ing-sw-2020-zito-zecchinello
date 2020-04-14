@@ -24,10 +24,20 @@ public abstract class God {
 
     public boolean isFeasibleMove(Cell cell,Worker worker){
 
+        if(cell.getX() == worker.getPosition().getX() && cell.getY() == worker.getPosition().getY()) {
+            return false;
+        }
+
+        if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
+            if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
+                return cell.getWorker() == null;
+            }
+        }
+        return false;
     }
 
-    public boolean isFeasibleBuild(Cell cell,Worker worker, Level level){
-
+    public boolean isFeasibleBuild(Cell cell, Worker worker, Level level){
+        return true;
     }
 
     public int getAvailableMoveNumber() {
