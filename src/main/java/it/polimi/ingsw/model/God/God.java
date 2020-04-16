@@ -10,7 +10,7 @@ public abstract class God {
     private boolean canMoveUp;
 
     public void Move(Cell cell, Worker worker){
-        cell.removeWorker();
+        worker.getPosition().removeWorker();
         cell.addWorker(worker);
         worker.setPosition(cell);
         setAvailableMoveNumber(this.availableMoveNumber-1);
@@ -24,20 +24,46 @@ public abstract class God {
 
     public boolean isFeasibleMove(Cell cell,Worker worker){
 
-        if(cell.getX() == worker.getPosition().getX() && cell.getY() == worker.getPosition().getY()) {
+        if(cell.getWorker()!=null) {
+            return false;
+        }
+
+        if(cell.getLevel()==Level.DOME){
+            return false;
+        }
+
+        if(cell.getLevel().ordinal()>(worker.getPosition().getLevel().ordinal()+1)){
             return false;
         }
 
         if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
             if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
-                return cell.getWorker() == null;
+                return true;
             }
         }
         return false;
     }
 
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level){
-        return true;
+
+        if(cell.getWorker()!=null) {
+            return false;
+        }
+
+        if(cell.getLevel()==Level.DOME){
+            return false;
+        }
+
+        if(!(cell.getLevel().ordinal()==(level.ordinal()-1))){
+            return false;
+        }
+
+        if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
+            if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getAvailableMoveNumber() {
