@@ -1,6 +1,64 @@
 package it.polimi.ingsw.model.God;
 
 
+import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Level;
+import it.polimi.ingsw.model.Worker;
+
 public class Apollo extends God {
 
+    public Apollo(){
+        super();
+    }
+
+    @Override
+    public void Move(Cell cell, Worker worker) {
+        Level oldLevel = worker.getPosition().getLevel();
+        if(cell.getWorker()!=null){
+            cell.getWorker().setPosition(worker.getPosition());
+            worker.getPosition().removeWorker();
+            worker.getPosition().addWorker(cell.getWorker());
+            cell.removeWorker();
+            cell.addWorker(worker);
+            worker.setPosition(cell);
+        }
+        else{
+            worker.getPosition().removeWorker();
+            cell.addWorker(worker);
+            worker.setPosition(cell);
+        }
+        setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
+        setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
+    }
+
+    @Override
+    public boolean isFeasibleMove(Cell cell, Worker worker) {
+        if(this.getAvailableMoveNumber()==0){
+            return false;
+        }
+
+        if(cell.getWorker()!=null&&(cell.getWorker().getPlayerID()==worker.getPlayerID())) {
+            return false;
+        }
+
+        if(cell.getLevel()== Level.DOME){
+            return false;
+        }
+
+        if(cell.getLevel().ordinal()>(worker.getPosition().getLevel().ordinal()+1)){
+            return false;
+        }
+
+        if(!this.getCanMoveUp()&& cell.getLevel().ordinal()== worker.getPosition().getLevel().ordinal()+1){
+            return false;
+        }
+
+        if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
+            if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -4,25 +4,38 @@ import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Worker;
 
+
 public abstract class God {
     private int availableMoveNumber;
     private int availableBuildNumber;
     private boolean canMoveUp;
 
+    public God(){
+        availableBuildNumber = 1;
+        availableBuildNumber = 0;
+        canMoveUp = true;
+    }
+
     public void Move(Cell cell, Worker worker){
+        Level oldLevel = worker.getPosition().getLevel();
         worker.getPosition().removeWorker();
         cell.addWorker(worker);
         worker.setPosition(cell);
-        setAvailableMoveNumber(this.availableMoveNumber-1);
-        setAvailableBuildNumber(this.availableBuildNumber+1);
+        setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
+        setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
     public void Build(Cell cell, Worker worker, Level level){
         cell.setLevel(level);
-        setAvailableBuildNumber(this.availableBuildNumber-1);
+        setAvailableBuildNumber(this.getAvailableBuildNumber()-1);
     }
 
     public boolean isFeasibleMove(Cell cell,Worker worker){
+
+        if(this.getAvailableMoveNumber()==0){
+            return false;
+        }
 
         if(cell.getWorker()!=null) {
             return false;
@@ -36,6 +49,10 @@ public abstract class God {
             return false;
         }
 
+        if(!this.getCanMoveUp()&&(cell.getLevel().ordinal()==(worker.getPosition().getLevel().ordinal()+1))){
+            return false;
+        }
+
         if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
             if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
                 return true;
@@ -45,6 +62,10 @@ public abstract class God {
     }
 
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level){
+
+        if(this.getAvailableBuildNumber()==0){
+            return false;
+        }
 
         if(cell.getWorker()!=null) {
             return false;
@@ -88,6 +109,13 @@ public abstract class God {
 
     public boolean getCanMoveUp() {
         return canMoveUp;
+    }
+
+    public boolean winControl(Level oldLevel, Level newLevel){
+        if(oldLevel!=newLevel&&newLevel==Level.LEVEL1){
+            return true;
+        }
+        return false;
     }
 
     public void resetTurn(){
