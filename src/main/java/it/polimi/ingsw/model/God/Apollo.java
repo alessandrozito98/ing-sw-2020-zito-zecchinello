@@ -34,11 +34,8 @@ public class Apollo extends God {
 
     @Override
     public boolean isFeasibleMove(Cell cell, Worker worker) {
-        if(this.getAvailableMoveNumber()==0){
-            return false;
-        }
 
-        if(cell.getWorker()!=null&&(cell.getWorker().getPlayerID()==worker.getPlayerID())) {
+        if(cell.getWorker()!=null&&(cell.getWorker().getColor()==worker.getColor())) {
             return false;
         }
 

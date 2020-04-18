@@ -33,10 +33,6 @@ public abstract class God {
 
     public boolean isFeasibleMove(Cell cell,Worker worker){
 
-        if(this.getAvailableMoveNumber()==0){
-            return false;
-        }
-
         if(cell.getWorker()!=null) {
             return false;
         }
