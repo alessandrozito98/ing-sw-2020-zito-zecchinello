@@ -6,14 +6,14 @@ import it.polimi.ingsw.model.Worker;
 
 
 public abstract class God {
-    private int availableMoveNumber;
-    private int availableBuildNumber;
-    private boolean canMoveUp;
+    protected int availableMoveNumber;
+    protected int availableBuildNumber;
+    protected boolean canMoveUp;
 
     public God(){
-        availableBuildNumber = 1;
-        availableBuildNumber = 0;
-        canMoveUp = true;
+        this.availableBuildNumber = 1;
+        this.availableBuildNumber = 0;
+        this.canMoveUp = true;
     }
 
     public void Move(Cell cell, Worker worker){
@@ -58,10 +58,6 @@ public abstract class God {
     }
 
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level){
-
-        if(this.getAvailableBuildNumber()==0){
-            return false;
-        }
 
         if(cell.getWorker()!=null) {
             return false;
@@ -108,7 +104,7 @@ public abstract class God {
     }
 
     public boolean winControl(Level oldLevel, Level newLevel){
-        if(oldLevel!=newLevel&&newLevel==Level.LEVEL1){
+        if(oldLevel!=newLevel&&newLevel==Level.LEVEL3){
             return true;
         }
         return false;
