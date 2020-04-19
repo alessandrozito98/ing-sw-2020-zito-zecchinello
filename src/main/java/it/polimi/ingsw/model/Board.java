@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 public class Board {
 
-    private Cell[][] board = new Cell[5][5];
+
+    private final Cell[][] board = new Cell[5][5];
+
+    public Cell[][] getBoard() {
+        return board;
+    }
 
 
     public Cell getCell(int row, int column) {
@@ -16,16 +21,6 @@ public class Board {
     }
 
 
-    // returns all the squares a player can move to, given his coordinates
-    public ArrayList<Cell> checkMovement(Worker worker, ArrayList<Cell> cells){
-
-        Cell workerCell = worker.getPosition();
-
-
-
-
-        return cells;
-    }
 
 
 

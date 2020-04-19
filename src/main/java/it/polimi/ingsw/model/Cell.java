@@ -54,7 +54,4 @@ public class Cell {
         this.worker = null;
     }
 
-
-
-
 }
