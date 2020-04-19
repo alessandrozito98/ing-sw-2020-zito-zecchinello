@@ -14,8 +14,8 @@ public class Demeter extends God {
 
     @Override
     public void Build(Cell cell, Worker worker, Level level) {
-        if(firstBuildPosition==null) {
-            firstBuildPosition = cell;
+        if(this.firstBuildPosition==null) {
+            this.firstBuildPosition = cell;
         }
         else {
             setAvailableBuildNumber(this.getAvailableBuildNumber() - 1);
