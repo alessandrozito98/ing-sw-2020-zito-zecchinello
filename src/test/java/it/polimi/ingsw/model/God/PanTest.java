@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.God;
 
+import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Worker;
+import it.polimi.ingsw.model.WorkerColor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,5 +24,33 @@ public class PanTest {
         assertFalse(panTest.getCanMoveUp());
     }
 
+    @Test
+    public void IsFeasibleMoveOccupiedCell(){
 
+    }
+
+    @Test
+    public void IsFeasibleMoveCellLevelDome(){
+
+    }
+
+    @Test
+    public void IsFeasibleMoveCellLevelTooHigh(){
+
+    }
+
+    @Test
+    public void IsFeasibleMoveCanMoveUpFalse(){
+
+    }
+
+    @Test
+    public void IsFeasibleMoveIncorrectDistance(){
+
+    }
+
+    @Test
+    public void IsFeasibleMove(){
+
+    }
 }
