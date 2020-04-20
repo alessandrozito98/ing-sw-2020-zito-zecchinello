@@ -13,23 +13,20 @@ public class CellTest {
 
     @Test
     public void addWorker() {
-        Worker workerTest = new Worker();
-        Cell cellTest = new Cell(1,1,true,null,null);
+        Worker workerTest = new Worker(1,WorkerColor.BLUE);
+        Cell cellTest = new Cell(1,1);
         cellTest.addWorker(workerTest);
         assertEquals(cellTest.getWorker(),workerTest);
-        assertTrue(cellTest.isOccupied());
     }
 
     @Test
     public void removeWorker() {
-        Worker workerTest = new Worker();
-        Cell cellTest = new Cell(1,1,false,null,workerTest);
+        Worker workerTest = new Worker(1,WorkerColor.BLUE);
+        Cell cellTest = new Cell(1,1);
+        cellTest.addWorker(workerTest);
+        assertNotNull(cellTest.getWorker());
         cellTest.removeWorker();
         assertNull(cellTest.getWorker());
-        assertFalse(cellTest.isOccupied());
     }
 
-    @Test
-    public void build() {
-    }
 }
