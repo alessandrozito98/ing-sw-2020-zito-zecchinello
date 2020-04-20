@@ -11,7 +11,7 @@ public abstract class God {
     protected boolean canMoveUp;
 
     public God(){
-        this.availableBuildNumber = 1;
+        this.availableMoveNumber = 1;
         this.availableBuildNumber = 0;
         this.canMoveUp = true;
     }
