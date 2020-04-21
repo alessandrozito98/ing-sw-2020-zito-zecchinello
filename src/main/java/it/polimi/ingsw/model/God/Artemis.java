@@ -1,14 +1,15 @@
 package it.polimi.ingsw.model.God;
 
 import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
 
 public class Artemis extends God {
     private Cell firstMovePosition;
 
-    public Artemis(){
-        super();
+    public Artemis(Game game){
+        super(game);
         this.availableMoveNumber = 2;
         this.firstMovePosition = null;
     }
@@ -24,6 +25,8 @@ public class Artemis extends God {
         cell.addWorker(worker);
         worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
+        setChanged();
+        notifyObservers();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 

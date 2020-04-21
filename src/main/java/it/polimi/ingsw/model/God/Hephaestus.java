@@ -1,13 +1,14 @@
 package it.polimi.ingsw.model.God;
 
 import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
 
 public class Hephaestus extends God {
     private Cell firstBuildPosition;
-    public Hephaestus(){
-        super();
+    public Hephaestus(Game game){
+        super(game);
         this.firstBuildPosition = null;
     }
 

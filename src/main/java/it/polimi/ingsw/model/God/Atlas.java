@@ -1,13 +1,14 @@
 package it.polimi.ingsw.model.God;
 
 import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
 
 public class Atlas extends God {
 
-    public Atlas(){
-        super();
+    public Atlas(Game game){
+        super(game);
     }
 
     @Override

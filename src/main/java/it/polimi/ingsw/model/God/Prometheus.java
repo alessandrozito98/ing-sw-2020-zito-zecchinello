@@ -1,12 +1,14 @@
 package it.polimi.ingsw.model.God;
 
 import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
 
 public class Prometheus extends God {
 
-    public Prometheus(){
+    public Prometheus(Game game){
+        super(game);
         this.availableMoveNumber = 1;
         this.availableBuildNumber = 1;
         this.canMoveUp = true;
