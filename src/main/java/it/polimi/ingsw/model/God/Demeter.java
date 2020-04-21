@@ -1,14 +1,15 @@
 package it.polimi.ingsw.model.God;
 
 import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
 
 public class Demeter extends God {
     private Cell firstBuildPosition;
 
-    public Demeter(){
-        super();
+    public Demeter(Game game){
+        super(game);
         this.firstBuildPosition = null;
     }
 

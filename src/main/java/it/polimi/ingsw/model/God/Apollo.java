@@ -2,13 +2,14 @@ package it.polimi.ingsw.model.God;
 
 
 import it.polimi.ingsw.model.Cell;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
 
 public class Apollo extends God {
 
-    public Apollo(){
-        super();
+    public Apollo(Game game){
+        super(game);
     }
 
     @Override
@@ -29,6 +30,8 @@ public class Apollo extends God {
         }
         setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        setChanged();
+        notifyObservers();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 

@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model.God;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 
 public class Pan extends God {
 
-    public Pan(){
-        super();
+    public Pan(Game game){
+        super(game);
     }
 
     @Override

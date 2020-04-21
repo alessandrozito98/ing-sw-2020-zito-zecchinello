@@ -1,5 +1,28 @@
 package it.polimi.ingsw.model.God;
 
-public class Athena extends God {
+import it.polimi.ingsw.model.*;
 
+import java.util.ArrayList;
+
+public class Athena extends God {
+    private ArrayList<Player> players;
+
+    public Athena(Game game){
+        super(game);
+        this.players = game.getPlayers();
+
+    }
+
+    @Override
+    public void Move(Cell cell, Worker worker) {
+        Level oldLevel = worker.getPosition().getLevel();
+        super.Move(cell, worker);
+        if(cell.getLevel().ordinal()==oldLevel.ordinal()+1){
+            for (Player player:players) {
+                if(!(player.getGodCard() instanceof Athena)){
+                    player.getGodCard().setCanMoveUp(false);
+                }
+            }
+        }
+    }
 }
