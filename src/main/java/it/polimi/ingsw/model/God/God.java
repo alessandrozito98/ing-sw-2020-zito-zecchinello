@@ -3,8 +3,7 @@ package it.polimi.ingsw.model.God;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Worker;
-
-import java.util.Observable;
+import it.polimi.ingsw.observer.Observable;
 
 
 public abstract class God extends Observable {
@@ -25,8 +24,7 @@ public abstract class God extends Observable {
         worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
-        setChanged();
-        notifyObservers();
+        notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
