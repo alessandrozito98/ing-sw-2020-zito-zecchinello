@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.view.View;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -9,11 +8,9 @@ import java.util.Observer;
 public class Controller implements Observer {
 
     private Game game;
-    private View view;
 
-    public Controller(Game game, View view) {
+    public Controller(Game game) {
         this.game = game;
-        this.view=view;
     }
 
 
@@ -21,6 +18,8 @@ public class Controller implements Observer {
 
 
     }
+
+    public void handleMove(){}
 
     @Override
     public void update(Observable o, Object arg) {

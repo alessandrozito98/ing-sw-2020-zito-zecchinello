@@ -19,6 +19,18 @@ public class CellTest {
         assertEquals(cellTest.getWorker(),workerTest);
     }
 
+
+    @Test
+    public void addWorker1() {
+        Worker workerTest = new Worker(1,WorkerColor.BLUE);
+        Cell cellTest = new Cell(1,1);
+        Worker workerTest2 = new Worker(2,WorkerColor.BLUE);
+        cellTest.addWorker(workerTest);
+        cellTest.addWorker(workerTest2);
+        assertEquals(cellTest.getWorker(),workerTest);
+    }
+
+
     @Test
     public void removeWorker() {
         Worker workerTest = new Worker(1,WorkerColor.BLUE);
