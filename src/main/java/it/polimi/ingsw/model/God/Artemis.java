@@ -25,8 +25,7 @@ public class Artemis extends God {
         cell.addWorker(worker);
         worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
-        setChanged();
-        notifyObservers();
+        notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 

@@ -30,8 +30,7 @@ public class Apollo extends God {
         }
         setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
-        setChanged();
-        notifyObservers();
+        notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 

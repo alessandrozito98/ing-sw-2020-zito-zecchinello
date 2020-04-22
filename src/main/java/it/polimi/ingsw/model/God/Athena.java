@@ -16,7 +16,6 @@ public class Athena extends God {
     @Override
     public void Move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
-        super.Move(cell, worker);
         if(cell.getLevel().ordinal()==oldLevel.ordinal()+1){
             for (Player player:players) {
                 if(!(player.getGodCard() instanceof Athena)){
@@ -24,5 +23,6 @@ public class Athena extends God {
                 }
             }
         }
+        super.Move(cell, worker);
     }
 }
