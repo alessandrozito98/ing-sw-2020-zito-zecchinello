@@ -7,7 +7,7 @@ public class Minotaur extends God {
 
     public Minotaur(Game game){
         super(game);
-        this.board = game.getBoard();
+        this.board = game.getBoardCopy();
     }
 
     @Override
