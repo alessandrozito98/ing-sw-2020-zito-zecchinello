@@ -11,7 +11,7 @@ public class Minotaur extends God {
     }
 
     @Override
-    public void Move(Cell cell, Worker worker) {
+    public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
         if(cell.getWorker()!=null){
             int x = cell.getX()-(worker.getPosition().getX()-cell.getX());

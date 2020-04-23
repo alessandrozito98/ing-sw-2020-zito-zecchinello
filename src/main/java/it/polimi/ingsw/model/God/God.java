@@ -18,7 +18,7 @@ public abstract class God extends Observable {
         this.canMoveUp = true;
     }
 
-    public void Move(Cell cell, Worker worker){
+    public void move(Cell cell, Worker worker){
         Level oldLevel = worker.getPosition().getLevel();
         worker.getPosition().removeWorker();
         cell.addWorker(worker);
@@ -29,7 +29,7 @@ public abstract class God extends Observable {
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
-    public void Build(Cell cell, Worker worker, Level level){
+    public void build(Cell cell, Worker worker, Level level){
         cell.setLevel(level);
         setAvailableBuildNumber(this.getAvailableBuildNumber()-1);
     }

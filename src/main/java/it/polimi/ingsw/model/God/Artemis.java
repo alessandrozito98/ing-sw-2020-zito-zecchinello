@@ -15,7 +15,7 @@ public class Artemis extends God {
     }
 
     @Override
-    public void Move(Cell cell, Worker worker) {
+    public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
         worker.getPosition().removeWorker();
         if(this.firstMovePosition==null){

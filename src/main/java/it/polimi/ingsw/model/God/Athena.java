@@ -14,7 +14,7 @@ public class Athena extends God {
     }
 
     @Override
-    public void Move(Cell cell, Worker worker) {
+    public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
         if(cell.getLevel().ordinal()==oldLevel.ordinal()+1){
             for (Player player:players) {

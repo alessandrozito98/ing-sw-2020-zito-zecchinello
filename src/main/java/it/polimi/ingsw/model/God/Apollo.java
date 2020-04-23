@@ -13,7 +13,7 @@ public class Apollo extends God {
     }
 
     @Override
-    public void Move(Cell cell, Worker worker) {
+    public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
         if(cell.getWorker()!=null){
             cell.getWorker().setPosition(worker.getPosition());

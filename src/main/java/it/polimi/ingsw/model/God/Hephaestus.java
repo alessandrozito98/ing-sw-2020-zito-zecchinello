@@ -13,7 +13,7 @@ public class Hephaestus extends God {
     }
 
     @Override
-    public void Build(Cell cell, Worker worker, Level level) {
+    public void build(Cell cell, Worker worker, Level level) {
         if(this.firstBuildPosition==null) {
             this.firstBuildPosition = cell;
         }
