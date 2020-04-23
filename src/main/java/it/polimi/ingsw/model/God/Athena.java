@@ -23,6 +23,6 @@ public class Athena extends God {
                 }
             }
         }
-        super.Move(cell, worker);
+        super.move(cell, worker);
     }
 }
