@@ -14,6 +14,9 @@ public class Artemis extends God {
         this.firstMovePosition = null;
     }
 
+    public Cell getFirstMovePosition(){ return this.firstMovePosition; }
+    public void setFirstMovePosition(Cell cell){ this.firstMovePosition = cell; }
+
     @Override
     public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
@@ -24,7 +27,7 @@ public class Artemis extends God {
         }
         cell.addWorker(worker);
         worker.setPosition(cell);
-        setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
+        setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }

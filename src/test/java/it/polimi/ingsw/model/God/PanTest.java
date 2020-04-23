@@ -95,6 +95,8 @@ public class PanTest {
         assertEquals(null, workerPosition.getWorker());
         assertEquals(cellTest, workerTest.getPosition());
         assertEquals(workerTest, cellTest.getWorker());
+        assertEquals(1,panTest.getAvailableBuildNumber());
+        assertEquals(0,panTest.getAvailableMoveNumber());
     }
 
     @Test
@@ -134,6 +136,7 @@ public class PanTest {
         assertEquals(Level.GROUND, cellTest.getLevel());
         panTest.build(cellTest,workerTest,Level.LEVEL1);
         assertEquals(Level.LEVEL1, cellTest.getLevel());
+        assertEquals(0,panTest.getAvailableBuildNumber());
     }
 
     @Test

@@ -32,6 +32,7 @@ public abstract class God extends Observable {
     public void build(Cell cell, Worker worker, Level level){
         cell.setLevel(level);
         setAvailableBuildNumber(this.getAvailableBuildNumber()-1);
+        setAvailableMoveNumber(0);
     }
 
     public boolean isFeasibleMove(Cell cell,Worker worker){

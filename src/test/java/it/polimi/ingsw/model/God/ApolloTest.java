@@ -88,6 +88,8 @@ public class ApolloTest {
         assertEquals(workerPosition, opponentWorker.getPosition());
         assertEquals(cellTest, workerTest.getPosition());
         assertEquals(workerTest, cellTest.getWorker());
+        assertEquals(1,apolloTest.getAvailableBuildNumber());
+        assertEquals(0,apolloTest.getAvailableMoveNumber());
     }
 
     @Test
@@ -104,6 +106,8 @@ public class ApolloTest {
         assertEquals(null, workerPosition.getWorker());
         assertEquals(cellTest, workerTest.getPosition());
         assertEquals(workerTest, cellTest.getWorker());
+        assertEquals(1,apolloTest.getAvailableBuildNumber());
+        assertEquals(0,apolloTest.getAvailableMoveNumber());
     }
 
     @Test

@@ -16,6 +16,8 @@ public class Game extends Observable<Controller> {
         return board.clone();
     }
 
+    public Board getBoard() { return this.board; }
+
     public ArrayList<Player> getPlayers() {
         return (ArrayList<Player>) players;
     }
