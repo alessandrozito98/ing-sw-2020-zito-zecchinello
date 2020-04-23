@@ -22,7 +22,7 @@ public class Atlas extends God {
             return false;
         }
 
-        if(!(cell.getLevel().ordinal() == (level.ordinal() - 1)) && (level != Level.DOME)){
+        if(!(cell.getLevel().ordinal() == (level.ordinal() - 1)) && !(level == Level.DOME)){
             return false;
         }
 
