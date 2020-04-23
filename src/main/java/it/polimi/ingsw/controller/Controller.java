@@ -1,13 +1,13 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.observer.Observer;
 
 import java.util.Observable;
-import java.util.Observer;
 
-public class Controller implements Observer {
+public class Controller implements Observer<Game> {
 
-    private Game game;
+    private final Game game;
 
     public Controller(Game game) {
         this.game = game;
@@ -21,8 +21,9 @@ public class Controller implements Observer {
 
     public void handleMove(){}
 
+
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Game message) {
 
     }
 }

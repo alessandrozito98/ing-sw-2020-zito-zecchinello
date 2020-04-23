@@ -42,7 +42,6 @@ public class Cell {
         return worker;
     }
 
-
     public void addWorker(Worker worker) {
 
         if (this.worker == null) {

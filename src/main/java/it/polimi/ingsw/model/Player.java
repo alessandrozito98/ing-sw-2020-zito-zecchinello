@@ -11,6 +11,12 @@ public class Player {
     private ArrayList<Worker> workers;
     private God godCard;
 
+    public Player(String name, int playerNumber, ArrayList<Worker> workers, God godCard) {
+        this.name = name;
+        this.playerNumber = playerNumber;
+        this.workers = workers;
+        this.godCard = godCard;
+    }
 
     public String getName() {
         return name;
@@ -44,7 +50,19 @@ public class Player {
         this.godCard = godCard;
     }
 
+    public Worker getSingleWorker(int workerNumber) {
+
+        // returns a worker given the playerNumber
+
+        for (Worker w: workers) {
+            if(w.getWorkerNumber() == workerNumber) {
+                return w;
+            }
+        }
+        return null;
+    }
 }
+
 
 
 

@@ -35,6 +35,7 @@ public class Worker {
     public void setColor(WorkerColor color) {
         this.color = color;
     }
+
 }
 
 
