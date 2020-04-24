@@ -10,6 +10,8 @@ public class Minotaur extends God {
         this.board = game.getBoard();
     }
 
+    public Board getBoard(){return this.board;}
+
     @Override
     public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
@@ -25,14 +27,14 @@ public class Minotaur extends God {
         worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
-        notify();
+        //notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
     @Override
     public boolean isFeasibleMove(Cell cell, Worker worker) {
 
-        if(cell.getWorker().getColor()==worker.getColor()) {
+        if(!(cell.getWorker()==null)&&(cell.getWorker().getColor()==worker.getColor())) {
             return false;
         }
 

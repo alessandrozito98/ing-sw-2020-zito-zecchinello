@@ -16,7 +16,8 @@ public class Prometheus extends God {
 
     @Override
     public void build(Cell cell, Worker worker, Level level) {
-        super.build(cell, worker, level);
+        cell.setLevel(level);
+        setAvailableBuildNumber(this.getAvailableBuildNumber()-1);
         if(this.availableMoveNumber==1){
             this.setCanMoveUp(false);
         }

@@ -44,7 +44,7 @@ public class DemeterTest {
     }
 
     @Test
-    public void SecondMove(){
+    public void SecondBuild(){
         demeterTest.setAvailableBuildNumber(1);
         Cell firstCell = new Cell(3,3);
         cellTest.setLevel(Level.LEVEL1);

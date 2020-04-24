@@ -12,6 +12,9 @@ public class Hephaestus extends God {
         this.firstBuildPosition = null;
     }
 
+    public Cell getFirstBuildPosition(){ return this.firstBuildPosition; }
+    public void setFirstBuildPosition(Cell cell){ this.firstBuildPosition = cell; }
+
     @Override
     public void build(Cell cell, Worker worker, Level level) {
         if(this.firstBuildPosition==null) {

@@ -13,6 +13,8 @@ public class Athena extends God {
 
     }
 
+    public ArrayList<Player> getPlayers(){return this.players;}
+
     @Override
     public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
@@ -28,7 +30,7 @@ public class Athena extends God {
         worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
-        notify();
+        //notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 }

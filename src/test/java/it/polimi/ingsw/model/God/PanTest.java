@@ -134,6 +134,8 @@ public class PanTest {
     @Test
     public void Build(){
         assertEquals(Level.GROUND, cellTest.getLevel());
+        panTest.setAvailableMoveNumber(0);
+        panTest.setAvailableBuildNumber(1);
         panTest.build(cellTest,workerTest,Level.LEVEL1);
         assertEquals(Level.LEVEL1, cellTest.getLevel());
         assertEquals(0,panTest.getAvailableBuildNumber());

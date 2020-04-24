@@ -4,10 +4,10 @@ import it.polimi.ingsw.model.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class AthenaTest {
-    God athenaTest;
+    Athena athenaTest;
     Cell cellTest;
     Worker workerTest;
     @Before
@@ -20,6 +20,8 @@ public class AthenaTest {
 
     @Test
     public void MoveUp(){
+        Game gameTest = new Game();
+        athenaTest.getPlayers().add(new Player("test",2,null, new Pan(gameTest)));
         cellTest.setLevel(Level.LEVEL3);
         Cell workerPosition = new Cell(1,2);
         workerPosition.addWorker(workerTest);
@@ -28,7 +30,9 @@ public class AthenaTest {
         assertEquals(workerTest, workerPosition.getWorker());
         assertEquals(workerPosition, workerTest.getPosition());
         assertEquals(null, cellTest.getWorker());
+        assertTrue(athenaTest.getPlayers().get(0).getGodCard().getCanMoveUp());
         athenaTest.move(cellTest,workerTest);
+        assertFalse(athenaTest.getPlayers().get(0).getGodCard().getCanMoveUp());
         assertEquals(null, workerPosition.getWorker());
         assertEquals(cellTest, workerTest.getPosition());
         assertEquals(workerTest, cellTest.getWorker());

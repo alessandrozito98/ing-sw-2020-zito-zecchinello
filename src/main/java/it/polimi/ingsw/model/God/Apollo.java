@@ -28,9 +28,9 @@ public class Apollo extends God {
             cell.addWorker(worker);
             worker.setPosition(cell);
         }
-        setAvailableMoveNumber(this.getAvailableBuildNumber()-1);
+        setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
-        notify();
+        //notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
