@@ -45,7 +45,7 @@ public class ArtemisTest {
         assertEquals(null, workerPosition.getWorker());
         assertEquals(cellTest, workerTest.getPosition());
         assertEquals(workerTest, cellTest.getWorker());
-        assertEquals(cellTest,artemisTest.getFirstMovePosition());
+        assertEquals(workerPosition,artemisTest.getFirstMovePosition());
         assertEquals(1,artemisTest.getAvailableBuildNumber());
         assertEquals(1,artemisTest.getAvailableMoveNumber());
     }
@@ -68,7 +68,7 @@ public class ArtemisTest {
         assertEquals(null, workerPosition.getWorker());
         assertEquals(cellTest, workerTest.getPosition());
         assertEquals(workerTest, cellTest.getWorker());
-        assertEquals(cellTest,artemisTest.getFirstMovePosition());
+        assertEquals(firstCell,artemisTest.getFirstMovePosition());
         assertEquals(1,artemisTest.getAvailableBuildNumber());
         assertEquals(0,artemisTest.getAvailableMoveNumber());
     }

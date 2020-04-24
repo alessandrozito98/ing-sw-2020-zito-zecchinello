@@ -23,6 +23,12 @@ public class Athena extends God {
                 }
             }
         }
-        super.move(cell, worker);
+        worker.getPosition().removeWorker();
+        cell.addWorker(worker);
+        worker.setPosition(cell);
+        setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
+        setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        notify();
+        if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 }
