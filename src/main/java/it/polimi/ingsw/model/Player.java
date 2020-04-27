@@ -38,8 +38,8 @@ public class Player {
         return workers;
     }
 
-    public void setWorkers(ArrayList<Worker> workers) {
-        this.workers = workers;
+    public void addWorkers(Worker worker) {
+        this.workers.add(worker);
     }
 
     public God getGodCard() {
@@ -54,7 +54,7 @@ public class Player {
 
         // returns a worker given the playerNumber
 
-        for (Worker w: workers) {
+        for (Worker w: this.workers) {
             if(w.getWorkerNumber() == workerNumber) {
                 return w;
             }
