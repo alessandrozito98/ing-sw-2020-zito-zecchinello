@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.God;
 
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Level;
-import it.polimi.ingsw.model.Cell;
-import it.polimi.ingsw.model.Worker;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.Observable;
 
 
@@ -11,11 +8,13 @@ public abstract class God extends Observable {
     protected int availableMoveNumber;
     protected int availableBuildNumber;
     protected boolean canMoveUp;
+    protected Board board;
 
     public God(Game game){
         this.availableMoveNumber = 1;
         this.availableBuildNumber = 0;
         this.canMoveUp = true;
+        this.board = game.getBoard();
     }
 
     public void move(Cell cell, Worker worker){

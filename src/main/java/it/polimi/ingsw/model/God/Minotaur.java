@@ -3,11 +3,9 @@ package it.polimi.ingsw.model.God;
 import it.polimi.ingsw.model.*;
 
 public class Minotaur extends God {
-    private Board board;
 
     public Minotaur(Game game){
         super(game);
-        this.board = game.getBoard();
     }
 
     public Board getBoard(){return this.board;}
