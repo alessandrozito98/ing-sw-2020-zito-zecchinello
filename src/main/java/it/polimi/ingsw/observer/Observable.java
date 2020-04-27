@@ -1,44 +1,47 @@
 package it.polimi.ingsw.observer;
 
+import it.polimi.ingsw.model.MoveMessage;
+import it.polimi.ingsw.model.WinMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Observable<T> {
+public class Observable {
 
-    private final List<Observer<T>> observers = new ArrayList<>();
+    private final List<Observer> observers = new ArrayList<>();
 
-    public void addObserver(Observer<T> observer){
+    public void addObserver(Observer observer){
         synchronized (observers) {
             observers.add(observer);
         }
     }
 
-    public void removeObserver(Observer<T> observer){
+    public void removeObserver(Observer observer){
         synchronized (observers) {
             observers.remove(observer);
         }
     }
 
-    protected void notifyWin(T message){
+    protected void notifyWin(WinMessage message){
         synchronized (observers) {
-            for(Observer<T> observer : observers){
-                observer.update(message);
+            for(Observer observer : observers){
+                observer.update();
             }
         }
     }
 
-    protected void notBuild(T message){
+    protected void notifyBuild(MoveMessage message){
         synchronized (observers) {
-            for(Observer<T> observer : observers){
-                observer.update(message);
+            for(Observer observer : observers){
+                observer.update();
             }
         }
     }
 
-    protected void notifyMove(T message){
+    protected void notifyMove(MoveMessage message){
         synchronized (observers) {
-            for(Observer<T> observer : observers){
-                observer.update(message);
+            for(Observer observer : observers){
+                observer.update();
             }
         }
     }
