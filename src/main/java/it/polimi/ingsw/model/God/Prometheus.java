@@ -24,6 +24,12 @@ public class Prometheus extends God {
     }
 
     @Override
+    public void move(Cell cell, Worker worker) {
+        super.move(cell, worker);
+        setAvailableBuildNumber(1);
+    }
+
+    @Override
     public void resetTurn() {
         this.availableMoveNumber = 1;
         this.availableBuildNumber = 1;
