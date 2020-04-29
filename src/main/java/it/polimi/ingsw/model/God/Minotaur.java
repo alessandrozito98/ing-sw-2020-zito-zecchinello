@@ -25,6 +25,7 @@ public class Minotaur extends God {
         worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        setHasMoved(true);
         //notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }

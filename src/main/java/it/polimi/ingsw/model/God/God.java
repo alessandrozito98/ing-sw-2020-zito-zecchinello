@@ -9,12 +9,16 @@ public abstract class God extends Observable {
     protected int availableBuildNumber;
     protected boolean canMoveUp;
     protected Board board;
+    protected boolean hasMoved;
+    protected boolean hasBuilt;
 
     public God(Game game){
         this.availableMoveNumber = 1;
         this.availableBuildNumber = 0;
         this.canMoveUp = true;
         this.board = game.getBoard();
+        this.hasMoved = false;
+        this.hasBuilt = false;
     }
 
     public void move(Cell cell, Worker worker){
@@ -24,6 +28,7 @@ public abstract class God extends Observable {
         worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        setHasMoved(true);
         //notify();
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
@@ -31,6 +36,7 @@ public abstract class God extends Observable {
     public void build(Cell cell, Worker worker, Level level){
         cell.setLevel(level);
         setAvailableBuildNumber(this.getAvailableBuildNumber()-1);
+        setHasBuilt(true);
         setAvailableMoveNumber(0);
     }
 
@@ -106,6 +112,22 @@ public abstract class God extends Observable {
         return canMoveUp;
     }
 
+    public boolean getHasMoved() {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+    public boolean getHasBuilt() {
+        return hasBuilt;
+    }
+
+    public void setHasBuilt(boolean hasBuilt) {
+        this.hasBuilt = hasBuilt;
+    }
+
     public boolean winControl(Level oldLevel, Level newLevel){
         if(oldLevel!=newLevel&&newLevel==Level.LEVEL3){
             return true;
@@ -117,6 +139,8 @@ public abstract class God extends Observable {
         this.availableMoveNumber = 1;
         this.availableBuildNumber = 0;
         this.canMoveUp = true;
+        this.hasMoved = false;
+        this.hasBuilt = false;
     }
 
 

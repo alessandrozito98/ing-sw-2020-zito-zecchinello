@@ -23,6 +23,7 @@ public class Hephaestus extends God {
         else {
             setAvailableBuildNumber(this.getAvailableBuildNumber() - 1);
         }
+        setHasBuilt(true);
         cell.setLevel(level);
     }
 

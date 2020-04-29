@@ -18,6 +18,7 @@ public class Prometheus extends God {
     public void build(Cell cell, Worker worker, Level level) {
         cell.setLevel(level);
         setAvailableBuildNumber(this.getAvailableBuildNumber()-1);
+        setHasBuilt(true);
         if(this.availableMoveNumber==1){
             this.setCanMoveUp(false);
         }
@@ -34,5 +35,7 @@ public class Prometheus extends God {
         this.availableMoveNumber = 1;
         this.availableBuildNumber = 1;
         this.canMoveUp = true;
+        this.hasMoved = false;
+        this.hasBuilt = false;
     }
 }
