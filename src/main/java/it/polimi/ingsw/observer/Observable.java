@@ -1,7 +1,7 @@
 package it.polimi.ingsw.observer;
 
-import it.polimi.ingsw.model.MoveMessage;
-import it.polimi.ingsw.model.WinMessage;
+import it.polimi.ingsw.observer.messages.MoveMessage;
+import it.polimi.ingsw.observer.messages.WinMessage;
 
 import java.util.ArrayList;
 import java.util.List;
