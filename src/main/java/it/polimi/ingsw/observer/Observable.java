@@ -25,15 +25,15 @@ public class Observable {
     protected void notifyWin(WinMessage message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.update();
+                observer.update(message);
             }
         }
     }
 
-    protected void notifyBuild(MoveMessage message){
+    protected void notifyBuild(BuildMessage message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.update();
+                observer.update(message);
             }
         }
     }
@@ -41,7 +41,7 @@ public class Observable {
     protected void notifyMove(MoveMessage message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.update();
+                observer.update(message);
             }
         }
     }
