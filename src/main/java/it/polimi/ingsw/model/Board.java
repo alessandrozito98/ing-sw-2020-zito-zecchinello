@@ -13,7 +13,7 @@ public class Board implements Cloneable{
 
 
     @Override
-    protected final Board clone() {
+    public final Board clone() {
         final Board result = new Board();
         for(int i = 0; i < 5; i++){
             result.board[i] = board[i].clone();
