@@ -1,7 +1,6 @@
 package it.polimi.ingsw.observer;
 
-import it.polimi.ingsw.observer.messages.MoveMessage;
-import it.polimi.ingsw.observer.messages.WinMessage;
+import it.polimi.ingsw.observer.messages.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,32 @@ public class Observable {
         }
     }
 
-    protected void notifyWin(WinMessage message){
+
+    protected void notifyAction(BoardChangeMessage message){
+        synchronized (observers) {
+            for(Observer observer : observers){
+                observer.updateBoard(message);
+            }
+        }
+    }
+
+    protected void notifyBuildRequest(BuildRequest message){
+        synchronized (observers) {
+            for(Observer observer : observers){
+                observer.updateBuild(message);
+            }
+        }
+    }
+
+    protected void notifyMoveRequest(MoveRequest message){
+        synchronized (observers) {
+            for(Observer observer : observers){
+                observer.updateMove(message);
+            }
+        }
+    }
+
+    protected void notifyEndTurn(EndTurnRequest message){
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.update(message);
@@ -30,21 +54,12 @@ public class Observable {
         }
     }
 
-    protected void notifyBuild(BuildMessage message){
+    protected void notifyStartTurn(StartTurnMessage message){
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.update(message);
             }
         }
     }
-
-    protected void notifyMove(MoveMessage message){
-        synchronized (observers) {
-            for(Observer observer : observers){
-                observer.update(message);
-            }
-        }
-    }
-
 
 }
