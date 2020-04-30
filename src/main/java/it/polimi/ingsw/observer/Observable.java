@@ -25,7 +25,8 @@ public class Observable {
     protected void notifyAction(BoardChangeMessage message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.updateBoard(message);
+                observer.update(message); //QUI DEVO INSERIRE UN METODO UPDATE, MA NON POSSO DIRE A PRIORI QUALE SIA
+                                               //PERCHÉ NON LO SO SE STA COSTRUENDO O SI STA MUOVENDO
             }
         }
     }
