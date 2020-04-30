@@ -1,17 +1,13 @@
 package it.polimi.ingsw.observer.messages;
 
-public class EndTurnRequest {
+public class EndTurnRequestMessage {
     private int playerNumber;
 
-    public EndTurnRequest(int playerNumber){
+    public EndTurnRequestMessage(int playerNumber){
         this.playerNumber = playerNumber;
     }
 
     public int getPlayerNumber() {
         return playerNumber;
-    }
-
-    public void setPlayerNumber(int playerNumber) {
-        this.playerNumber = playerNumber;
     }
 }

@@ -2,13 +2,13 @@ package it.polimi.ingsw.observer.messages;
 
 import it.polimi.ingsw.model.Level;
 
-public class MoveRequest {
+public class MoveRequestMessage {
     private int playerNumber;
     private int workerNumber;
     private int xPosition;
     private int yPosition;
 
-    public MoveRequest(int playerNumber, int workerNumber, int xPosition, int yPosition){
+    public MoveRequestMessage(int playerNumber, int workerNumber, int xPosition, int yPosition){
         this.playerNumber = playerNumber;
         this.workerNumber = workerNumber;
         this.xPosition = xPosition;
@@ -29,21 +29,5 @@ public class MoveRequest {
 
     public int getyPosition() {
         return yPosition;
-    }
-
-    public void setPlayerNumber(int playerNumber) {
-        this.playerNumber = playerNumber;
-    }
-
-    public void setWorkerNumber(int workerNumber) {
-        this.workerNumber = workerNumber;
-    }
-
-    public void setxPosition(int xPosition) {
-        this.xPosition = xPosition;
-    }
-
-    public void setyPosition(int yPosition) {
-        this.yPosition = yPosition;
     }
 }
