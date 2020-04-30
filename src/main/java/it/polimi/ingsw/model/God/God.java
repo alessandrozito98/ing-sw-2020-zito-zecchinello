@@ -30,7 +30,7 @@ public abstract class God extends Observable {
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
         setHasMoved(true);
-        notify(new BoardChangeMessage(board.clone(), this.availableBuildNumber, this.availableMoveNumber, this.getHasBuilt(), this.getHasMoved(), ));
+        notify(new BoardChangeMessage(board.clone(), this.availableBuildNumber, this.availableMoveNumber, this.getHasBuilt(), this.getHasMoved()));
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
