@@ -25,8 +25,10 @@ public class Observable {
     protected void notifyAction(BoardChangeMessage message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.update(message); //QUI DEVO INSERIRE UN METODO UPDATE, MA NON POSSO DIRE A PRIORI QUALE SIA
-                                               //PERCHÉ NON LO SO SE STA COSTRUENDO O SI STA MUOVENDO
+                observer.updateBuild(message);  //QUI DEVO INSERIRE UN METODO UPDATE, MA NON POSSO DIRE A PRIORI QUALE
+                                                // SIA PERCHÉ NON LO SO SE STA COSTRUENDO O SI STA MUOVENDO. IN PIU' NON
+                                                // E' CORRETTO COSì PERCHÉ L'ATTRIBUTO MESSAGE IN UPDATEBUILD DEVE ESSERE
+                                                // DI TIPO BUILDREQUEST, NON DI BOARDCHANGEMESSAGE
             }
         }
     }
