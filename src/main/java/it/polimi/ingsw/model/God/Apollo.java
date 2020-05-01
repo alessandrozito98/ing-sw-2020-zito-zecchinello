@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
-import it.polimi.ingsw.observer.messages.BoardChange;
 
 public class Apollo extends God {
 
@@ -32,7 +31,6 @@ public class Apollo extends God {
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
         setHasMoved(true);
-        notifyBoardChange(new BoardChange(this.board.clone(),this.availableMoveNumber,this.availableBuildNumber,this.hasMoved,this.hasBuilt));
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 

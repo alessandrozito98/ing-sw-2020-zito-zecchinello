@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
-import it.polimi.ingsw.observer.messages.BoardChange;
 
 public class Prometheus extends God {
 
@@ -35,7 +34,6 @@ public class Prometheus extends God {
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
         setHasMoved(true);
         setAvailableBuildNumber(1);
-        notifyBoardChange(new BoardChange(this.board.clone(),this.availableMoveNumber,this.availableBuildNumber,this.hasMoved,this.hasBuilt));
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 

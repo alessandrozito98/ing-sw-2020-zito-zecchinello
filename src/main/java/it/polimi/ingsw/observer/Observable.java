@@ -23,7 +23,7 @@ Observable {
     }
 
 
-    protected void notifyBoardChange(BoardChange message){
+    public void notifyBoardChange(BoardChange message){
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateBoardChange(message);  //QUI DEVO INSERIRE UN METODO UPDATE, MA NON POSSO DIRE A PRIORI QUALE
@@ -34,7 +34,7 @@ Observable {
         }
     }
 
-    protected void notifyStartTurn(StartTurn message){
+    public void notifyStartTurn(StartTurn message){
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateStartTurn(message);
@@ -42,7 +42,7 @@ Observable {
         }
     }
 
-    protected void notifyPlayerLose(PlayerLose message){
+    public void notifyPlayerLose(PlayerLose message){
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updatePlayerLose(message);
@@ -50,7 +50,7 @@ Observable {
         }
     }
 
-    protected void notifyMoveRequest(MoveRequest message){
+    public void notifyMoveRequest(MoveRequest message){
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateMoveRequest(message);
@@ -58,7 +58,7 @@ Observable {
         }
     }
 
-    protected void notifyBuildRequest(BuildRequest message){
+    public void notifyBuildRequest(BuildRequest message){
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateBuildRequest(message);
@@ -66,7 +66,7 @@ Observable {
         }
     }
 
-    protected void notifyEndTurnRequest(EndTurnRequest message){
+    public void notifyEndTurnRequest(EndTurnRequest message){
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateEndTurnRequest(message);
