@@ -5,8 +5,7 @@ import it.polimi.ingsw.observer.messages.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class
-Observable {
+public class Observable {
 
     private final List<Observer> observers = new ArrayList<>();
 

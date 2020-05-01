@@ -6,7 +6,7 @@ import it.polimi.ingsw.observer.Observable;
 
 import java.util.ArrayList;
 
-public class Game extends Observable<Controller> {
+public class Game extends Observable {
 
     private final Board board = new Board();
     private final ArrayList<Player> players = new ArrayList<Player>();

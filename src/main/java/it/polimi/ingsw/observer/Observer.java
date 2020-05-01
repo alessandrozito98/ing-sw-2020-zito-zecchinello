@@ -6,23 +6,23 @@ public interface Observer {
 
 // UPDATE DELLA VIEW A SEGUITO DI NOTIFY DEL MODEL
     default void updateBoardChange(BoardChange message){
-        throw UnsupportedOperationException;
+        throw new UnsupportedOperationException();
     }
     default void updateStartTurn(StartTurn message) {
-        throw UnsupportedOperationException;
+        throw new UnsupportedOperationException();
     }
     default void updatePlayerLose(PlayerLose message) {
-        throw UnsupportedOperationException;
+        throw new UnsupportedOperationException();
     }
 
 // UPDATE DEL CONTROLLER A SEGUITO DI NOTIFY DELLA VIEW
     default void updateMoveRequest(MoveRequest message) {
-        throw UnsupportedOperationException;
+        throw new UnsupportedOperationException();
     }
     default void updateBuildRequest(BuildRequest message) {
-        throw UnsupportedOperationException;
+        throw new UnsupportedOperationException();
     }
     default void updateEndTurnRequest(EndTurnRequest message) {
-        throw UnsupportedOperationException;
+        throw new UnsupportedOperationException();
     }
 }
