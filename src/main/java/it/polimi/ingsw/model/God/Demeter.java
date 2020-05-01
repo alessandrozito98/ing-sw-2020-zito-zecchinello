@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
+import it.polimi.ingsw.observer.messages.BoardChange;
 
 public class Demeter extends God {
     private Cell firstBuildPosition;
@@ -26,6 +27,7 @@ public class Demeter extends God {
         }
         setHasBuilt(true);
         cell.setLevel(level);
+        notifyBoardChange(new BoardChange(this.board.clone(),this.availableMoveNumber,this.availableBuildNumber,this.hasMoved,this.hasBuilt));
     }
 
     @Override

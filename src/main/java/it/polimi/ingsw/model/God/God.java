@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.God;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.Observable;
-import it.polimi.ingsw.observer.messages.BoardChangeMessage;
+import it.polimi.ingsw.observer.messages.BoardChange;
 
 
 public abstract class God extends Observable {
@@ -30,7 +30,7 @@ public abstract class God extends Observable {
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
         setHasMoved(true);
-        notify(new BoardChangeMessage(board.clone(), this.availableBuildNumber, this.availableMoveNumber, this.getHasBuilt(), this.getHasMoved()));
+        notifyBoardChange(new BoardChange(this.board.clone(),this.availableMoveNumber,this.availableBuildNumber,this.hasMoved,this.hasBuilt));
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
@@ -39,6 +39,7 @@ public abstract class God extends Observable {
         setAvailableBuildNumber(this.getAvailableBuildNumber()-1);
         setHasBuilt(true);
         setAvailableMoveNumber(0);
+        notifyBoardChange(new BoardChange(this.board.clone(),this.availableMoveNumber,this.availableBuildNumber,this.hasMoved,this.hasBuilt));
     }
 
     public boolean isFeasibleMove(Cell cell,Worker worker){

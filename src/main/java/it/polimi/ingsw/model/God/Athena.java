@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.God;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.observer.messages.BoardChange;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class Athena extends God {
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
         setHasMoved(true);
-        //notify();
+        notifyBoardChange(new BoardChange(this.board.clone(),this.availableMoveNumber,this.availableBuildNumber,this.hasMoved,this.hasBuilt));
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 }

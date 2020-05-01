@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Worker;
+import it.polimi.ingsw.observer.messages.BoardChange;
 
 public class Artemis extends God {
     private Cell firstMovePosition;
@@ -29,7 +30,7 @@ public class Artemis extends God {
         worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setHasMoved(true);
-        //notify();
+        notifyBoardChange(new BoardChange(this.board.clone(),this.availableMoveNumber,this.availableBuildNumber,this.hasMoved,this.hasBuilt));
         if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
