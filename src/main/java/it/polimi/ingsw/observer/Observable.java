@@ -5,7 +5,8 @@ import it.polimi.ingsw.observer.messages.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Observable {
+public class
+Observable {
 
     private final List<Observer> observers = new ArrayList<>();
 
@@ -22,10 +23,10 @@ public class Observable {
     }
 
 
-    protected void notifyAction(BoardChangeMessage message){
+    protected void notifyBoardChange(BoardChange message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.updateBuild(message);  //QUI DEVO INSERIRE UN METODO UPDATE, MA NON POSSO DIRE A PRIORI QUALE
+                observer.updateBoardChange(message);  //QUI DEVO INSERIRE UN METODO UPDATE, MA NON POSSO DIRE A PRIORI QUALE
                                                 // SIA PERCHÉ NON LO SO SE STA COSTRUENDO O SI STA MUOVENDO. IN PIU' NON
                                                 // E' CORRETTO COSì PERCHÉ L'ATTRIBUTO MESSAGE IN UPDATEBUILD DEVE ESSERE
                                                 // DI TIPO BUILDREQUEST, NON DI BOARDCHANGEMESSAGE
@@ -33,10 +34,18 @@ public class Observable {
         }
     }
 
-    protected void notifyBuildRequest(BuildRequest message){
+    protected void notifyStartTurn(StartTurn message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.updateBuild(message);
+                observer.updateStartTurn(message);
+            }
+        }
+    }
+
+    protected void notifyPlayerLose(PlayerLose message){
+        synchronized (observers) {
+            for(Observer observer : observers){
+                observer.updatePlayerLose(message);
             }
         }
     }
@@ -44,25 +53,24 @@ public class Observable {
     protected void notifyMoveRequest(MoveRequest message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.updateMove(message);
+                observer.updateMoveRequest(message);
             }
         }
     }
 
-    protected void notifyEndTurn(EndTurnRequest message){
+    protected void notifyBuildRequest(BuildRequest message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.update(message);
+                observer.updateBuildRequest(message);
             }
         }
     }
 
-    protected void notifyStartTurn(StartTurnMessage message){
+    protected void notifyEndTurnRequest(EndTurnRequest message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.update(message);
+                observer.updateEndTurnRequest(message);
             }
         }
     }
-
 }

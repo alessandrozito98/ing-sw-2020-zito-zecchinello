@@ -2,10 +2,10 @@ package it.polimi.ingsw.observer.messages;
 
 import it.polimi.ingsw.model.Board;
 
-public class PlayerLoseMessage {
+public class PlayerLose {
     private Board boardCopy;
 
-    public PlayerLoseMessage(Board boardCopy, int playerID){
+    public PlayerLose(Board boardCopy, int playerID){
         this.boardCopy = boardCopy;
     }
 

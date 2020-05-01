@@ -1,12 +1,12 @@
 package it.polimi.ingsw.observer.messages;
 
-public class StartTurnMessage {
+public class StartTurn {
     private int availableMoveNumber;
     private int availableBuildNumber;
     private boolean hasMoved;
     private boolean hasBuilt;
 
-    public StartTurnMessage(int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt){
+    public StartTurn(int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt){
         this.availableMoveNumber = availableMoveNumber;
         this.availableBuildNumber = availableBuildNumber;
         this.hasMoved = hasMoved;
