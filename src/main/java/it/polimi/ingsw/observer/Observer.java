@@ -5,12 +5,24 @@ import it.polimi.ingsw.observer.messages.*;
 public interface Observer {
 
 // UPDATE DELLA VIEW A SEGUITO DI NOTIFY DEL MODEL
-    void updateBoardChange(BoardChange message);
-    void updateStartTurn(StartTurn message);
-    void updatePlayerLose(PlayerLose message);
+    default void updateBoardChange(BoardChange message){
+        throw UnsupportedOperationException;
+    }
+    default void updateStartTurn(StartTurn message) {
+        throw UnsupportedOperationException;
+    }
+    default void updatePlayerLose(PlayerLose message) {
+        throw UnsupportedOperationException;
+    }
 
 // UPDATE DEL CONTROLLER A SEGUITO DI NOTIFY DELLA VIEW
-    void updateMoveRequest(MoveRequest message);
-    void updateBuildRequest(BuildRequest message);
-    void updateEndTurnRequest(EndTurnRequest message);
+    default void updateMoveRequest(MoveRequest message) {
+        throw UnsupportedOperationException;
+    }
+    default void updateBuildRequest(BuildRequest message) {
+        throw UnsupportedOperationException;
+    }
+    default void updateEndTurnRequest(EndTurnRequest message) {
+        throw UnsupportedOperationException;
+    }
 }
