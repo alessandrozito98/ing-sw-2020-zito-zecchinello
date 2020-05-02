@@ -33,10 +33,10 @@ public class Observable {
         }
     }
 
-    public void notifyStartTurn(StartTurn message){
+    public void notifyResetTurn(ResetTurn message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.updateStartTurn(message);
+                observer.updateResetTurn(message);
             }
         }
     }

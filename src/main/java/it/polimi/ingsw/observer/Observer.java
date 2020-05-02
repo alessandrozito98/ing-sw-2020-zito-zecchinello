@@ -8,7 +8,7 @@ public interface Observer {
     default void updateBoardChange(BoardChange message){
         throw new UnsupportedOperationException();
     }
-    default void updateStartTurn(StartTurn message) {
+    default void updateResetTurn(ResetTurn message) {
         throw new UnsupportedOperationException();
     }
     default void updatePlayerLose(PlayerLose message) {
