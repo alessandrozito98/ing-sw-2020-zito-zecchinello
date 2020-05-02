@@ -1,9 +1,12 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.messages.*;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class Controller implements Observer {
@@ -14,13 +17,34 @@ public class Controller implements Observer {
         this.game = game;
     }
 
-
-    private void Game() {
-
-
+    // crea un ArrayList che identifica le celle su cui un worker può fare una move
+    public ArrayList<Cell> availableMoveCells(int playerNumber, int workerNumber){
+        ArrayList<Cell> availableMoveCells = new ArrayList<Cell>();
+        for(int i=0; i<5; i++){
+            for(int j=0; j<5; j++){
+                if(game.getSinglePlayer(playerNumber).getGodCard().isFeasibleMove(game.getBoard().getCell(i,j),game.getSinglePlayer(playerNumber).getSingleWorker(workerNumber))){
+                    availableMoveCells.add(new Cell(i,j));
+                }
+            }
+        }
+        return availableMoveCells;
     }
 
-    public void handleMove(){}
+    // crea un ArrayList che identifica le celle su cui un worker può fare una build
+    public ArrayList<Cell> availableBuildCells(int playerNumber, int workerNumber){
+        ArrayList<Cell> availableBuildCells = new ArrayList<Cell>();
+        Level level;
+        for(int i=0; i<5; i++){
+            for(int j=0; j<5; j++){
+                for(Level l: Level.values()) {
+                    if (game.getSinglePlayer(playerNumber).getGodCard().isFeasibleBuild(game.getBoard().getCell(i, j), game.getSinglePlayer(playerNumber).getSingleWorker(workerNumber),l)) {
+                        availableBuildCells.add(new Cell(i, j));
+                    }
+                }
+            }
+        }
+        return availableBuildCells;
+    }
 
     public void updateMoveRequest(MoveRequest message) {
         //QUA FA QUALCOSA
