@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Cell;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Level;
@@ -18,11 +19,11 @@ public class Controller implements Observer {
     }
 
     // crea un ArrayList che identifica le celle su cui un worker può fare una move
-    public ArrayList<Cell> availableMoveCells(int playerNumber, int workerNumber){
+    public ArrayList<Cell> availableMoveCells(int playerNumber, int workerNumber, Board board){
         ArrayList<Cell> availableMoveCells = new ArrayList<Cell>();
         for(int i=0; i<5; i++){
             for(int j=0; j<5; j++){
-                if(game.getSinglePlayer(playerNumber).getGodCard().isFeasibleMove(game.getBoard().getCell(i,j),game.getSinglePlayer(playerNumber).getSingleWorker(workerNumber))){
+                if(game.getSinglePlayer(playerNumber).getGodCard().isFeasibleMove(board.getCell(i,j),game.getSinglePlayer(playerNumber).getSingleWorker(workerNumber))){
                     availableMoveCells.add(new Cell(i,j));
                 }
             }
@@ -31,13 +32,13 @@ public class Controller implements Observer {
     }
 
     // crea un ArrayList che identifica le celle su cui un worker può fare una build
-    public ArrayList<Cell> availableBuildCells(int playerNumber, int workerNumber){
+    public ArrayList<Cell> availableBuildCells(int playerNumber, int workerNumber, Board board){
         ArrayList<Cell> availableBuildCells = new ArrayList<Cell>();
         Level level;
         for(int i=0; i<5; i++){
             for(int j=0; j<5; j++){
                 for(Level l: Level.values()) {
-                    if (game.getSinglePlayer(playerNumber).getGodCard().isFeasibleBuild(game.getBoard().getCell(i, j), game.getSinglePlayer(playerNumber).getSingleWorker(workerNumber),l)) {
+                    if (game.getSinglePlayer(playerNumber).getGodCard().isFeasibleBuild(board.getCell(i, j), game.getSinglePlayer(playerNumber).getSingleWorker(workerNumber),l)) {
                         availableBuildCells.add(new Cell(i, j));
                     }
                 }
