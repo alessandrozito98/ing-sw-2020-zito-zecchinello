@@ -3,11 +3,11 @@ package it.polimi.ingsw.observer.messages;
 import it.polimi.ingsw.model.Board;
 
 public class BoardChange {
-    private Board boardCopy;
-    private int availableMoveNumber;
-    private int availableBuildNumber;
-    private boolean hasMoved;
-    private boolean hasBuilt;
+    private final Board boardCopy;
+    private final int availableMoveNumber;
+    private final int availableBuildNumber;
+    private final boolean hasMoved;
+    private final boolean hasBuilt;
 
     public BoardChange(Board boardCopy, int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt){
         this.boardCopy = boardCopy;

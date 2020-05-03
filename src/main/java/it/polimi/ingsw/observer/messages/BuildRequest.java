@@ -3,11 +3,11 @@ package it.polimi.ingsw.observer.messages;
 import it.polimi.ingsw.model.Level;
 
 public class BuildRequest {
-    private int playerNumber;
-    private int workerNumber;
-    private int xPosition;
-    private int yPosition;
-    private Level level;
+    private final int playerNumber;
+    private final int workerNumber;
+    private final int xPosition;
+    private final int yPosition;
+    private final Level level;
 
     public BuildRequest(int playerNumber, int workerNumber, int xPosition, int yPosition, Level level){
         this.playerNumber = playerNumber;

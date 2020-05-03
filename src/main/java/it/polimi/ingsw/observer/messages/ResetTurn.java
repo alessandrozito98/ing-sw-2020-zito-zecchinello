@@ -1,10 +1,10 @@
 package it.polimi.ingsw.observer.messages;
 
 public class ResetTurn {
-    private int availableMoveNumber;
-    private int availableBuildNumber;
-    private boolean hasMoved;
-    private boolean hasBuilt;
+    private final int availableMoveNumber;
+    private final int availableBuildNumber;
+    private final boolean hasMoved;
+    private final boolean hasBuilt;
 
     public ResetTurn(int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt){
         this.availableMoveNumber = availableMoveNumber;

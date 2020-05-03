@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 
-import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.God.God;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.messages.BoardChange;
@@ -53,7 +52,7 @@ public class Game extends Observable {
         notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt()));
     }
 
-    //esegue il movimento di un worker e notifica le view del cambiamento
+    //esegue la costruzione di un worker e notifica le view del cambiamento
     public void performBuild(int playerNumber, int workerNumber, int xPosition, int yPosition, Level level){
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = getSinglePlayer(playerNumber).getGodCard();

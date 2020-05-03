@@ -1,9 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.model.Board;
-import it.polimi.ingsw.model.Cell;
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Level;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.messages.*;
 
@@ -47,15 +44,32 @@ public class Controller implements Observer {
         return availableBuildCells;
     }
 
+
+    public synchronized void handleMove(MoveRequest message) {
+        if(availableMoveCells(message.getPlayerNumber(), message.getWorkerNumber(), game.getBoardCopy()).size() != 0) {
+            game.performMove(message.getPlayerNumber(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
+        }
+    }
+
+    public void handleBuild(BuildRequest message) {
+        if(availableBuildCells(message.getPlayerNumber(),message.getWorkerNumber(), game.getBoardCopy()).size() != 0) {
+            game.performBuild(message.getPlayerNumber(),message.getWorkerNumber(),message.getxPosition(), message.getyPosition(), message.getLevel());
+        }
+    }
+
+    public void endTurn(EndTurnRequest message) {
+        game.manageEndTurn(message.getPlayerNumber());
+    }
+
     public void updateMoveRequest(MoveRequest message) {
-        //QUA FA QUALCOSA
+        handleMove(message);
     }
 
     public void updateBuildRequest(BuildRequest message) {
-        //QUA FA QUALCOSA
+        handleBuild(message);
     }
 
     public void updateEndTurnRequest(EndTurnRequest message) {
-        //QUA FA QUALCOSA
+        endTurn(message);
     }
 }
