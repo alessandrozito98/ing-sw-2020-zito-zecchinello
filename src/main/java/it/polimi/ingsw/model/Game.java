@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.God.God;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.messages.BoardChange;
+import it.polimi.ingsw.observer.messages.ResetTurn;
 
 import java.util.ArrayList;
 
@@ -60,5 +61,10 @@ public class Game extends Observable {
         notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt()));
     }
 
-
+    public void manageEndTurn(int playerNumber){
+        // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
+        God godCard = getSinglePlayer(playerNumber).getGodCard();
+        godCard.resetTurn();
+        notifyResetTurn(new ResetTurn(godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt()));
+    }
 }
