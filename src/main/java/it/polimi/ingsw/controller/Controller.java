@@ -51,13 +51,13 @@ public class Controller implements Observer {
         }
     }
 
-    public void handleBuild(BuildRequest message) {
+    public synchronized void handleBuild(BuildRequest message) {
         if(availableBuildCells(message.getPlayerNumber(),message.getWorkerNumber(), game.getBoardCopy()).size() != 0) {
             game.performBuild(message.getPlayerNumber(),message.getWorkerNumber(),message.getxPosition(), message.getyPosition(), message.getLevel());
         }
     }
 
-    public void endTurn(EndTurnRequest message) {
+    public synchronized void endTurn(EndTurnRequest message) {
         game.manageEndTurn(message.getPlayerNumber());
     }
 
