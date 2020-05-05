@@ -16,7 +16,7 @@ public class Controller implements Observer {
     }
 
     // crea un ArrayList che identifica le celle su cui un worker può fare una move
-    public ArrayList<Cell> checkMovement(int playerNumber, int workerNumber, Board board){
+    public ArrayList<Cell> checkMovement(int playerNumber, int workerNumber, Board board) {
         ArrayList<Cell> availableMoveCells = new ArrayList<Cell>();
         for(int i=0; i<5; i++){
             for(int j=0; j<5; j++){
@@ -57,7 +57,7 @@ public class Controller implements Observer {
         }
     }
 
-    public synchronized void endTurn(EndTurnRequest message) {
+    public synchronized void manageTurn(EndTurnRequest message) {
         game.manageEndTurn(message.getPlayerNumber());
     }
 
@@ -70,6 +70,6 @@ public class Controller implements Observer {
     }
 
     public void updateEndTurnRequest(EndTurnRequest message) {
-        endTurn(message);
+        manageTurn(message);
     }
 }

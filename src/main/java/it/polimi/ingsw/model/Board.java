@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Board implements Cloneable {
+public class Board implements Cloneable, Serializable {
 
 
     private final Cell[][] board = new Cell[5][5];

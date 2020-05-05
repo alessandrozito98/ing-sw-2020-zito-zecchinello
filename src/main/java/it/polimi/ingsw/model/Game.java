@@ -45,7 +45,7 @@ public class Game extends Observable {
     }
 
     //esegue il movimento di un worker e notifica le view del cambiamento
-    public void performMove(int playerNumber, int workerNumber, int xPosition, int yPosition){
+    public void performMove(int playerNumber, int workerNumber, int xPosition, int yPosition) {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = getSinglePlayer(playerNumber).getGodCard();
         godCard.move(this.board.getCell(xPosition, yPosition),getSinglePlayer(playerNumber).getSingleWorker(workerNumber));
@@ -53,14 +53,14 @@ public class Game extends Observable {
     }
 
     //esegue la costruzione di un worker e notifica le view del cambiamento
-    public void performBuild(int playerNumber, int workerNumber, int xPosition, int yPosition, Level level){
+    public void performBuild(int playerNumber, int workerNumber, int xPosition, int yPosition, Level level) {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = getSinglePlayer(playerNumber).getGodCard();
         godCard.build(this.board.getCell(xPosition, yPosition),getSinglePlayer(playerNumber).getSingleWorker(workerNumber), level);
         notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt()));
     }
 
-    public void manageEndTurn(int playerNumber){
+    public void manageEndTurn(int playerNumber) {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = getSinglePlayer(playerNumber).getGodCard();
         godCard.resetTurn();
