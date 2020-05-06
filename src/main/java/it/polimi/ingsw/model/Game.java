@@ -66,4 +66,35 @@ public class Game extends Observable {
         godCard.resetTurn();
         notifyResetTurn(new ResetTurn(godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt()));
     }
+
+    // crea un ArrayList che identifica le celle su cui un worker può fare una move
+    public ArrayList<Cell> checkMovement(int playerNumber, int workerNumber, Board board){
+        ArrayList<Cell> availableMoveCells = new ArrayList<Cell>();
+        for(int i=0; i<5; i++){
+            for(int j=0; j<5; j++){
+                if(getSinglePlayer(playerNumber).getGodCard().isFeasibleMove(board.getCell(i,j),getSinglePlayer(playerNumber).getSingleWorker(workerNumber))){
+                    availableMoveCells.add(new Cell(i,j));
+                }
+            }
+        }
+        return availableMoveCells;
+    }
+
+    // crea un ArrayList che identifica le celle su cui un worker può fare una build
+    public ArrayList<Cell> checkBuilding(int playerNumber, int workerNumber, Board board){
+        ArrayList<Cell> availableBuildCells = new ArrayList<Cell>();
+        Level level;
+        for(int i=0; i<5; i++){
+            for(int j=0; j<5; j++){
+                for(Level l: Level.values()) {
+                    if (getSinglePlayer(playerNumber).getGodCard().isFeasibleBuild(board.getCell(i, j), getSinglePlayer(playerNumber).getSingleWorker(workerNumber),l)) {
+                        Cell cell = new Cell(i, j);
+                        cell.setLevel(l);
+                        availableBuildCells.add(cell);
+                    }
+                }
+            }
+        }
+        return availableBuildCells;
+    }
 }
