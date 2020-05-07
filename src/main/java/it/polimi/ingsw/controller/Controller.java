@@ -35,15 +35,15 @@ public class Controller implements Observer {
     }
 
     public synchronized void handleMove(MoveRequest message) {
-        game.performMove(message.getPlayerNumber(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
+        game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
     }
 
     public synchronized void handleBuild(BuildRequest message) {
-        game.performBuild(message.getPlayerNumber(),message.getWorkerNumber(),message.getxPosition(), message.getyPosition(), message.getLevel());
+        game.performBuild(message.getPlayer(),message.getWorkerNumber(),message.getxPosition(), message.getyPosition(), message.getLevel());
     }
 
     public synchronized void manageTurn(EndTurnRequest message) {
-        game.manageEndTurn(message.getPlayerNumber());
+        game.manageEndTurn(message.getPlayer());
     }
 
     public void updateMoveRequest(MoveRequest message) {

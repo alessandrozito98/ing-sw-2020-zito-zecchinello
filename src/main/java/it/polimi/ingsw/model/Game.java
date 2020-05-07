@@ -45,30 +45,67 @@ public class Game extends Observable {
     }
 
     //esegue il movimento di un worker e notifica le view del cambiamento
-    public void performMove(int playerNumber, int workerNumber, int xPosition, int yPosition) {
+    public void performMove(Player player, int workerNumber, int xPosition, int yPosition) {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
-        God godCard = getSinglePlayer(playerNumber).getGodCard();
-        godCard.move(this.board.getCell(xPosition, yPosition),getSinglePlayer(playerNumber).getSingleWorker(workerNumber));
-        notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt()));
+        God godCard = player.getGodCard();
+        godCard.move(this.board.getCell(xPosition, yPosition),player.getSingleWorker(workerNumber));
+        notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(), player));
     }
 
     //esegue la costruzione di un worker e notifica le view del cambiamento
-    public void performBuild(int playerNumber, int workerNumber, int xPosition, int yPosition, Level level) {
+    public void performBuild(Player player, int workerNumber, int xPosition, int yPosition, Level level) {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
-        God godCard = getSinglePlayer(playerNumber).getGodCard();
-        godCard.build(this.board.getCell(xPosition, yPosition),getSinglePlayer(playerNumber).getSingleWorker(workerNumber), level);
-        notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt()));
+        God godCard = player.getGodCard();
+        godCard.build(this.board.getCell(xPosition, yPosition),player.getSingleWorker(workerNumber), level);
+        notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(), player));
     }
 
-    public void manageEndTurn(int playerNumber) {
+    public void manageEndTurn(Player player) {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
-        God godCard = getSinglePlayer(playerNumber).getGodCard();
+        God godCard = player.getGodCard();
         godCard.resetTurn();
-        notifyResetTurn(new ResetTurn(godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt()));
+        Player loseControlPlayer;
+        Player nextPlayer;
+        //quello che fa il codice da questa riga fino alla notifyEndTurn serve per controllare la possibile
+        //sconfitta del prossimo giocatore
+        if(players.indexOf(player)==players.size()-1){
+            loseControlPlayer=players.get(0);
+        }
+        else{
+            loseControlPlayer=players.get(players.indexOf(player)+1);
+        }
+        int actionCounter=0;
+        for(int i=1; i<3; i++){
+            if(loseControlPlayer.getGodCard().getAvailableBuildNumber()!=0){
+                if(!checkBuilding(loseControlPlayer.getPlayerNumber(),i,this.board).isEmpty()){ actionCounter++;}
+            }
+            if(!checkMovement(loseControlPlayer.getPlayerNumber(),i,this.board).isEmpty()){ actionCounter++;}
+        }
+        if(actionCounter==0){
+            remove(loseControlPlayer);
+            if(players.indexOf(player)==players.size()-1){
+                nextPlayer=players.get(0);
+            }
+            else{
+                nextPlayer=players.get(players.indexOf(player)+1);
+            }
+        }else{
+            nextPlayer=loseControlPlayer;
+            loseControlPlayer=null;
+        }
+        notifyResetTurn(new ResetTurn(godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(),player,nextPlayer,loseControlPlayer,getBoardCopy()));
+    }
+
+    public void managePlayerLose(Player player) {
+
+    }
+
+    public void remove(Player player){
+
     }
 
     // crea un ArrayList che identifica le celle su cui un worker può fare una move
-    public ArrayList<Cell> checkMovement(int playerNumber, int workerNumber, Board board){
+    public ArrayList<Cell> checkMovement(int playerNumber, int workerNumber, Board board) {
         ArrayList<Cell> availableMoveCells = new ArrayList<Cell>();
         for(int i=0; i<5; i++){
             for(int j=0; j<5; j++){
@@ -81,7 +118,7 @@ public class Game extends Observable {
     }
 
     // crea un ArrayList che identifica le celle su cui un worker può fare una build
-    public ArrayList<Cell> checkBuilding(int playerNumber, int workerNumber, Board board){
+    public ArrayList<Cell> checkBuilding(int playerNumber, int workerNumber, Board board) {
         ArrayList<Cell> availableBuildCells = new ArrayList<Cell>();
         Level level;
         for(int i=0; i<5; i++){

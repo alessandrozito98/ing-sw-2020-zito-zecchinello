@@ -6,18 +6,24 @@ import it.polimi.ingsw.model.Player;
 public class PlayerLose {
 
     private final Board boardCopy;
-    private final Player player;
+    private final Player losePlayer;
+    private final Player nextPlayer;
 
-    public PlayerLose(Board boardCopy, Player player){
+    public PlayerLose(Board boardCopy, Player losePlayer, Player nextPlayer){
         this.boardCopy = boardCopy;
-        this.player = player;
+        this.losePlayer = losePlayer;
+        this.nextPlayer = nextPlayer;
     }
 
     public Board getBoardCopy() {
         return boardCopy;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Player getLosePlayer() {
+        return losePlayer;
+    }
+
+    public Player getNextPlayer() {
+        return nextPlayer;
     }
 }
