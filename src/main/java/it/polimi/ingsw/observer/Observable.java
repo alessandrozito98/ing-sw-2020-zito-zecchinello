@@ -21,6 +21,13 @@ public class Observable {
         }
     }
 
+    public void notify(String message){
+        synchronized (observers) {
+            for(Observer observer : observers){
+                observer.update(message);
+            }
+        }
+    }
 
     public void notifyBoardChange(BoardChange message){
         synchronized (observers) {

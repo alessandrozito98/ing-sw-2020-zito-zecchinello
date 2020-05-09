@@ -25,4 +25,9 @@ public interface Observer {
     default void updateEndTurnRequest(EndTurnRequest message) {
         throw new UnsupportedOperationException();
     }
+
+// UPDATE DI MESSAGERECEIVER A SEGUITO DI NOTIFY DI SOCKETCLIENTCONNECTION
+    default void update(String message) {
+    throw new UnsupportedOperationException();
+}
 }
