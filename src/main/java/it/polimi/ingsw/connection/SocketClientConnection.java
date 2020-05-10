@@ -39,7 +39,7 @@ public class SocketClientConnection extends Observable implements Runnable {
         active = false;
     }
 
-    private synchronized void send(Object message) {
+    public synchronized void send(Object message) {
         try {
             out.reset();
             out.writeObject(message);
