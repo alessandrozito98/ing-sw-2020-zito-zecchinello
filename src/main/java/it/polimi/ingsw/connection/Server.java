@@ -12,21 +12,22 @@ public class Server {
     private static final int PORT = 2020;
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
-    private Map<String, SocketClientConnection> waitingConnection = new HashMap<>();
+    private ArrayList<SocketClientConnection> waitingConnection = new ArrayList<SocketClientConnection>();
 
     private int numberOfPlayers = 0;
     private ArrayList<EnumGodCard> availableGodCards = new ArrayList<EnumGodCard>();
+    private Map<SocketClientConnection, EnumGodCard> chosenGodCards = new HashMap<>();
 
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     }
 
     public synchronized void lobby(SocketClientConnection c, String name) {
-        waitingConnection.put(name, c);
-        if(waitingConnection.size()==1){ //scelta numero giocatori e dei da parte del primo che si collega
-            List<String> keys = new ArrayList<>(waitingConnection.keySet());
-            SocketClientConnection c1 = waitingConnection.get(keys.get(0));
-            c1.asyncSend((String)"chose the number of player: 2 or 3?");
+        waitingConnection.add(c);
+        //scelta numero giocatori e dei da parte del primo che si collega
+        if(waitingConnection.size()==1){
+            SocketClientConnection c1 = waitingConnection.get(0);
+            c1.asyncSend((String)"Chose the number of player: 2 or 3?");
             // SCELTA NUMERO DEI GIOCATORI
             while(!(numberOfPlayers==2||numberOfPlayers==3)){
                 try {
@@ -35,15 +36,15 @@ public class Server {
                     if (number == 2 || number == 3) {
                         numberOfPlayers = number;
                     } else {
-                        c1.asyncSend((String) "Error! chose 2 or 3:");
+                        c1.asyncSend((String) "Error! Chose 2 or 3:");
                     }
                 } catch (NumberFormatException e) {
-                    c1.asyncSend((String) "Error! chose 2 or 3:");
+                    c1.asyncSend((String) "Error! Chose 2 or 3:");
                 }
             }
             // SCELTA DEI
             ArrayList<EnumGodCard> godCards = new ArrayList<EnumGodCard>(Arrays.asList(EnumGodCard.values()));
-            c1.send((String) "chose "+numberOfPlayers+" godCards from this list:");
+            c1.send((String) "Chose "+numberOfPlayers+" godCards from this list:");
             while(availableGodCards.size()!=numberOfPlayers){
                 try {
                     for (EnumGodCard g : godCards) {
@@ -55,15 +56,48 @@ public class Server {
                         availableGodCards.add(god);
                         godCards.remove(god);
                     } else {
-                        c1.send((String) "Error! chose from this list:");
+                        c1.send((String) "Error! Chose from this list:");
                     }
                 } catch (IllegalArgumentException e) {
-                    c1.send((String) "Error! chose from this list:");
+                    c1.send((String) "Error! Chose from this list:");
                 }
             }
+            System.out.println("numero giocatori:" + numberOfPlayers); //da togliere, usata solo per test stupido
+            for(EnumGodCard g:  availableGodCards){System.out.println(g.toString());} //da togliere, usata solo per test stupido
         }
-        System.out.println("numero giocatori:" + numberOfPlayers); //da togliere, usata solo per test stupido
-        for(EnumGodCard g:  availableGodCards){System.out.println(g.toString());} //da togliere, usata solo per test stupido
+        //SE SONO COLLEGATI IL NUMERO GIUSTO DI CLIENT FA SCEGLIERE AI GIOCATORI GLI DEI
+        //POI FA POSIZIONARE I WORKERS, POI INIZIALIZZA LA PARTITA
+        if(waitingConnection.size()==numberOfPlayers&&waitingConnection.size()!=0){
+            //SCELTA DEI
+            for(int i=1; i<numberOfPlayers;i++){
+                SocketClientConnection connection = waitingConnection.get(i);
+                connection.send((String) "Chose one god from this list: ");
+                while(chosenGodCards.size()<i) {
+                    try {
+                        for (EnumGodCard g : availableGodCards) {
+                            connection.send((String) g.toString());
+                        }
+                        String s = connection.read();
+                        EnumGodCard god = Enum.valueOf(EnumGodCard.class, s.toUpperCase());
+                        if (availableGodCards.contains(god)) {
+                            chosenGodCards.put(connection, god);
+                            availableGodCards.remove(god);
+                        } else {
+                            connection.send((String) "Error! Chose from this list:");
+                        }
+                    } catch (IllegalArgumentException e) {
+                        connection.send((String) "Error! Chose from this list:");
+                    }
+                }
+            }
+            chosenGodCards.put(waitingConnection.get(0),availableGodCards.get(0));
+            availableGodCards.remove(availableGodCards.get(0));
+            waitingConnection.get(0).send((String)"your god is: "+ chosenGodCards.get(waitingConnection.get(0)).toString());
+            //da togliere, usata solo per test stupido
+            for(int i=0; i<numberOfPlayers; i++){
+                System.out.println(chosenGodCards.get(waitingConnection.get(i)).toString());
+            }
+        }
     }
 
     public void run(){
