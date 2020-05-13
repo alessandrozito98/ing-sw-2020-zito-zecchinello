@@ -36,7 +36,7 @@ public class Client {
                         if(inputObject instanceof String){
                             System.out.println((String)inputObject);
                       //  } else if (inputObject instanceof Board){
-                      //      ((Board)inputObject).print();
+                      //      ((Board)inputObject).printBoard();
                         } else {
                             throw new IllegalArgumentException();
                         }
