@@ -28,7 +28,6 @@ public abstract class God {
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
         setHasMoved(true);
-        if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
     public void build(Cell cell, Worker worker, Level level){

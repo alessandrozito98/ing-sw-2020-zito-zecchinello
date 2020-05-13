@@ -48,8 +48,12 @@ public class Game extends Observable {
     public void performMove(Player player, int workerNumber, int xPosition, int yPosition) {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = player.getGodCard();
-        godCard.move(this.board.getCell(xPosition, yPosition),player.getSingleWorker(workerNumber));
+        Level oldLevel = player.getSingleWorker(workerNumber).getPosition().getLevel();
+        godCard.move(this.board.getCell(xPosition,yPosition),player.getSingleWorker(workerNumber));
         notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(), player));
+        if(godCard.winControl(oldLevel,player.getSingleWorker(workerNumber).getPosition().getLevel())) {
+            //notifyWin();  TO DO
+        }
     }
 
     //esegue la costruzione di un worker e notifica le view del cambiamento

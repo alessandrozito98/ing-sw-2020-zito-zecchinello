@@ -34,7 +34,6 @@ public class Prometheus extends God {
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
         setHasMoved(true);
         setAvailableBuildNumber(1);
-        if(winControl(oldLevel,cell.getLevel())){} //TO DO!!!!!!!!!
     }
 
     @Override
