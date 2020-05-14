@@ -40,10 +40,16 @@ public class Board implements Cloneable, Serializable {
     }
 
     public void printBoard() {
-        System.out.println("  0 1 2 3 4");
+        System.out.println("     0    1    2    3    4");
         for(int i = 0; i < 5; i++) {
+            System.out.print(i+ " |");
             for(int j = 0; j < 5; j++) {
-                System.out.print(board[i][j] + "|");
+                System.out.print(this.board[i][j].getLevel().label+" ");
+                if(this.board[i][j].getWorker()==null){
+                    System.out.print("  |");
+                }else{
+                    System.out.print(this.board[i][j].getWorker().getColor().label+this.board[i][j].getWorker().getWorkerNumber()+ "|");
+                }
             }
             System.out.println();
         }

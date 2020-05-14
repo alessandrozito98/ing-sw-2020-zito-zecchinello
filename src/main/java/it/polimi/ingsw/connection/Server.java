@@ -1,8 +1,9 @@
 package it.polimi.ingsw.connection;
 
-import it.polimi.ingsw.model.Board;
-import it.polimi.ingsw.model.Worker;
-import it.polimi.ingsw.model.WorkerColor;
+import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.view.RemoteView;
+import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -20,6 +21,7 @@ public class Server {
 
     private int numberOfPlayers = 0;
     int firstPlayer =0;
+    private Map<SocketClientConnection, String> names = new HashMap<>();
     private ArrayList<EnumGodCard> availableGodCards = new ArrayList<EnumGodCard>();
     private Map<SocketClientConnection, EnumGodCard> chosenGodCards = new HashMap<>();
     private Map<SocketClientConnection, ArrayList<Worker>> workerMap = new HashMap<>();
@@ -30,6 +32,7 @@ public class Server {
 
     public synchronized void lobby(SocketClientConnection c, String name) {
         waitingConnection.add(c);
+        names.put(c,name);
         //scelta numero giocatori e dei da parte del primo che si collega
         if(waitingConnection.size()==1){
             SocketClientConnection c1 = waitingConnection.get(0);
@@ -103,6 +106,7 @@ public class Server {
             waitingConnection.get(0).send((String)"Your god is: "+ chosenGodCards.get(waitingConnection.get(0)).toString());
             //da togliere, usata solo per test stupido
             for(int i=0; i<numberOfPlayers; i++){System.out.println(chosenGodCards.get(waitingConnection.get(i)).toString()); }
+            //scelta primo giocatore
             waitingConnection.get(0).send((String) "Chose the first player with a number from 1 to "+numberOfPlayers+":");
             while(firstPlayer<1||firstPlayer>numberOfPlayers){
                 try {
@@ -117,17 +121,16 @@ public class Server {
                     waitingConnection.get(0).send((String) "Error! Chose the first player with a number from 1 to "+numberOfPlayers+":");
                 }
             }
-            //da togliere, usata solo per test stupido
-            System.out.println(firstPlayer);
             if(firstPlayer!=1){
                 SocketClientConnection temp = waitingConnection.remove(firstPlayer-1);
                 waitingConnection.add(0,temp);
             }
+            //da togliere, usata solo per test stupido
+            System.out.println(firstPlayer);
 
             Board board = new Board();
 
             // posizionamento workers
-            ArrayList<WorkerColor> workerColors = new ArrayList<WorkerColor>(Arrays.asList(WorkerColor.values()));
             for(int i=0;i<numberOfPlayers;i++){
                 SocketClientConnection connection = waitingConnection.get(i);
                 workerMap.put(connection,new ArrayList<Worker>());
@@ -135,7 +138,7 @@ public class Server {
                 for(int j=1;j<3;j++){
                     boolean done = false;
                     while (!done){
-                        //connection.send((Board)board);
+                        connection.send((Board)board);
                         connection.send((String)"Chose the coordinates 'x,y' of the worker N^"+j+" from 0 to 4:");
                         try {
                             String s = connection.read();
@@ -147,7 +150,7 @@ public class Server {
                             }else if(board.getCell(x,y).getWorker()!=null){
                                 connection.send((String)"Error! occupied cell");
                             }else{
-                                Worker w = new Worker(j,workerColors.get(i));
+                                Worker w = new Worker(j,WorkerColor.values()[i]);
                                 w.setPosition(board.getCell(x,y));
                                 workers.add(w);
                                 board.getCell(x,y).addWorker(w);
@@ -159,6 +162,18 @@ public class Server {
                     }
                 }
             }
+            //inizializzazione partita
+            /*ArrayList<View> views = new ArrayList<>();
+            Game game = new Game(board);
+            Controller controller = new Controller(game);
+            for(int i=0;i<numberOfPlayers;i++){
+                game.addPlayer(new Player(names.get(waitingConnection.get(i)),i,workerMap.get(waitingConnection.get(i)),chosenGodCards.get(waitingConnection.get(i)).createGod(game)));
+                views.add(new RemoteView(game.getSinglePlayer(i),waitingConnection.get(i)));
+                game.addObserver(views.get(i));
+                views.get(i).addObserver(controller);
+            }
+            controller.setPlayerTurn(0);
+            for(int i=0;i<numberOfPlayers;i++){waitingConnection.get(i).setStart(true);} */
         }
     }
 

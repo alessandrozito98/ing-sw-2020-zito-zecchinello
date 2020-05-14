@@ -10,8 +10,13 @@ import java.util.ArrayList;
 
 public class Game extends Observable {
 
-    private final Board board = new Board();
-    private final ArrayList<Player> players = new ArrayList<Player>();
+    private final Board board;
+    private final ArrayList<Player> players;
+
+    public Game(Board board){
+        this.board = board;
+        this.players= new ArrayList<Player>();
+    }
 
 
     public Board getBoardCopy() {

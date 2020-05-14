@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-public class Worker {
+import java.io.Serializable;
+
+public class Worker implements Serializable {
 
     private int workerNumber;
     private WorkerColor color;

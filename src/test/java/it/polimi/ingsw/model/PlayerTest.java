@@ -19,9 +19,9 @@ public class PlayerTest extends TestCase {
 
     @Before
     public void setUp() {
-        Game gameTest = new Game();
-        workerTest = new Worker(1, WorkerColor.BROWN);
-        workerTest2 = new Worker(2, WorkerColor.BROWN);
+        Game gameTest = new Game(new Board());
+        workerTest = new Worker(1, WorkerColor.RED);
+        workerTest2 = new Worker(2, WorkerColor.RED);
         workersTest = new ArrayList<Worker>();
         workersTest.add(workerTest);
         workersTest.add(workerTest2);

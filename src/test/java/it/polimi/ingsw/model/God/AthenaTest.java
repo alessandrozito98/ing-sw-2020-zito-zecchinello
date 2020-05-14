@@ -12,7 +12,7 @@ public class AthenaTest {
     Worker workerTest;
     @Before
     public void setUp(){
-        Game gameTest = new Game();
+        Game gameTest = new Game(new Board());
         athenaTest = new Athena(gameTest);
         cellTest = new Cell(1,1);
         workerTest = new Worker(1, WorkerColor.BLUE);
@@ -20,7 +20,7 @@ public class AthenaTest {
 
     @Test
     public void MoveUp(){
-        Game gameTest = new Game();
+        Game gameTest = new Game(new Board());
         athenaTest.getPlayers().add(new Player("test",2,null, new Pan(gameTest)));
         cellTest.setLevel(Level.LEVEL3);
         Cell workerPosition = new Cell(1,2);

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.connection;
 
+import it.polimi.ingsw.model.Board;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
@@ -35,8 +37,8 @@ public class Client {
                         Object inputObject = socketIn.readObject();
                         if(inputObject instanceof String){
                             System.out.println((String)inputObject);
-                      //  } else if (inputObject instanceof Board){
-                      //      ((Board)inputObject).printBoard();
+                        } else if (inputObject instanceof Board){
+                            ((Board)inputObject).printBoard();
                         } else {
                             throw new IllegalArgumentException();
                         }

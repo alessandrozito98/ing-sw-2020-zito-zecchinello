@@ -13,7 +13,7 @@ public class ArtemisTest {
 
     @Before
     public void setUp(){
-        Game gameTest = new Game();
+        Game gameTest = new Game(new Board());
         artemisTest = new Artemis(gameTest);
         cellTest = new Cell(1,1);
         workerTest = new Worker(1,WorkerColor.BLUE);

@@ -14,7 +14,7 @@ public class ApolloTest {
     Worker workerTest;
     @Before
     public void setUp(){
-        Game gameTest = new Game();
+        Game gameTest = new Game(new Board());
         apolloTest = new Apollo(gameTest);
         cellTest = new Cell(1,1);
         workerTest = new Worker(1, WorkerColor.BLUE);

@@ -1,5 +1,11 @@
 package it.polimi.ingsw.model;
 
 public enum Level {
-    GROUND, LEVEL1, LEVEL2, LEVEL3, DOME
+    GROUND("G"), LEVEL1("1"), LEVEL2("2"), LEVEL3("3"), DOME("D");
+
+    public final String label;
+
+    Level(String label){
+        this.label = label;
+    }
 }

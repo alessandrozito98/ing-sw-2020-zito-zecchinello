@@ -14,7 +14,7 @@ public class HephaestusTest {
 
     @Before
     public void setUp(){
-        Game gameTest = new Game();
+        Game gameTest = new Game(new Board());
         hephaestusTest = new Hephaestus(gameTest);
         cellTest = new Cell(1,1);
         workerTest = new Worker(1, WorkerColor.BLUE);
