@@ -73,12 +73,12 @@ public class SocketClientConnection extends Observable implements Runnable {
             String read = in.nextLine();
             name = read;
             server.lobby(this, name);
-            while(!isStart()){}
-            while(isActive()){
+            while(true){Thread.sleep(10000);}
+            /*while(isActive()){
                 read = in.nextLine();
                 notify(read);
-            }
-        } catch (IOException | NoSuchElementException e) {
+            }*/
+        } catch (IOException | NoSuchElementException | InterruptedException e) {
             System.err.println("Error!" + e.getMessage());
         }finally{
             closeConnection();

@@ -122,8 +122,12 @@ public class Server {
                 }
             }
             if(firstPlayer!=1){
-                SocketClientConnection temp = waitingConnection.remove(firstPlayer-1);
-                waitingConnection.add(0,temp);
+                SocketClientConnection oldFirst = waitingConnection.get(0);
+                SocketClientConnection first = waitingConnection.get(firstPlayer-1);
+                while(waitingConnection.get(0)!=first) {
+                    SocketClientConnection temp = waitingConnection.remove(0);
+                    waitingConnection.add(temp);
+                }
             }
             //da togliere, usata solo per test stupido
             System.out.println(firstPlayer);
