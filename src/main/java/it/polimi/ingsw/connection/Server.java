@@ -36,7 +36,7 @@ public class Server {
         //scelta numero giocatori e dei da parte del primo che si collega
         if(waitingConnection.size()==1){
             SocketClientConnection c1 = waitingConnection.get(0);
-            c1.asyncSend((String)"Chose the number of player: 2 or 3?");
+            c1.asyncSend((String)"Choose the number of player: 2 or 3?");
             // SCELTA NUMERO DEI GIOCATORI
             while(!(numberOfPlayers==2||numberOfPlayers==3)){
                 try {
@@ -45,15 +45,15 @@ public class Server {
                     if (number == 2 || number == 3) {
                         numberOfPlayers = number;
                     } else {
-                        c1.asyncSend((String) "Error! Chose 2 or 3:");
+                        c1.asyncSend((String) "Error! Choose 2 or 3:");
                     }
                 } catch (NumberFormatException e) {
-                    c1.asyncSend((String) "Error! Chose 2 or 3:");
+                    c1.asyncSend((String) "Error! Choose 2 or 3:");
                 }
             }
             // SCELTA DEI
             ArrayList<EnumGodCard> godCards = new ArrayList<EnumGodCard>(Arrays.asList(EnumGodCard.values()));
-            c1.send((String) "Chose "+numberOfPlayers+" godCards from this list:");
+            c1.send((String) "Choose "+numberOfPlayers+" godCards from this list:");
             while(availableGodCards.size()!=numberOfPlayers){
                 try {
                     for (EnumGodCard g : godCards) {
@@ -65,10 +65,10 @@ public class Server {
                         availableGodCards.add(god);
                         godCards.remove(god);
                     } else {
-                        c1.send((String) "Error! Chose from this list:");
+                        c1.send((String) "Error! Choose from this list:");
                     }
                 } catch (IllegalArgumentException e) {
-                    c1.send((String) "Error! Chose from this list:");
+                    c1.send((String) "Error! Choose from this list:");
                 }
             }
             //da togliere, usata solo per test stupido
@@ -82,7 +82,7 @@ public class Server {
             //SCELTA DEI
             for(int i=1; i<numberOfPlayers;i++){
                 SocketClientConnection connection = waitingConnection.get(i);
-                connection.send((String) "Chose one god from this list: ");
+                connection.send((String) "Choose one god from this list: ");
                 while(chosenGodCards.size()<i) {
                     try {
                         for (EnumGodCard g : availableGodCards) {
@@ -94,10 +94,10 @@ public class Server {
                             chosenGodCards.put(connection, god);
                             availableGodCards.remove(god);
                         } else {
-                            connection.send((String) "Error! Chose from this list:");
+                            connection.send((String) "Error! Choose from this list:");
                         }
                     } catch (IllegalArgumentException e) {
-                        connection.send((String) "Error! Chose from this list:");
+                        connection.send((String) "Error! Choose from this list:");
                     }
                 }
             }
@@ -107,7 +107,7 @@ public class Server {
             //da togliere, usata solo per test stupido
             for(int i=0; i<numberOfPlayers; i++){System.out.println(chosenGodCards.get(waitingConnection.get(i)).toString()); }
             //scelta primo giocatore
-            waitingConnection.get(0).send((String) "Chose the first player with a number from 1 to "+numberOfPlayers+":");
+            waitingConnection.get(0).send((String) "Choose the first player with a number from 1 to "+numberOfPlayers+":");
             while(firstPlayer<1||firstPlayer>numberOfPlayers){
                 try {
                     String s = waitingConnection.get(0).read();
@@ -115,10 +115,10 @@ public class Server {
                     if (number == 1 || number == 2 || number == 3) {
                         firstPlayer = number;
                     } else {
-                        waitingConnection.get(0).send((String) "Error! Chose the first player with a number from 1 to "+numberOfPlayers+":");
+                        waitingConnection.get(0).send((String) "Error! Choose the first player with a number from 1 to "+numberOfPlayers+":");
                     }
                 } catch (NumberFormatException e) {
-                    waitingConnection.get(0).send((String) "Error! Chose the first player with a number from 1 to "+numberOfPlayers+":");
+                    waitingConnection.get(0).send((String) "Error! Choose the first player with a number from 1 to "+numberOfPlayers+":");
                 }
             }
             if(firstPlayer!=1){
@@ -143,7 +143,7 @@ public class Server {
                     boolean done = false;
                     while (!done){
                         connection.send((Board)board);
-                        connection.send((String)"Chose the coordinates 'x,y' of the worker N^"+j+" from 0 to 4:");
+                        connection.send((String)"Choose the coordinates 'x,y' of the worker N^"+j+" from 0 to 4:");
                         try {
                             String s = connection.read();
                             String[] coordinates = s.split(",");

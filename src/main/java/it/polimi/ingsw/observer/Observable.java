@@ -21,10 +21,10 @@ public class Observable {
         }
     }
 
-    public void notify(String message){
+    public void notifyWin(Win message){
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.update(message);
+                observer.updateWin(message);
             }
         }
     }

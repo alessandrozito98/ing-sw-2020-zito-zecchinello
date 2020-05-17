@@ -14,7 +14,9 @@ public interface Observer {
     default void updatePlayerLose(PlayerLose message) {
         throw new UnsupportedOperationException();
     }
-
+    default void updateWin(Win message) {
+        throw new UnsupportedOperationException();
+    }
 // UPDATE DEL CONTROLLER A SEGUITO DI NOTIFY DELLA VIEW
     default void updateMoveRequest(MoveRequest message) {
         throw new UnsupportedOperationException();
@@ -26,8 +28,4 @@ public interface Observer {
         throw new UnsupportedOperationException();
     }
 
-// UPDATE DI MESSAGERECEIVER A SEGUITO DI NOTIFY DI SOCKETCLIENTCONNECTION
-    default void update(String message) {
-    throw new UnsupportedOperationException();
-}
 }
