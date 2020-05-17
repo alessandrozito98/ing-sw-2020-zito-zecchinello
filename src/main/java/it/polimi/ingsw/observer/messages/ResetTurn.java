@@ -10,16 +10,14 @@ public class ResetTurn {
     private final boolean hasBuilt;
     private final Player previousPlayer;
     private final Player nextPlayer;
-    private final Board boardCopy;
 
-    public ResetTurn(int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt, Player previousPlayer, Player nextPlayer, Board boardCopy){
+    public ResetTurn(int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt, Player previousPlayer, Player nextPlayer){
         this.availableMoveNumber = availableMoveNumber;
         this.availableBuildNumber = availableBuildNumber;
         this.hasMoved = hasMoved;
         this.hasBuilt = hasBuilt;
         this.previousPlayer = previousPlayer;
         this.nextPlayer = nextPlayer;
-        this.boardCopy = boardCopy;
     }
 
     public int getAvailableMoveNumber() {
@@ -46,7 +44,4 @@ public class ResetTurn {
         return nextPlayer;
     }
 
-    public Board getBoardCopy() {
-        return boardCopy;
-    }
 }

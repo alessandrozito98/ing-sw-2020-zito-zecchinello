@@ -16,7 +16,6 @@ public class SocketClientConnection extends Observable implements Runnable {
     private Server server;
 
     private boolean active = true;
-    private boolean start = false;
 
     public SocketClientConnection(Socket socket, Server server) {
         this.socket = socket;
@@ -26,8 +25,6 @@ public class SocketClientConnection extends Observable implements Runnable {
     private synchronized boolean isActive(){
         return active;
     }
-    private boolean isStart(){ return start;}
-    public void setStart(boolean start){ this.start = start; }
 
     public synchronized void closeConnection() {
         send("Connection closed!");
@@ -73,11 +70,7 @@ public class SocketClientConnection extends Observable implements Runnable {
             String read = in.nextLine();
             name = read;
             server.lobby(this, name);
-            while(true){Thread.sleep(10000);}
-            /*while(isActive()){
-                read = in.nextLine();
-                notify(read);
-            }*/
+            while(isActive()){Thread.sleep(10000);}
         } catch (IOException | NoSuchElementException | InterruptedException e) {
             System.err.println("Error!" + e.getMessage());
         }finally{
