@@ -11,11 +11,11 @@ public class Controller implements Observer {
 
     private final Game game;
     private int playerTurn;
-    private int workerNumber;
+    private int choosenWorker;
 
     public Controller(Game game) {
         this.game = game;
-        this.workerNumber = 0;
+        this.choosenWorker = -1;
     }
 
     public int getPlayerTurn() {
@@ -26,20 +26,43 @@ public class Controller implements Observer {
         this.playerTurn = playerTurn;
     }
 
-    public int getWorkerNumber() {
-        return workerNumber;
+    public int getChoosenWorker() {
+        return choosenWorker;
     }
 
-    public void setWorkerNumber(int workerNumber) {
-        this.workerNumber = workerNumber;
+    public void setChoosenWorker(int choosenWorker) {
+        this.choosenWorker = choosenWorker;
     }
 
     public synchronized void handleMove(MoveRequest message) {
-        game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
+        if (getChoosenWorker() == -1) {
+            setChoosenWorker(message.getWorkerNumber());
+            game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
+        }
+        else {
+            if (message.getWorkerNumber() != getChoosenWorker()) {
+                message.getView().reportError("Error! You chose the incorrect worker!");
+            }
+            else {
+                game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
+            }
+
+        }
     }
 
     public synchronized void handleBuild(BuildRequest message) {
-        game.performBuild(message.getPlayer(),message.getWorkerNumber(),message.getxPosition(), message.getyPosition(), message.getLevel());
+        if (getChoosenWorker() == -1) {
+            setChoosenWorker(message.getWorkerNumber());
+            game.performBuild(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition(), message.getLevel());
+        }
+        else {
+            if (getChoosenWorker() != message.getWorkerNumber()) {
+                message.getView().reportError("Error! You chose the incorrect worker!");
+            }
+            else {
+                game.performBuild(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition(), message.getLevel());
+            }
+        }
     }
 
     public synchronized void manageTurn(EndTurnRequest message) {

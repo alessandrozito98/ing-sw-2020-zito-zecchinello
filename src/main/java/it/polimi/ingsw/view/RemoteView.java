@@ -142,7 +142,8 @@ public class RemoteView extends View {
         notifyEndTurnRequest(new EndTurnRequest(this.player));
     }
 
-    public void reportError(String message){
+    @Override
+    public void reportError(Object message){
         connection.send((String)message);
         chooseAction();
     }
@@ -242,4 +243,5 @@ public class RemoteView extends View {
         }
         connection.closeConnection();
     }
+
 }
