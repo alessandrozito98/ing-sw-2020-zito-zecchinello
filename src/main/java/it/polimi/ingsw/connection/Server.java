@@ -167,17 +167,17 @@ public class Server {
                 }
             }
             //inizializzazione partita
-            /*ArrayList<View> views = new ArrayList<>();
+           /* ArrayList<View> views = new ArrayList<>();
             Game game = new Game(board);
             Controller controller = new Controller(game);
             for(int i=0;i<numberOfPlayers;i++){
                 game.addPlayer(new Player(names.get(waitingConnection.get(i)),i,workerMap.get(waitingConnection.get(i)),chosenGodCards.get(waitingConnection.get(i)).createGod(game)));
-                views.add(new RemoteView(game.getSinglePlayer(i),waitingConnection.get(i)));
+                views.add(new RemoteView(game.getSinglePlayer(i),waitingConnection.get(i),game.getBoardCopy()));
                 game.addObserver(views.get(i));
                 views.get(i).addObserver(controller);
             }
             controller.setPlayerTurn(0);
-            for(int i=0;i<numberOfPlayers;i++){waitingConnection.get(i).setStart(true);} */
+            views.get(0).chooseAction();*/
         }
     }
 
