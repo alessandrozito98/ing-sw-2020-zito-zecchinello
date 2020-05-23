@@ -1,6 +1,5 @@
 package it.polimi.ingsw.observer.messages;
 
-import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Player;
 
 public class ResetTurn {

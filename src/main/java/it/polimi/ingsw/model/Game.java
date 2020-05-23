@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.God.God;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.messages.BoardChange;
 import it.polimi.ingsw.observer.messages.ResetTurn;
+import it.polimi.ingsw.observer.messages.Win;
 
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class Game extends Observable {
         godCard.move(this.board.getCell(xPosition,yPosition),player.getSingleWorker(workerNumber));
         notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(), player));
         if(godCard.winControl(oldLevel,player.getSingleWorker(workerNumber).getPosition().getLevel())) {
-            //notifyWin();  TO DO
+            notifyWin(new Win(player));
         }
     }
 
@@ -73,44 +74,29 @@ public class Game extends Observable {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = player.getGodCard();
         godCard.resetTurn();
-        Player loseControlPlayer;
         Player nextPlayer;
-        //quello che fa il codice da questa riga fino alla notifyEndTurn serve per controllare la possibile
-        //sconfitta del prossimo giocatore
-        if(players.indexOf(player)==players.size()-1){
-            loseControlPlayer=players.get(0);
-        }
-        else{
-            loseControlPlayer=players.get(players.indexOf(player)+1);
-        }
-        int actionCounter=0;
-        for(int i=1; i<3; i++){
-            if(loseControlPlayer.getGodCard().getAvailableBuildNumber()!=0){
-                if(!checkBuilding(loseControlPlayer.getPlayerNumber(),i,this.board).isEmpty()){ actionCounter++;}
-            }
-            if(!checkMovement(loseControlPlayer.getPlayerNumber(),i,this.board).isEmpty()){ actionCounter++;}
-        }
-        if(actionCounter==0){
-            remove(loseControlPlayer);
-            if(players.indexOf(player)==players.size()-1){
-                nextPlayer=players.get(0);
-            }
-            else{
-                nextPlayer=players.get(players.indexOf(player)+1);
-            }
-        }else{
-            nextPlayer=loseControlPlayer;
-            loseControlPlayer=null;
-        }
-        notifyResetTurn(new ResetTurn(godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(),player,nextPlayer,loseControlPlayer,getBoardCopy()));
-    }
 
-    public void managePlayerLose(Player player) {
-
+        if(players.indexOf(player)==players.size()-1) {
+            nextPlayer=players.get(0);
+        }
+        else {
+            nextPlayer=players.get(players.indexOf(player)+1);
+        }
+        notifyResetTurn(new ResetTurn(godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(),player, nextPlayer));
     }
 
     public void remove(Player player){
 
+        //Removing the Worker
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if(board.getCell(i,j).getWorker() == player.getSingleWorker(1) || getBoard().getCell(i,j).getWorker() == player.getSingleWorker(2)) {
+                    board.getCell(i,j).removeWorker();
+                }
+            }
+        }
+        //removing the player
+        players.remove(player);
     }
 
     // crea un ArrayList che identifica le celle su cui un worker può fare una move

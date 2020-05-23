@@ -1,6 +1,5 @@
 package it.polimi.ingsw.observer.messages;
 
-import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.View;
 
