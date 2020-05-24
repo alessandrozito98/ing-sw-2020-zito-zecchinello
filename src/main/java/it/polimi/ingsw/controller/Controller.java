@@ -35,50 +35,74 @@ public class Controller implements Observer {
     }
 
     public synchronized void handleMove(MoveRequest message) {
-        if (getChoosenWorker() == -1) {
+        if(playerTurn==message.getPlayer().getPlayerNumber()) {
             if (loseControl(message.getPlayer()) == 0) {
+                setChoosenWorker(-1);
+                if(playerTurn == game.getPlayers().size()-1) {
+                    setPlayerTurn(0);
+                }
+                else {
+                    setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())).getPlayerNumber());
+                }
                 game.remove(message.getPlayer());
-            }
-            else {
+            } else if (getChoosenWorker() == -1) {
                 setChoosenWorker(message.getWorkerNumber());
-                game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
-            }
-        }
-        else if (message.getWorkerNumber() != getChoosenWorker()) {
+                if(message.getPlayer().getGodCard().isFeasibleMove(game.getBoard().getCell(message.getxPosition(),message.getyPosition()),message.getPlayer().getSingleWorker(message.getWorkerNumber()))) {
+                    game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
+                } else {
+                    message.getView().reportError("Error! this move is not feasible!");
+                }
+            } else if (message.getWorkerNumber() != getChoosenWorker()) {
                 message.getView().reportError("Error! You chose the incorrect worker!");
-        }
-        else {
-            game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
+            } else {
+                if(message.getPlayer().getGodCard().isFeasibleMove(game.getBoard().getCell(message.getxPosition(),message.getyPosition()),message.getPlayer().getSingleWorker(message.getWorkerNumber()))) {
+                    game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
+                } else {
+                    message.getView().reportError("Error! this move is not feasible!");
+                }
+            }
         }
     }
 
     public synchronized void handleBuild(BuildRequest message) {
-        if (getChoosenWorker() == -1) {
+        if(playerTurn==message.getPlayer().getPlayerNumber()) {
             if (loseControl(message.getPlayer()) == 0) {
+                setChoosenWorker(-1);
+                if(playerTurn == game.getPlayers().size()-1) {
+                    setPlayerTurn(0);
+                }
+                else {
+                    setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())).getPlayerNumber());
+                }
                 game.remove(message.getPlayer());
-            }
-            else {
+            } else if (getChoosenWorker() == -1) {
                 setChoosenWorker(message.getWorkerNumber());
-                game.performBuild(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition(), message.getLevel());
+                if(message.getPlayer().getGodCard().isFeasibleBuild(game.getBoard().getCell(message.getxPosition(),message.getyPosition()),message.getPlayer().getSingleWorker(message.getWorkerNumber()),message.getLevel())) {
+                    game.performBuild(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition(), message.getLevel());
+                } else {
+                    message.getView().reportError("Error! this build is not feasible!");
+                }
+            } else if (getChoosenWorker() != message.getWorkerNumber()) {
+                message.getView().reportError("Error! You chose the incorrect worker!");
+            } else {
+                if(message.getPlayer().getGodCard().isFeasibleBuild(game.getBoard().getCell(message.getxPosition(),message.getyPosition()),message.getPlayer().getSingleWorker(message.getWorkerNumber()),message.getLevel())) {
+                    game.performBuild(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition(), message.getLevel());
+                } else {
+                    message.getView().reportError("Error! this build is not feasible!");
+                }
             }
-        }
-        else if (getChoosenWorker() != message.getWorkerNumber()) {
-            message.getView().reportError("Error! You chose the incorrect worker!");
-        }
-        else {
-            game.performBuild(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition(), message.getLevel());
         }
     }
 
     public synchronized void manageTurn(EndTurnRequest message) {
-        game.manageEndTurn(message.getPlayer());
         setChoosenWorker(-1);
-        if(playerTurn == game.getPlayers().size()) {
-            setPlayerTurn(1);
+        if(playerTurn == game.getPlayers().size()-1) {
+            setPlayerTurn(0);
         }
         else {
-            setPlayerTurn(playerTurn+1);
+            setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())).getPlayerNumber());
         }
+        game.manageEndTurn(message.getPlayer());
     }
 
     public void updateMoveRequest(MoveRequest message) {

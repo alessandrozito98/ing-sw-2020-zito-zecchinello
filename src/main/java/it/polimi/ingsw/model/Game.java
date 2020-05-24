@@ -4,6 +4,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.God.God;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.observer.messages.BoardChange;
+import it.polimi.ingsw.observer.messages.PlayerLose;
 import it.polimi.ingsw.observer.messages.ResetTurn;
 import it.polimi.ingsw.observer.messages.Win;
 
@@ -75,7 +76,6 @@ public class Game extends Observable {
         God godCard = player.getGodCard();
         godCard.resetTurn();
         Player nextPlayer;
-
         if(players.indexOf(player)==players.size()-1) {
             nextPlayer=players.get(0);
         }
@@ -86,7 +86,6 @@ public class Game extends Observable {
     }
 
     public void remove(Player player){
-
         //Removing the Worker
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -96,6 +95,14 @@ public class Game extends Observable {
             }
         }
         //removing the player
+        Player nextPlayer;
+        if(players.indexOf(player)==players.size()-1) {
+            nextPlayer=players.get(0);
+        }
+        else {
+            nextPlayer=players.get(players.indexOf(player)+1);
+        }
+        notifyPlayerLose(new PlayerLose(getBoardCopy(),player,nextPlayer));
         players.remove(player);
     }
 

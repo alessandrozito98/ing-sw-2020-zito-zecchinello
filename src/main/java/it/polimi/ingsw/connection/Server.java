@@ -167,7 +167,7 @@ public class Server {
                 }
             }
             //inizializzazione partita
-           /* ArrayList<View> views = new ArrayList<>();
+            ArrayList<View> views = new ArrayList<>();
             Game game = new Game(board);
             Controller controller = new Controller(game);
             for(int i=0;i<numberOfPlayers;i++){
@@ -177,7 +177,7 @@ public class Server {
                 views.get(i).addObserver(controller);
             }
             controller.setPlayerTurn(0);
-            views.get(0).chooseAction();*/
+            views.get(0).chooseAction();
         }
     }
 

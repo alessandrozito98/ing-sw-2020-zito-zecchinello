@@ -27,11 +27,9 @@ public class RemoteView extends View {
         String action = " ";
         while(action.equals(" ")){
             connection.send((String)"Chose one of the available actions:");
-            String s = "";
-            if(availableMoveNumber>0){s.concat("move ");}
-            if(availableBuildNumber>0){s.concat("build ");}
-            if(hasMoved&&hasBuilt){s.concat("end turn");}
-            connection.send((String)s);
+            if(availableMoveNumber>0){connection.send("move");}
+            if(availableBuildNumber>0){connection.send("build");}
+            if(hasMoved&&hasBuilt){connection.send("end turn");}
             String read = connection.read();
             if((read.equalsIgnoreCase("move")&&availableMoveNumber>0)||(read.equalsIgnoreCase("build")&&availableBuildNumber>0)||(read.equalsIgnoreCase("end turn")&&hasMoved&&hasBuilt)){
                 action = read;
@@ -49,6 +47,7 @@ public class RemoteView extends View {
         int xCell = -1;
         int yCell = -1;
         while(!(workerNumber == 1||workerNumber == 2)){
+            connection.send((Board)boardCopy);
             connection.send((String) "Choose which worker you want to move, 1 or 2?");
             try {
                 String s = connection.read();
@@ -89,7 +88,8 @@ public class RemoteView extends View {
         int yCell = -1;
         Level level = Level.GROUND;
         while(!(workerNumber == 1||workerNumber == 2)){
-            connection.send((String) "Choose which worker you want to move, 1 or 2?");
+            connection.send((Board)boardCopy);
+            connection.send((String) "Choose which worker should build, 1 or 2?");
             try {
                 String s = connection.read();
                 int number = Integer.parseInt(s);
@@ -121,6 +121,7 @@ public class RemoteView extends View {
             }
         }
         while(level.equals(Level.GROUND)){
+            connection.send((Board)boardCopy);
             connection.send((String) "Choose the level block you want to build:\n'1' for Level 1\n'2' for Level 2\n'3' for Level 3\n'd' for Dome");
             String s = connection.read();
             if (s.equals("1")) {
