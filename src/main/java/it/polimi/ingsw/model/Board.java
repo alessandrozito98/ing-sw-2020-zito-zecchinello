@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Board implements Cloneable, Serializable {
 
-
     private final Cell[][] board = new Cell[5][5];
 
     public Board() {

@@ -36,6 +36,7 @@ public class Controller implements Observer {
 
     public synchronized void handleMove(MoveRequest message) {
         if(playerTurn==message.getPlayer().getPlayerNumber()) {
+            System.out.println("arrivato a inizio handleMove");
             if (loseControl(message.getPlayer()) == 0) {
                 setChoosenWorker(-1);
                 if(playerTurn == game.getPlayers().size()-1) {
@@ -46,8 +47,8 @@ public class Controller implements Observer {
                 }
                 game.remove(message.getPlayer());
             } else if (getChoosenWorker() == -1) {
-                setChoosenWorker(message.getWorkerNumber());
                 if(message.getPlayer().getGodCard().isFeasibleMove(game.getBoard().getCell(message.getxPosition(),message.getyPosition()),message.getPlayer().getSingleWorker(message.getWorkerNumber()))) {
+                    setChoosenWorker(message.getWorkerNumber());
                     game.performMove(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition());
                 } else {
                     message.getView().reportError("Error! this move is not feasible!");
@@ -61,6 +62,7 @@ public class Controller implements Observer {
                     message.getView().reportError("Error! this move is not feasible!");
                 }
             }
+            System.out.println("arrivato a fine handleMove");
         }
     }
 
@@ -76,8 +78,8 @@ public class Controller implements Observer {
                 }
                 game.remove(message.getPlayer());
             } else if (getChoosenWorker() == -1) {
-                setChoosenWorker(message.getWorkerNumber());
                 if(message.getPlayer().getGodCard().isFeasibleBuild(game.getBoard().getCell(message.getxPosition(),message.getyPosition()),message.getPlayer().getSingleWorker(message.getWorkerNumber()),message.getLevel())) {
+                    setChoosenWorker(message.getWorkerNumber());
                     game.performBuild(message.getPlayer(), message.getWorkerNumber(), message.getxPosition(), message.getyPosition(), message.getLevel());
                 } else {
                     message.getView().reportError("Error! this build is not feasible!");
@@ -106,6 +108,7 @@ public class Controller implements Observer {
     }
 
     public void updateMoveRequest(MoveRequest message) {
+        System.out.println("update move request");
         handleMove(message);
     }
 

@@ -24,6 +24,9 @@ public class RemoteView extends View {
     }
 
     public void chooseAction(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
         String action = " ";
         while(action.equals(" ")){
             connection.send((String)"Chose one of the available actions:");
@@ -40,6 +43,8 @@ public class RemoteView extends View {
         if(action.equalsIgnoreCase("move")){ moveHandler();}
         if(action.equalsIgnoreCase("build")){ buildHandler();}
         if(action.equalsIgnoreCase("end turn")){ endTurnHandler();}
+            }
+        }).start();
     }
 
     public void moveHandler(){
@@ -104,7 +109,7 @@ public class RemoteView extends View {
         }
         while (xCell<0&&yCell<0){
             connection.send((Board)boardCopy);
-            connection.send((String)"Choose the coordinates 'x,y' of the destination cell from 0 to 4:");
+            connection.send((String)"Choose the coordinates 'x,y' of the destination cell of the build from 0 to 4:");
             try {
                 String s = connection.read();
                 String[] coordinates = s.split(",");
