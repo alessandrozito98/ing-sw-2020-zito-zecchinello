@@ -39,11 +39,11 @@ public class Controller implements Observer {
             System.out.println("arrivato a inizio handleMove");
             if (loseControl(message.getPlayer()) == 0) {
                 setChoosenWorker(-1);
-                if(playerTurn == game.getPlayers().size()-1) {
-                    setPlayerTurn(0);
+                if(game.getPlayers().indexOf(game.getSinglePlayer(playerTurn)) == game.getPlayers().size()-1) {
+                    setPlayerTurn(game.getPlayers().get(0).getPlayerNumber());
                 }
                 else {
-                    setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())).getPlayerNumber());
+                    setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())+1).getPlayerNumber());
                 }
                 game.remove(message.getPlayer());
             } else if (getChoosenWorker() == -1) {
@@ -73,11 +73,11 @@ public class Controller implements Observer {
         if(playerTurn==message.getPlayer().getPlayerNumber()) {
             if (loseControl(message.getPlayer()) == 0) {
                 setChoosenWorker(-1);
-                if(playerTurn == game.getPlayers().size()-1) {
-                    setPlayerTurn(0);
+                if(game.getPlayers().indexOf(game.getSinglePlayer(playerTurn)) == game.getPlayers().size()-1) {
+                    setPlayerTurn(game.getPlayers().get(0).getPlayerNumber());
                 }
                 else {
-                    setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())).getPlayerNumber());
+                    setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())+1).getPlayerNumber());
                 }
                 game.remove(message.getPlayer());
             } else if (getChoosenWorker() == -1) {
@@ -101,11 +101,11 @@ public class Controller implements Observer {
 
     public synchronized void manageTurn(EndTurnRequest message) {
         setChoosenWorker(-1);
-        if(playerTurn == game.getPlayers().size()-1) {
-            setPlayerTurn(0);
+        if(game.getPlayers().indexOf(game.getSinglePlayer(playerTurn)) == game.getPlayers().size()-1) {
+            setPlayerTurn(game.getPlayers().get(0).getPlayerNumber());
         }
         else {
-            setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())).getPlayerNumber());
+            setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())+1).getPlayerNumber());
         }
         game.manageEndTurn(message.getPlayer());
     }
