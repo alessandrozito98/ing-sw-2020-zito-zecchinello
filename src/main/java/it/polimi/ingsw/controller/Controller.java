@@ -64,6 +64,9 @@ public class Controller implements Observer {
             }
             System.out.println("arrivato a fine handleMove");
         }
+        else {
+            message.getView().reportError("Error! It's not your turn!");
+        }
     }
 
     public synchronized void handleBuild(BuildRequest message) {
