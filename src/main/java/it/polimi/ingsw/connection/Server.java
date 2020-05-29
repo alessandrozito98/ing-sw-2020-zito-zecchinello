@@ -30,8 +30,23 @@ public class Server {
         this.serverSocket = new ServerSocket(PORT);
     }
 
-    public synchronized void lobby(SocketClientConnection c, String name) {
+    public synchronized void lobby(SocketClientConnection c, String loginName) {
         waitingConnection.add(c);
+        String name = loginName;
+        List<SocketClientConnection> keys = new ArrayList<>(names.keySet());
+        boolean alreadyUsedName = false;
+        do{
+            if(alreadyUsedName){
+                c.send("Error! this name is already used, choose another one:");
+                name = c.read();
+                alreadyUsedName = false;
+            }
+            boolean b = false;
+            for(SocketClientConnection k : keys){
+                if(names.get(k).equalsIgnoreCase(name)){b = true;}
+            }
+            if(b){alreadyUsedName = true;}
+        }while(alreadyUsedName);
         names.put(c,name);
         //scelta numero giocatori e dei da parte del primo che si collega
         if(waitingConnection.size()==1){
