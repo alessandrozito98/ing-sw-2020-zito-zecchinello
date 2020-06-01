@@ -42,7 +42,10 @@ public class SocketClientConnection extends Observable implements Runnable {
             out.writeObject(message);
             out.flush();
         } catch(IOException e){
+            //INIZIOOOO
             System.err.println(e.getMessage());
+            server.closeAllConnection(this);
+            //FINEEEE
         }
     }
 
@@ -54,11 +57,19 @@ public class SocketClientConnection extends Observable implements Runnable {
             }
         }).start();
     }
-    // SERVE AL SERVER PER LEGGERE DAL CLIENT PRIMA DI INIZIALIZZARE LA PARTITA
+    //INIZIOOOO
     public String read(){
-        String read = in.nextLine();
-        return read;
+        String read = "not initialized";
+        try {
+            read = in.nextLine();
+        } catch (NoSuchElementException e){
+            System.err.println(e.getMessage());
+            server.closeAllConnection(this);
+        }finally {
+            return read;
+        }
     }
+    //FINEEEE
 
     @Override
     public void run() {
@@ -72,7 +83,7 @@ public class SocketClientConnection extends Observable implements Runnable {
             server.lobby(this, name);
             while(isActive()){Thread.sleep(10000);}
         } catch (IOException | NoSuchElementException | InterruptedException e) {
-            System.err.println("Error!" + e.getMessage());
+            System.err.println("Error!test" + e.getMessage());
         }finally{
             closeConnection();
         }

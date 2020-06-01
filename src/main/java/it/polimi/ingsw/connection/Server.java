@@ -29,7 +29,15 @@ public class Server {
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     }
-
+//INIZIOOOO
+    public void closeAllConnection(SocketClientConnection con) {
+        for (SocketClientConnection s : waitingConnection){
+            if(s!=con) {
+                s.closeConnection();
+            }
+        }
+    }
+//FINEEEEE
     public synchronized void lobby(SocketClientConnection c, String loginName) {
         waitingConnection.add(c);
         String name = loginName;
