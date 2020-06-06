@@ -2,26 +2,28 @@ package it.polimi.ingsw.observer;
 
 import it.polimi.ingsw.observer.messages.*;
 
+import java.io.IOException;
+
 public interface Observer {
 
 // UPDATE DELLA VIEW A SEGUITO DI NOTIFY DEL MODEL
-    default void updateBoardChange(BoardChange message){
+    default void updateBoardChange(BoardChange message) throws IOException {
         throw new UnsupportedOperationException();
     }
     default void updateResetTurn(ResetTurn message) {
         throw new UnsupportedOperationException();
     }
-    default void updatePlayerLose(PlayerLose message) {
+    default void updatePlayerLose(PlayerLose message) throws IOException {
         throw new UnsupportedOperationException();
     }
-    default void updateWin(Win message) {
+    default void updateWin(Win message) throws IOException {
         throw new UnsupportedOperationException();
     }
 // UPDATE DEL CONTROLLER A SEGUITO DI NOTIFY DELLA VIEW
-    default void updateMoveRequest(MoveRequest message) {
+    default void updateMoveRequest(MoveRequest message) throws IOException {
         throw new UnsupportedOperationException();
     }
-    default void updateBuildRequest(BuildRequest message) {
+    default void updateBuildRequest(BuildRequest message) throws IOException {
         throw new UnsupportedOperationException();
     }
     default void updateEndTurnRequest(EndTurnRequest message) {

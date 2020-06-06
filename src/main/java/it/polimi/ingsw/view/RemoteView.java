@@ -4,6 +4,9 @@ import it.polimi.ingsw.connection.SocketClientConnection;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.messages.*;
 
+import java.io.IOException;
+import java.util.NoSuchElementException;
+
 public class RemoteView extends View {
     private Player player;
     private SocketClientConnection connection;
@@ -24,30 +27,41 @@ public class RemoteView extends View {
     }
 
     public void chooseAction(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
         String action = " ";
-        while(action.equals(" ")){
-            connection.send((String)"Chose one of the available actions:");
-            if(availableMoveNumber>0){connection.send("move");}
-            if(availableBuildNumber>0){connection.send("build");}
-            if(hasMoved&&hasBuilt){connection.send("end turn");}
-            String read = connection.read();
-            if((read.equalsIgnoreCase("move")&&availableMoveNumber>0)||(read.equalsIgnoreCase("build")&&availableBuildNumber>0)||(read.equalsIgnoreCase("end turn")&&hasMoved&&hasBuilt)){
-                action = read;
-            }else{
-                connection.send((String)"Error! Invalid action");
+        try {
+            while (action.equals(" ")) {
+                connection.send((String) "Chose one of the available actions:");
+                if (availableMoveNumber > 0) {
+                    connection.send("move");
+                }
+                if (availableBuildNumber > 0) {
+                    connection.send("build");
+                }
+                if (hasMoved && hasBuilt) {
+                    connection.send("end turn");
+                }
+                String read = connection.read();
+                if ((read.equalsIgnoreCase("move") && availableMoveNumber > 0) || (read.equalsIgnoreCase("build") && availableBuildNumber > 0) || (read.equalsIgnoreCase("end turn") && hasMoved && hasBuilt)) {
+                    action = read;
+                } else {
+                    connection.send((String) "Error! Invalid action");
+                }
             }
+            if (action.equalsIgnoreCase("move")) {
+                moveHandler();
+            }
+            if (action.equalsIgnoreCase("build")) {
+                buildHandler();
+            }
+            if (action.equalsIgnoreCase("end turn")) {
+                endTurnHandler();
+            }
+        } catch (IOException | NoSuchElementException e){
+
         }
-        if(action.equalsIgnoreCase("move")){ moveHandler();}
-        if(action.equalsIgnoreCase("build")){ buildHandler();}
-        if(action.equalsIgnoreCase("end turn")){ endTurnHandler();}
-            }
-        }).start();
     }
 
-    public void moveHandler(){
+    public void moveHandler() throws IOException, NoSuchElementException {
         int workerNumber = -1;
         int xCell = -1;
         int yCell = -1;
@@ -87,7 +101,7 @@ public class RemoteView extends View {
         notifyMoveRequest(new MoveRequest(this,this.player,workerNumber,xCell,yCell));
     }
 
-    public void buildHandler(){
+    public void buildHandler() throws IOException, NoSuchElementException {
         int workerNumber = -1;
         int xCell = -1;
         int yCell = -1;
@@ -148,9 +162,8 @@ public class RemoteView extends View {
         notifyEndTurnRequest(new EndTurnRequest(this.player));
     }
 
-    public void reportError(Object message){
+    public void reportError(Object message) throws IOException {
         connection.send((String)message);
-        chooseAction();
     }
 
     public Player getPlayer() {
@@ -202,7 +215,7 @@ public class RemoteView extends View {
     }
 
     @Override
-    public void updateBoardChange(BoardChange message) {
+    public void updateBoardChange(BoardChange message) throws IOException {
         setBoardCopy(message.getBoardCopy());
         connection.send((Board)this.boardCopy);
         if(message.getPlayer()==this.player){
@@ -210,7 +223,6 @@ public class RemoteView extends View {
             this.availableBuildNumber = message.getAvailableBuildNumber();
             this.hasMoved = message.getHasMoved();
             this.hasBuilt = message.getHasBuilt();
-            chooseAction();
         }
     }
 
@@ -222,25 +234,19 @@ public class RemoteView extends View {
             this.hasMoved = message.getHasMoved();
             this.hasBuilt = message.getHasBuilt();
         }
-        if(message.getNextPlayer()==this.player){
-            chooseAction();
-        }
     }
 
     @Override
-    public void updatePlayerLose(PlayerLose message) {
+    public void updatePlayerLose(PlayerLose message) throws IOException {
         setBoardCopy(message.getBoardCopy());
         connection.send((Board)this.boardCopy);
         if(message.getLosePlayer()==this.player){
             connection.send((String)"YOU LOSE");
         }
-        if(message.getNextPlayer()==this.player){
-            chooseAction();
-        }
     }
 
     @Override
-    public void updateWin(Win message) {
+    public void updateWin(Win message) throws IOException {
         if(message.getPlayer()==this.player){
             connection.send((String)"YOU WIN");
         }else{

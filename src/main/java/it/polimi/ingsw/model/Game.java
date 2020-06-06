@@ -8,6 +8,7 @@ import it.polimi.ingsw.observer.messages.PlayerLose;
 import it.polimi.ingsw.observer.messages.ResetTurn;
 import it.polimi.ingsw.observer.messages.Win;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game extends Observable {
@@ -52,7 +53,7 @@ public class Game extends Observable {
     }
 
     //esegue il movimento di un worker e notifica le view del cambiamento
-    public void performMove(Player player, int workerNumber, int xPosition, int yPosition) {
+    public void performMove(Player player, int workerNumber, int xPosition, int yPosition) throws IOException {
         System.out.println("arrivato a inizio performMove");
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = player.getGodCard();
@@ -66,7 +67,7 @@ public class Game extends Observable {
     }
 
     //esegue la costruzione di un worker e notifica le view del cambiamento
-    public void performBuild(Player player, int workerNumber, int xPosition, int yPosition, Level level) {
+    public void performBuild(Player player, int workerNumber, int xPosition, int yPosition, Level level) throws IOException {
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = player.getGodCard();
         godCard.build(this.board.getCell(xPosition, yPosition),player.getSingleWorker(workerNumber), level);
@@ -87,7 +88,7 @@ public class Game extends Observable {
         notifyResetTurn(new ResetTurn(godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(),player, nextPlayer));
     }
 
-    public void remove(Player player){
+    public void remove(Player player) throws IOException {
         //Removing the Worker
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {

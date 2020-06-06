@@ -1,17 +1,23 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.connection.SocketClientConnection;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.messages.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Controller implements Observer {
 
     private final Game game;
     private int playerTurn;
     private int chosenWorker;
+    private ArrayList<SocketClientConnection> connections = new ArrayList<SocketClientConnection>();
 
-    public Controller(Game game) {
+    public Controller(Game game,ArrayList<SocketClientConnection> connections) {
         this.game = game;
+        this.connections = connections;
         this.chosenWorker = -1;
     }
 
@@ -19,8 +25,15 @@ public class Controller implements Observer {
         return playerTurn;
     }
 
-    public void setPlayerTurn(int playerTurn) {
-        this.playerTurn = playerTurn;
+    public void setPlayerTurn(int newPayerTurn) {
+        int oldPlayerTurn = this.playerTurn;
+        this.playerTurn = newPayerTurn;
+        for(SocketClientConnection connection : connections){
+            if(connection.getView().getPlayer().getPlayerNumber() == oldPlayerTurn) connection.setMyTurn(false);
+        }
+        for(SocketClientConnection connection : connections){
+            if(connection.getView().getPlayer().getPlayerNumber() == this.playerTurn) connection.setMyTurn(true);
+        }
     }
 
     public int getChosenWorker() {
@@ -31,7 +44,7 @@ public class Controller implements Observer {
         this.chosenWorker = chosenWorker;
     }
 
-    public synchronized void handleMove(MoveRequest message) {
+    public synchronized void handleMove(MoveRequest message) throws IOException {
         if(playerTurn==message.getPlayer().getPlayerNumber()) {
             System.out.println("arrivato a inizio handleMove");
             if (loseControl(message.getPlayer()) == 0) {
@@ -66,17 +79,17 @@ public class Controller implements Observer {
         }
     }
 
-    public synchronized void handleBuild(BuildRequest message) {
+    public synchronized void handleBuild(BuildRequest message) throws IOException {
         if(playerTurn==message.getPlayer().getPlayerNumber()) {
             if (loseControl(message.getPlayer()) == 0) {
                 setChosenWorker(-1);
+                game.remove(message.getPlayer());
                 if(game.getPlayers().indexOf(game.getSinglePlayer(playerTurn)) == game.getPlayers().size()-1) {
                     setPlayerTurn(game.getPlayers().get(0).getPlayerNumber());
                 }
                 else {
                     setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())+1).getPlayerNumber());
                 }
-                game.remove(message.getPlayer());
             } else if (getChosenWorker() == -1) {
                 if(message.getPlayer().getGodCard().isFeasibleBuild(game.getBoard().getCell(message.getxPosition(),message.getyPosition()),message.getPlayer().getSingleWorker(message.getWorkerNumber()),message.getLevel())) {
                     setChosenWorker(message.getWorkerNumber());
@@ -98,21 +111,21 @@ public class Controller implements Observer {
 
     public synchronized void manageTurn(EndTurnRequest message) {
         setChosenWorker(-1);
+        game.manageEndTurn(message.getPlayer());
         if(game.getPlayers().indexOf(game.getSinglePlayer(playerTurn)) == game.getPlayers().size()-1) {
             setPlayerTurn(game.getPlayers().get(0).getPlayerNumber());
         }
         else {
             setPlayerTurn(game.getPlayers().get(game.getPlayers().indexOf(message.getPlayer())+1).getPlayerNumber());
         }
-        game.manageEndTurn(message.getPlayer());
     }
 
-    public void updateMoveRequest(MoveRequest message) {
+    public void updateMoveRequest(MoveRequest message) throws IOException {
         System.out.println("update move request");
         handleMove(message);
     }
 
-    public void updateBuildRequest(BuildRequest message) {
+    public void updateBuildRequest(BuildRequest message) throws IOException {
         handleBuild(message);
     }
 

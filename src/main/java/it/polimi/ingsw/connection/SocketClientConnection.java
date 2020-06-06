@@ -1,6 +1,7 @@
 package it.polimi.ingsw.connection;
 
 import it.polimi.ingsw.observer.Observable;
+import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,62 +15,58 @@ public class SocketClientConnection extends Observable implements Runnable {
     private Scanner in;
     private ObjectOutputStream out;
     private Server server;
+    private View view;
 
-    private boolean active = true;
+    private boolean myTurn = false;
+    private boolean activeGame = true;
 
     public SocketClientConnection(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
     }
 
-    private synchronized boolean isActive(){
-        return active;
+    public synchronized void setMyTurn(boolean t){
+        myTurn = t;
+        if(t) notify();
     }
 
-    public synchronized void closeConnection() {
+    public synchronized void setEndGame(){
+        activeGame = false;
+        notify();
+    }
+
+    public synchronized void waitMyTurn() throws InterruptedException {
+        while(!myTurn) wait();
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public synchronized void closeConnection() throws IOException {
         send("Connection closed!");
         try {
             socket.close();
         } catch (IOException e) {
             System.err.println("Error when closing socket!");
         }
-        active = false;
     }
 
-    public synchronized void send(Object message) {
-        try {
-            out.reset();
-            out.writeObject(message);
-            out.flush();
-        } catch(IOException e){
-            //INIZIOOOO
-            System.err.println(e.getMessage());
-            server.closeAllConnection(this);
-            //FINEEEE
-        }
+    public synchronized void send(Object message) throws IOException {
+        out.reset();
+        out.writeObject(message);
+        out.flush();
     }
 
-    public void asyncSend(final Object message){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                send(message);
-            }
-        }).start();
+    public String read() throws NoSuchElementException{
+        String read;
+        read = in.nextLine();
+        return read;
     }
-    //INIZIOOOO
-    public String read(){
-        String read = "not initialized";
-        try {
-            read = in.nextLine();
-        } catch (NoSuchElementException e){
-            System.err.println(e.getMessage());
-            server.closeAllConnection(this);
-        }finally {
-            return read;
-        }
-    }
-    //FINEEEE
 
     @Override
     public void run() {
@@ -81,11 +78,12 @@ public class SocketClientConnection extends Observable implements Runnable {
             String read = in.nextLine();
             name = read;
             server.lobby(this, name);
-            while(isActive()){Thread.sleep(10000);}
+            while(activeGame){
+                waitMyTurn();
+                if(activeGame) view.chooseAction();
+            }
         } catch (IOException | NoSuchElementException | InterruptedException e) {
             System.err.println("Error!test" + e.getMessage());
-        }finally{
-            closeConnection();
         }
     }
 }

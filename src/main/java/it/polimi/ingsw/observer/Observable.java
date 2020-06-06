@@ -2,6 +2,7 @@ package it.polimi.ingsw.observer;
 
 import it.polimi.ingsw.observer.messages.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Observable {
         }
     }
 
-    public void notifyWin(Win message){
+    public void notifyWin(Win message) throws IOException {
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateWin(message);
@@ -29,7 +30,7 @@ public class Observable {
         }
     }
 
-    public void notifyBoardChange(BoardChange message){
+    public void notifyBoardChange(BoardChange message) throws IOException {
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateBoardChange(message);  //QUI DEVO INSERIRE UN METODO UPDATE, MA NON POSSO DIRE A PRIORI QUALE
@@ -48,7 +49,7 @@ public class Observable {
         }
     }
 
-    public void notifyPlayerLose(PlayerLose message){
+    public void notifyPlayerLose(PlayerLose message) throws IOException {
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updatePlayerLose(message);
@@ -56,7 +57,7 @@ public class Observable {
         }
     }
 
-    public void notifyMoveRequest(MoveRequest message){
+    public void notifyMoveRequest(MoveRequest message) throws IOException {
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateMoveRequest(message);
@@ -64,7 +65,7 @@ public class Observable {
         }
     }
 
-    public void notifyBuildRequest(BuildRequest message){
+    public void notifyBuildRequest(BuildRequest message) throws IOException {
         synchronized (observers) {
             for(Observer observer : observers){
                 observer.updateBuildRequest(message);

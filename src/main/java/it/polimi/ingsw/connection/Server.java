@@ -30,15 +30,15 @@ public class Server {
         this.serverSocket = new ServerSocket(PORT);
     }
 //INIZIOOOO
-    public void closeAllConnection(SocketClientConnection con) {
+    /*public void closeAllConnection(SocketClientConnection con) {
         for (SocketClientConnection s : waitingConnection){
             if(s!=con) {
                 s.closeConnection();
             }
         }
-    }
+    }*/
 //FINEEEEE
-    public synchronized void lobby(SocketClientConnection c, String loginName) {
+    public synchronized void lobby(SocketClientConnection c, String loginName) throws IOException {
         waitingConnection.add(c);
         String name = loginName;
         List<SocketClientConnection> keys = new ArrayList<>(names.keySet());
@@ -59,7 +59,7 @@ public class Server {
         //scelta numero giocatori e dei da parte del primo che si collega
         if(waitingConnection.size()==1){
             SocketClientConnection c1 = waitingConnection.get(0);
-            c1.asyncSend((String)"Choose the number of player: 2 or 3?");
+            c1.send((String)"Choose the number of player: 2 or 3?");
             // SCELTA NUMERO DEI GIOCATORI
             while(!(numberOfPlayers==2||numberOfPlayers==3)){
                 try {
@@ -68,10 +68,10 @@ public class Server {
                     if (number == 2 || number == 3) {
                         numberOfPlayers = number;
                     } else {
-                        c1.asyncSend((String) "Error! Choose 2 or 3:");
+                        c1.send((String) "Error! Choose 2 or 3:");
                     }
                 } catch (NumberFormatException e) {
-                    c1.asyncSend((String) "Error! Choose 2 or 3:");
+                    c1.send((String) "Error! Choose 2 or 3:");
                 }
             }
             // SCELTA DEI
@@ -192,15 +192,15 @@ public class Server {
             //inizializzazione partita
             ArrayList<View> views = new ArrayList<>();
             Game game = new Game(board);
-            Controller controller = new Controller(game);
+            Controller controller = new Controller(game,waitingConnection);
             for(int i=0;i<numberOfPlayers;i++){
                 game.addPlayer(new Player(names.get(waitingConnection.get(i)),i,workerMap.get(waitingConnection.get(i)),chosenGodCards.get(waitingConnection.get(i)).createGod(game)));
                 views.add(new RemoteView(game.getSinglePlayer(i),waitingConnection.get(i),game.getBoardCopy()));
+                waitingConnection.get(i).setView(views.get(i));
                 game.addObserver(views.get(i));
                 views.get(i).addObserver(controller);
             }
             controller.setPlayerTurn(0);
-            views.get(0).chooseAction();
         }
     }
 
