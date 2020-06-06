@@ -133,6 +133,18 @@ public class Controller implements Observer {
         manageTurn(message);
     }
 
+    @Override
+    public void updateEndGame() {
+        for(SocketClientConnection c : connections){
+            try{
+                c.send("Game canceled!! A client has disconnected");
+                c.setEndGame();
+            } catch (IOException e) {
+                c.setEndGame();
+            }
+        }
+    }
+
     public int loseControl(Player player) {
         Player loseControlPlayer;
         if (game.getPlayers().indexOf(player) == game.getPlayers().size() - 1) {

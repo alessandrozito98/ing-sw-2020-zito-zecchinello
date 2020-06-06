@@ -82,8 +82,9 @@ public class SocketClientConnection extends Observable implements Runnable {
                 waitMyTurn();
                 if(activeGame) view.chooseAction();
             }
+            socket.close();
         } catch (IOException | NoSuchElementException | InterruptedException e) {
-            System.err.println("Error!test" + e.getMessage());
+            System.err.println("Error!" + e.getMessage());
         }
     }
 }

@@ -57,7 +57,7 @@ public class RemoteView extends View {
                 endTurnHandler();
             }
         } catch (IOException | NoSuchElementException e){
-
+            notifyEndGame();
         }
     }
 
@@ -252,7 +252,7 @@ public class RemoteView extends View {
         }else{
             connection.send((String)"YOU LOSE");
         }
-        connection.closeConnection();
+        connection.setEndGame();
     }
 
 }

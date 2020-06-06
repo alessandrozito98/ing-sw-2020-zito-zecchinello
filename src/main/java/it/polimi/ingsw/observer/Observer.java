@@ -30,4 +30,8 @@ public interface Observer {
         throw new UnsupportedOperationException();
     }
 
+    default void updateEndGame() {
+        throw new UnsupportedOperationException();
+    }
+
 }

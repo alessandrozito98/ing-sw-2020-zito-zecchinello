@@ -80,4 +80,12 @@ public class Observable {
             }
         }
     }
+
+    public void notifyEndGame(){
+        synchronized (observers) {
+            for(Observer observer : observers){
+                observer.updateEndGame();
+            }
+        }
+    }
 }
