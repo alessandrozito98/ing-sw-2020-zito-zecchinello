@@ -14,20 +14,17 @@ public class Apollo extends God {
 
     @Override
     public void move(Cell cell, Worker worker) {
-        Level oldLevel = worker.getPosition().getLevel();
         if(cell.getWorker()!=null){
             cell.getWorker().setPosition(worker.getPosition());
             worker.getPosition().removeWorker();
             worker.getPosition().addWorker(cell.getWorker());
             cell.removeWorker();
-            cell.addWorker(worker);
-            worker.setPosition(cell);
         }
         else{
             worker.getPosition().removeWorker();
-            cell.addWorker(worker);
-            worker.setPosition(cell);
         }
+        cell.addWorker(worker);
+        worker.setPosition(cell);
         setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
         setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
         setHasMoved(true);

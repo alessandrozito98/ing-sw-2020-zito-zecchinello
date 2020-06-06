@@ -26,7 +26,6 @@ public class Prometheus extends God {
 
     @Override
     public void move(Cell cell, Worker worker) {
-        Level oldLevel = worker.getPosition().getLevel();
         worker.getPosition().removeWorker();
         cell.addWorker(worker);
         worker.setPosition(cell);
