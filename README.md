@@ -59,7 +59,6 @@ java -jar client.jar
 The following parameters will be asked in order
 1. Socket server port
 2. Nickname
-3. (Only if first player entered in lobby) Numero board
 
 Example:
 ```
