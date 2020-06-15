@@ -29,7 +29,7 @@ public class Game extends Observable {
     public Board getBoard() { return this.board; }
 
     public ArrayList<Player> getPlayers() {
-        return (ArrayList<Player>) players;
+        return players;
     }
 
     public Player getSinglePlayer(int playerNumber) {
@@ -46,10 +46,6 @@ public class Game extends Observable {
 
     public void addPlayer(Player player) {
         players.add(player);
-    }
-
-    public void removePlayers(Player player) {
-        players.remove(player);
     }
 
     //esegue il movimento di un worker e notifica le view del cambiamento

@@ -21,13 +21,10 @@ public class Controller implements Observer {
         this.chosenWorker = -1;
     }
 
-    public int getPlayerTurn() {
-        return playerTurn;
-    }
 
-    public void setPlayerTurn(int newPayerTurn) {
+    public void setPlayerTurn(int newPlayerTurn) {
         int oldPlayerTurn = this.playerTurn;
-        this.playerTurn = newPayerTurn;
+        this.playerTurn = newPlayerTurn;
         for(SocketClientConnection connection : connections){
             if(connection.getView().getPlayer().getPlayerNumber() == oldPlayerTurn) connection.setMyTurn(false);
         }

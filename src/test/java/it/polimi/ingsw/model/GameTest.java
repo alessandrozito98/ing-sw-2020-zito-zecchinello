@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.God.Pan;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -48,7 +49,7 @@ public class GameTest {
 
         workersTest = new ArrayList<Worker>();
         workersTest2 = new ArrayList<Worker>();
-       workersTest3 = new ArrayList<Worker>();
+        workersTest3 = new ArrayList<Worker>();
         workersTest.add(workerTest);
         workersTest.add(workerTest2);
         workersTest2.add(workerTest3);
@@ -81,11 +82,19 @@ public class GameTest {
     }
 
     @Test
-    public void performMove() {
+    public void performMove() throws IOException {
+        Cell cellTest = new Cell(1,2);
+        workerTest.setPosition(gameTest.getBoard().getCell(1,1));
+        gameTest.performMove(playerTest, workerTest.getWorkerNumber(), cellTest.getX(), cellTest.getY());
+        assertEquals(gameTest.getBoard().getCell(cellTest.getX(),cellTest.getY()).getWorker(), workerTest);
     }
 
     @Test
-    public void performBuild() {
+    public void performBuild() throws IOException {
+        Level levelTest = Level.LEVEL1;
+        workerTest.setPosition(gameTest.getBoard().getCell(1,1));
+        gameTest.performBuild(playerTest, workerTest.getWorkerNumber(), 1,2, levelTest);
+        assertEquals(levelTest, gameTest.getBoard().getCell(1,2).getLevel());
     }
 
     @Test
