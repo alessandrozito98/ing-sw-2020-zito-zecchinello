@@ -1,4 +1,4 @@
-# Prova Finale Ingegneria del Software 2019
+# Prova Finale Ingegneria del Software 2020
 ## Gruppo GC16
 
 - ###   10617579    Alessandro Zito ([@alessandrozito98](https://github.com/alessandrozito98)) alessandro4-zito@mail.polimi.it
