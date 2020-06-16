@@ -47,9 +47,9 @@ public class GameTest {
         workerTest5 = new Worker(1, WorkerColor.WHITE);
         workerTest6 = new Worker(2, WorkerColor.WHITE);
 
-        workersTest = new ArrayList<Worker>();
-        workersTest2 = new ArrayList<Worker>();
-        workersTest3 = new ArrayList<Worker>();
+        workersTest = new ArrayList<>();
+        workersTest2 = new ArrayList<>();
+        workersTest3 = new ArrayList<>();
         workersTest.add(workerTest);
         workersTest.add(workerTest2);
         workersTest2.add(workerTest3);
@@ -76,9 +76,9 @@ public class GameTest {
         assertEquals(gameTest.getSinglePlayer(1), playerTest);
         assertEquals(gameTest.getSinglePlayer(2), playerTest2);
         assertEquals(gameTest.getSinglePlayer(3), playerTest3);
-        assertNotSame(gameTest.getSinglePlayer(2), playerTest);
-        assertNotSame(gameTest.getSinglePlayer(3), playerTest2);
-        assertNotSame(gameTest.getSinglePlayer(1), playerTest3);
+        assertNotEquals(gameTest.getSinglePlayer(2), playerTest);
+        assertNotEquals(gameTest.getSinglePlayer(3), playerTest2);
+        assertNotEquals(gameTest.getSinglePlayer(1), playerTest3);
     }
 
     @Test
@@ -99,14 +99,30 @@ public class GameTest {
 
     @Test
     public void manageEndTurn() {
+        gameTest.manageEndTurn(playerTest);
+        assertEquals(godCardTest.getAvailableBuildNumber(), 0);
+        assertEquals(godCardTest.getAvailableMoveNumber(),1);
     }
 
     @Test
-    public void remove() {
+    public void remove() throws IOException {
+        gameTest.remove(playerTest);
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                assertNotEquals(workerTest, gameTest.getBoard().getCell(i,j).getWorker());
+                assertNotEquals(workerTest2, gameTest.getBoard().getCell(i,j).getWorker());
+            }
+
+        }
+        assertEquals(gameTest.getPlayers().size(),2);
     }
 
     @Test
     public void checkMovement() {
+        workerTest.setPosition(gameTest.getBoard().getCell(1,1));
+        gameTest.getBoard().getCell(1,1).addWorker(workerTest   );
+        assertEquals(gameTest.checkMovement(playerTest.getPlayerNumber(), workerTest.getWorkerNumber(), gameTest.getBoardCopy()).size(), 8);
     }
 
     @Test
