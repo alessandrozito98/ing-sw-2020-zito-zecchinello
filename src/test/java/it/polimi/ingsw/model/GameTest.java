@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class GameTest {
 
-
+    Board board = new Board();
     Game gameTest;
     Worker workerTest;
     Worker workerTest2;
@@ -35,11 +35,9 @@ public class GameTest {
     Player playerTest2;
     Player playerTest3;
 
-
-
     @Before
     public void setUp() {
-        gameTest = new Game(new Board());
+        gameTest = new Game(board);
         workerTest = new Worker(1, WorkerColor.RED);
         workerTest2 = new Worker(2, WorkerColor.RED);
         workerTest3 = new Worker(1, WorkerColor.BLUE);
@@ -57,7 +55,6 @@ public class GameTest {
         workersTest3.add(workerTest5);
         workersTest3.add(workerTest6);
 
-
         godCardTest = new Pan(gameTest);
         godCardTest2 = new Apollo(gameTest);
         godCardTest3 = new Artemis(gameTest);
@@ -72,7 +69,26 @@ public class GameTest {
     }
 
     @Test
-    public void getSinglePlayer() {
+    public void getBoardCopy() {
+        assertNotEquals(board, gameTest.getBoardCopy());
+    }
+
+    @Test
+    public void getBoard() {
+        assertEquals(board,gameTest.getBoard());
+    }
+
+    @Test
+    public void getPlayers() {
+        ArrayList<Player> playersTest = new ArrayList<>();
+        playersTest.add(playerTest);
+        playersTest.add(playerTest2);
+        playersTest.add(playerTest3);
+        assertEquals(gameTest.getPlayers(), playersTest);
+    }
+
+    @Test
+    public void testGetSinglePlayer() {
         assertEquals(gameTest.getSinglePlayer(1), playerTest);
         assertEquals(gameTest.getSinglePlayer(2), playerTest2);
         assertEquals(gameTest.getSinglePlayer(3), playerTest3);
@@ -82,7 +98,15 @@ public class GameTest {
     }
 
     @Test
-    public void performMove() throws IOException {
+    public void addPlayer() {
+        Player testPlayer = new Player("test", 4, workersTest, new Pan(gameTest));
+        assertEquals(gameTest.getPlayers().size(),3);
+        gameTest.getPlayers().add(testPlayer);
+        assertEquals(gameTest.getPlayers().size(),4);
+    }
+
+    @Test
+    public void testPerformMove() throws IOException {
         Cell cellTest = new Cell(1,2);
         workerTest.setPosition(gameTest.getBoard().getCell(1,1));
         gameTest.performMove(playerTest, workerTest.getWorkerNumber(), cellTest.getX(), cellTest.getY());
@@ -90,7 +114,7 @@ public class GameTest {
     }
 
     @Test
-    public void performBuild() throws IOException {
+    public void testPerformBuild() throws IOException {
         Level levelTest = Level.LEVEL1;
         workerTest.setPosition(gameTest.getBoard().getCell(1,1));
         gameTest.performBuild(playerTest, workerTest.getWorkerNumber(), 1,2, levelTest);
@@ -98,14 +122,14 @@ public class GameTest {
     }
 
     @Test
-    public void manageEndTurn() {
+    public void testManageEndTurn() {
         gameTest.manageEndTurn(playerTest);
         assertEquals(godCardTest.getAvailableBuildNumber(), 0);
         assertEquals(godCardTest.getAvailableMoveNumber(),1);
     }
 
     @Test
-    public void remove() throws IOException {
+    public void testRemove() throws IOException {
         gameTest.remove(playerTest);
 
         for (int i = 0; i < 5; i++) {
@@ -119,13 +143,22 @@ public class GameTest {
     }
 
     @Test
-    public void checkMovement() {
+    public void testCheckMovement() {
         workerTest.setPosition(gameTest.getBoard().getCell(1,1));
-        gameTest.getBoard().getCell(1,1).addWorker(workerTest   );
+        gameTest.getBoard().getCell(1,1).addWorker(workerTest);
         assertEquals(gameTest.checkMovement(playerTest.getPlayerNumber(), workerTest.getWorkerNumber(), gameTest.getBoardCopy()).size(), 8);
+        workerTest.setPosition(gameTest.getBoard().getCell(1,2));
+        gameTest.getBoard().getCell(1,2).addWorker(workerTest);
+        assertEquals(gameTest.checkMovement(playerTest.getPlayerNumber(), workerTest.getWorkerNumber(), gameTest.getBoardCopy()).size(), 7);
     }
 
     @Test
-    public void checkBuilding() {
+    public void testCheckBuilding() {
+        workerTest.setPosition(gameTest.getBoard().getCell(1,1));
+        gameTest.getBoard().getCell(1,1).addWorker(workerTest);
+        assertEquals(gameTest.checkBuilding(1,1,gameTest.getBoardCopy()).size(),8);
+        workerTest2.setPosition(gameTest.getBoard().getCell(1,2));
+        gameTest.getBoard().getCell(1,2).addWorker(workerTest);
+        assertEquals(gameTest.checkBuilding(1,1,gameTest.getBoardCopy()).size(),7);
     }
 }

@@ -1,8 +1,16 @@
 # Prova Finale Ingegneria del Software 2020
 ## Gruppo GC16
 
-- ###   10617579    Alessandro Zito ([@alessandrozito98](https://github.com/alessandrozito98)) alessandro4.zito@mail.polimi.it
+- ###   890219    Alessandro Zito ([@alessandrozito98](https://github.com/alessandrozito98)) alessandro4.zito@mail.polimi.it
 - ###   10530016    Flavio Zecchinello ([@FlavioZecchinello](https://github.com/FlavioZecchinello)) flavio.zecchinello@mail.polimi.it
+
+####Legend
+
+[![RED](https://placehold.it/15/f03c15/f03c15)](#) = not implemented yet
+
+[![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) = being implemented
+
+[![GREEN](https://placehold.it/15/44bb44/44bb44)](#) = implemented and tested
 
 | Functionality | State |
 |:-----------------------|:------------------------------------:|
@@ -11,7 +19,7 @@
 | Socket | [![GREEN](https://placehold.it/15/44bb44/44bb44)](#) |
 | CLI | [![GREEN](https://placehold.it/15/44bb44/44bb44)](#) |
 | GUI | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
-| Multiple games | [![RED](https://placehold.it/15/f3e212/f3e212)](#) |
+| Multiple games | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
 | Persistence | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
 | Undo | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
 | Advanced Gods | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |

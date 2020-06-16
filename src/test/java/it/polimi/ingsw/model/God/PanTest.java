@@ -10,6 +10,7 @@ public class PanTest {
     God panTest;
     Cell cellTest;
     Worker workerTest;
+
     @Before
     public void setUp(){
         Game gameTest = new Game(new Board());
@@ -19,8 +20,7 @@ public class PanTest {
     }
 
     @Test
-    public void TestGetterAndSetter(){
-
+    public void testTestGetterAndSetter(){
         assertEquals(1,panTest.getAvailableMoveNumber());
         assertEquals(0,panTest.getAvailableBuildNumber());
         assertTrue(panTest.getCanMoveUp());
@@ -33,19 +33,19 @@ public class PanTest {
     }
 
     @Test
-    public void IsFeasibleMoveOccupiedCell(){
+    public void testIsFeasibleMoveOccupiedCell(){
         cellTest.addWorker(new Worker(2,WorkerColor.WHITE));
         assertFalse(panTest.isFeasibleMove(cellTest,workerTest));
     }
 
     @Test
-    public void IsFeasibleMoveCellLevelDome(){
+    public void testIsFeasibleMoveCellLevelDome(){
         cellTest.setLevel(Level.DOME);
         assertFalse(panTest.isFeasibleMove(cellTest,workerTest));
     }
 
     @Test
-    public void IsFeasibleMoveCellLevelTooHigh(){
+    public void testIsFeasibleMoveCellLevelTooHigh(){
         cellTest.setLevel(Level.LEVEL3);
         Cell workerPosition = new Cell(1,2);
         workerPosition.setLevel(Level.GROUND);
@@ -54,7 +54,7 @@ public class PanTest {
     }
 
     @Test
-    public void IsFeasibleMoveCanMoveUpFalse(){
+    public void testIsFeasibleMoveCanMoveUpFalse(){
         cellTest.setLevel(Level.LEVEL1);
         Cell workerPosition = new Cell(1,2);
         workerPosition.setLevel(Level.GROUND);
@@ -64,7 +64,7 @@ public class PanTest {
     }
 
     @Test
-    public void IsFeasibleMoveIncorrectDistance(){
+    public void testIsFeasibleMoveIncorrectDistance(){
         cellTest.setLevel(Level.LEVEL1);
         Cell workerPosition = new Cell(1,3);
         workerPosition.setLevel(Level.GROUND);
@@ -73,7 +73,7 @@ public class PanTest {
     }
 
     @Test
-    public void IsFeasibleMove(){
+    public void testIsFeasibleMove(){
         cellTest.setLevel(Level.LEVEL1);
         Cell workerPosition = new Cell(1,2);
         workerPosition.setLevel(Level.GROUND);
@@ -82,7 +82,7 @@ public class PanTest {
     }
 
     @Test
-    public void Move(){
+    public void testMove(){
         cellTest.setLevel(Level.LEVEL3);
         Cell workerPosition = new Cell(1,2);
         workerPosition.addWorker(workerTest);
@@ -90,9 +90,9 @@ public class PanTest {
         workerTest.setPosition(workerPosition);
         assertEquals(workerTest, workerPosition.getWorker());
         assertEquals(workerPosition, workerTest.getPosition());
-        assertEquals(null, cellTest.getWorker());
+        assertNull(cellTest.getWorker());
         panTest.move(cellTest,workerTest);
-        assertEquals(null, workerPosition.getWorker());
+        assertNull(workerPosition.getWorker());
         assertEquals(cellTest, workerTest.getPosition());
         assertEquals(workerTest, cellTest.getWorker());
         assertEquals(1,panTest.getAvailableBuildNumber());
@@ -100,39 +100,39 @@ public class PanTest {
     }
 
     @Test
-    public void IsFeasibleBuildOccupiedCell(){
+    public void testIsFeasibleBuildOccupiedCell(){
         cellTest.addWorker(new Worker(2,WorkerColor.WHITE));
         assertFalse(panTest.isFeasibleBuild(cellTest,workerTest,Level.LEVEL3));
     }
 
     @Test
-    public void IsFeasibleBuildCellLevelDome(){
+    public void testIsFeasibleBuildCellLevelDome(){
         cellTest.setLevel(Level.DOME);
         assertFalse(panTest.isFeasibleBuild(cellTest,workerTest,Level.LEVEL3));
     }
 
     @Test
-    public void IsFeasibleBuildWrongBlock(){
+    public void testIsFeasibleBuildWrongBlock(){
         cellTest.setLevel(Level.GROUND);
         assertFalse(panTest.isFeasibleBuild(cellTest,workerTest,Level.LEVEL3));
     }
 
     @Test
-    public void IsFeasibleBuildIncorrectDistance(){
+    public void testIsFeasibleBuildIncorrectDistance(){
         Cell workerPosition = new Cell(1,3);
         workerTest.setPosition(workerPosition);
         assertFalse(panTest.isFeasibleBuild(cellTest,workerTest,Level.LEVEL1));
     }
 
     @Test
-    public void IsFeasibleBuild(){
+    public void testIsFeasibleBuild(){
         Cell workerPosition = new Cell(1,2);
         workerTest.setPosition(workerPosition);
         assertTrue(panTest.isFeasibleBuild(cellTest,workerTest,Level.LEVEL1));
     }
 
     @Test
-    public void Build(){
+    public void testBuild(){
         assertEquals(Level.GROUND, cellTest.getLevel());
         panTest.setAvailableMoveNumber(0);
         panTest.setAvailableBuildNumber(1);
@@ -142,7 +142,7 @@ public class PanTest {
     }
 
     @Test
-    public void ResetTurn(){
+    public void testResetTurn(){
         panTest.setAvailableMoveNumber(2);
         panTest.setAvailableBuildNumber(2);
         panTest.setCanMoveUp(false);
@@ -156,17 +156,17 @@ public class PanTest {
     }
 
     @Test
-    public void WinControlFalse(){
+    public void testWinControlFalse(){
         assertFalse(panTest.winControl(Level.LEVEL3,Level.LEVEL3));
     }
 
     @Test
-    public void WinControlTrue1(){
+    public void testWinControlTrue1(){
         assertTrue(panTest.winControl(Level.LEVEL2,Level.LEVEL3));
     }
 
     @Test
-    public void WinControlTrue2(){
+    public void testWinControlTrue2(){
         assertTrue(panTest.winControl(Level.LEVEL3,Level.LEVEL1));
         assertTrue(panTest.winControl(Level.LEVEL2,Level.GROUND));
     }
