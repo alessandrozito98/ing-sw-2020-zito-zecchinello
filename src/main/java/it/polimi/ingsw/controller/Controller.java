@@ -13,7 +13,7 @@ public class Controller implements Observer {
     private final Game game;
     private int playerTurn;
     private int chosenWorker;
-    private ArrayList<SocketClientConnection> connections = new ArrayList<SocketClientConnection>();
+    private ArrayList<SocketClientConnection> connections;
 
     public Controller(Game game,ArrayList<SocketClientConnection> connections) {
         this.game = game;
@@ -21,6 +21,9 @@ public class Controller implements Observer {
         this.chosenWorker = -1;
     }
 
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
 
     public void setPlayerTurn(int newPlayerTurn) {
         int oldPlayerTurn = this.playerTurn;
