@@ -7,12 +7,10 @@ import it.polimi.ingsw.model.God.Pan;
 import it.polimi.ingsw.observer.messages.BuildRequest;
 import it.polimi.ingsw.observer.messages.EndTurnRequest;
 import it.polimi.ingsw.observer.messages.MoveRequest;
-import it.polimi.ingsw.view.RemoteView;
 import it.polimi.ingsw.view.View;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -21,7 +19,7 @@ public class ControllerTest {
 
     Board board = new Board();
     Game gameTest;
-    Controller controllerTest = new Controller(gameTest,());
+    Controller controllerTest = new Controller(gameTest,new ArrayList<SocketClientConnection>());
     Worker workerTest;
     Worker workerTest2;
 
