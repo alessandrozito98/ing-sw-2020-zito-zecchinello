@@ -4,7 +4,7 @@
 - ###   890219    Alessandro Zito ([@alessandrozito98](https://github.com/alessandrozito98)) alessandro4.zito@mail.polimi.it
 - ###   10530016    Flavio Zecchinello ([@FlavioZecchinello](https://github.com/FlavioZecchinello)) flavio.zecchinello@mail.polimi.it
 
-####Legend
+#### Legend
 
 [![RED](https://placehold.it/15/f03c15/f03c15)](#) = not implemented yet
 
