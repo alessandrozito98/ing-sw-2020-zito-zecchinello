@@ -1,0 +1,127 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Demeter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.model.God</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Demeter (it.polimi.ingsw.model.God)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Demeter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.model.God;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.model.Cell;
+<i>4</i>&nbsp;import it.polimi.ingsw.model.Game;
+<i>5</i>&nbsp;import it.polimi.ingsw.model.Level;
+<i>6</i>&nbsp;import it.polimi.ingsw.model.Worker;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class Demeter extends God {
+<i>9</i>&nbsp;    private Cell firstBuildPosition;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    public Demeter(Game game){
+<b class="fc"><i>12</i>&nbsp;        super(game);</b>
+<b class="fc"><i>13</i>&nbsp;        this.firstBuildPosition = null;</b>
+<b class="fc"><i>14</i>&nbsp;    }</b>
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;    public Cell getFirstBuildPosition(){ return this.firstBuildPosition; }</b>
+<b class="fc"><i>17</i>&nbsp;    public void setFirstBuildPosition(Cell cell){ this.firstBuildPosition = cell; }</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    @Override
+<i>20</i>&nbsp;    public void build(Cell cell, Worker worker, Level level) {
+<b class="fc"><i>21</i>&nbsp;        if(this.firstBuildPosition==null) {</b>
+<b class="fc"><i>22</i>&nbsp;            this.firstBuildPosition = cell;</b>
+<i>23</i>&nbsp;        }
+<i>24</i>&nbsp;        else {
+<b class="fc"><i>25</i>&nbsp;            setAvailableBuildNumber(this.getAvailableBuildNumber() - 1);</b>
+<i>26</i>&nbsp;        }
+<b class="fc"><i>27</i>&nbsp;        setHasBuilt(true);</b>
+<b class="fc"><i>28</i>&nbsp;        cell.setLevel(level);</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Override
+<i>32</i>&nbsp;    public boolean isFeasibleBuild(Cell cell, Worker worker, Level level) {
+<b class="fc"><i>33</i>&nbsp;        if(this.firstBuildPosition==cell){</b>
+<b class="fc"><i>34</i>&nbsp;            return false;</b>
+<i>35</i>&nbsp;        }
+<b class="fc"><i>36</i>&nbsp;        return super.isFeasibleBuild(cell, worker, level);</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    public void resetTurn() {
+<b class="fc"><i>41</i>&nbsp;        super.resetTurn();</b>
+<b class="fc"><i>42</i>&nbsp;        this.firstBuildPosition = null;</b>
+<b class="fc"><i>43</i>&nbsp;    }</b>
+<i>44</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-06-21 01:07</div>
+</div>
+</body>
+</html>

@@ -14,3 +14,6 @@ buildNumber.properties
 #custom ignore
 .idea
 GC16.iml
+
+#ignoring all coverage test not necessary
+!/deliverables/report/index.html

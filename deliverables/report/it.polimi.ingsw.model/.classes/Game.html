@@ -1,0 +1,221 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Game</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Game (it.polimi.ingsw.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Game</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91,5%
+  </span>
+  <span class="absValue">
+    (54/ 59)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import it.polimi.ingsw.model.God.God;
+<i>5</i>&nbsp;import it.polimi.ingsw.observer.Observable;
+<i>6</i>&nbsp;import it.polimi.ingsw.observer.messages.BoardChange;
+<i>7</i>&nbsp;import it.polimi.ingsw.observer.messages.PlayerLose;
+<i>8</i>&nbsp;import it.polimi.ingsw.observer.messages.ResetTurn;
+<i>9</i>&nbsp;import it.polimi.ingsw.observer.messages.Win;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import java.io.IOException;
+<i>12</i>&nbsp;import java.util.ArrayList;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;public class Game extends Observable {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    private final Board board;
+<i>17</i>&nbsp;    private final ArrayList&lt;Player&gt; players;
+<i>18</i>&nbsp;
+<b class="fc"><i>19</i>&nbsp;    public Game(Board board){</b>
+<b class="fc"><i>20</i>&nbsp;        this.board = board;</b>
+<b class="fc"><i>21</i>&nbsp;        this.players= new ArrayList&lt;Player&gt;();</b>
+<b class="fc"><i>22</i>&nbsp;    }</b>
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    public Board getBoardCopy() {
+<b class="fc"><i>26</i>&nbsp;        return board.clone();</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<b class="fc"><i>29</i>&nbsp;    public Board getBoard() { return this.board; }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public ArrayList&lt;Player&gt; getPlayers() {
+<b class="fc"><i>32</i>&nbsp;        return players;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public Player getSinglePlayer(int playerNumber) {
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;        // returns a player given the playerNumber
+<i>38</i>&nbsp;
+<b class="fc"><i>39</i>&nbsp;        for (Player p: players) {</b>
+<b class="fc"><i>40</i>&nbsp;            if(p.getPlayerNumber() == playerNumber) {</b>
+<b class="fc"><i>41</i>&nbsp;                return p;</b>
+<i>42</i>&nbsp;            }
+<b class="fc"><i>43</i>&nbsp;        }</b>
+<b class="nc"><i>44</i>&nbsp;        return null;</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    public void addPlayer(Player player) {
+<b class="fc"><i>48</i>&nbsp;        players.add(player);</b>
+<b class="fc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    //esegue il movimento di un worker e notifica le view del cambiamento
+<i>52</i>&nbsp;    public void performMove(Player player, int workerNumber, int xPosition, int yPosition) throws IOException {
+<b class="fc"><i>53</i>&nbsp;        System.out.println(&quot;arrivato a inizio performMove&quot;);</b>
+<i>54</i>&nbsp;        // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
+<b class="fc"><i>55</i>&nbsp;        God godCard = player.getGodCard();</b>
+<b class="fc"><i>56</i>&nbsp;        Level oldLevel = player.getSingleWorker(workerNumber).getPosition().getLevel();</b>
+<b class="fc"><i>57</i>&nbsp;        godCard.move(this.board.getCell(xPosition,yPosition),player.getSingleWorker(workerNumber));</b>
+<b class="fc"><i>58</i>&nbsp;        notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(), player));</b>
+<b class="fc"><i>59</i>&nbsp;        System.out.println(&quot;arrivato a fine performMove&quot;);</b>
+<b class="fc"><i>60</i>&nbsp;        if(godCard.winControl(oldLevel,player.getSingleWorker(workerNumber).getPosition().getLevel())) {</b>
+<b class="nc"><i>61</i>&nbsp;            notifyWin(new Win(player));</b>
+<i>62</i>&nbsp;        }
+<b class="fc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    //esegue la costruzione di un worker e notifica le view del cambiamento
+<i>66</i>&nbsp;    public void performBuild(Player player, int workerNumber, int xPosition, int yPosition, Level level) throws IOException {
+<i>67</i>&nbsp;        // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
+<b class="fc"><i>68</i>&nbsp;        God godCard = player.getGodCard();</b>
+<b class="fc"><i>69</i>&nbsp;        godCard.build(this.board.getCell(xPosition, yPosition),player.getSingleWorker(workerNumber), level);</b>
+<b class="fc"><i>70</i>&nbsp;        notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(), player));</b>
+<b class="fc"><i>71</i>&nbsp;    }</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    public void manageEndTurn(Player player) {
+<i>74</i>&nbsp;        // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
+<b class="fc"><i>75</i>&nbsp;        God godCard = player.getGodCard();</b>
+<b class="fc"><i>76</i>&nbsp;        godCard.resetTurn();</b>
+<i>77</i>&nbsp;        Player nextPlayer;
+<b class="fc"><i>78</i>&nbsp;        if(players.indexOf(player)==players.size()-1) {</b>
+<b class="nc"><i>79</i>&nbsp;            nextPlayer=players.get(0);</b>
+<i>80</i>&nbsp;        }
+<i>81</i>&nbsp;        else {
+<b class="fc"><i>82</i>&nbsp;            nextPlayer=players.get(players.indexOf(player)+1);</b>
+<i>83</i>&nbsp;        }
+<b class="fc"><i>84</i>&nbsp;        notifyResetTurn(new ResetTurn(godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(),player, nextPlayer));</b>
+<b class="fc"><i>85</i>&nbsp;    }</b>
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    public void remove(Player player) throws IOException {
+<i>88</i>&nbsp;        //Removing the Worker
+<b class="fc"><i>89</i>&nbsp;        for (int i = 0; i &lt; 5; i++) {</b>
+<b class="fc"><i>90</i>&nbsp;            for (int j = 0; j &lt; 5; j++) {</b>
+<b class="fc"><i>91</i>&nbsp;                if(board.getCell(i,j).getWorker() == player.getSingleWorker(1) || getBoard().getCell(i,j).getWorker() == player.getSingleWorker(2)) {</b>
+<b class="nc"><i>92</i>&nbsp;                    board.getCell(i,j).removeWorker();</b>
+<i>93</i>&nbsp;                }
+<i>94</i>&nbsp;            }
+<i>95</i>&nbsp;        }
+<i>96</i>&nbsp;        //removing the player
+<i>97</i>&nbsp;        Player nextPlayer;
+<b class="fc"><i>98</i>&nbsp;        if(players.indexOf(player)==players.size()-1) {</b>
+<b class="nc"><i>99</i>&nbsp;            nextPlayer=players.get(0);</b>
+<i>100</i>&nbsp;        }
+<i>101</i>&nbsp;        else {
+<b class="fc"><i>102</i>&nbsp;            nextPlayer=players.get(players.indexOf(player)+1);</b>
+<i>103</i>&nbsp;        }
+<b class="fc"><i>104</i>&nbsp;        notifyPlayerLose(new PlayerLose(getBoardCopy(),player,nextPlayer));</b>
+<b class="fc"><i>105</i>&nbsp;        players.remove(player);</b>
+<b class="fc"><i>106</i>&nbsp;    }</b>
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    // crea un ArrayList che identifica le celle su cui un worker può fare una move
+<i>109</i>&nbsp;    public ArrayList&lt;Cell&gt; checkMovement(int playerNumber, int workerNumber, Board board) {
+<b class="fc"><i>110</i>&nbsp;        ArrayList&lt;Cell&gt; availableMoveCells = new ArrayList&lt;Cell&gt;();</b>
+<b class="fc"><i>111</i>&nbsp;        for(int i=0; i&lt;5; i++){</b>
+<b class="fc"><i>112</i>&nbsp;            for(int j=0; j&lt;5; j++){</b>
+<b class="fc"><i>113</i>&nbsp;                if(getSinglePlayer(playerNumber).getGodCard().isFeasibleMove(board.getCell(i,j),getSinglePlayer(playerNumber).getSingleWorker(workerNumber))){</b>
+<b class="fc"><i>114</i>&nbsp;                    availableMoveCells.add(new Cell(i,j));</b>
+<i>115</i>&nbsp;                }
+<i>116</i>&nbsp;            }
+<i>117</i>&nbsp;        }
+<b class="fc"><i>118</i>&nbsp;        return availableMoveCells;</b>
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    // crea un ArrayList che identifica le celle su cui un worker può fare una build
+<i>122</i>&nbsp;    public ArrayList&lt;Cell&gt; checkBuilding(int playerNumber, int workerNumber, Board board) {
+<b class="fc"><i>123</i>&nbsp;        ArrayList&lt;Cell&gt; availableBuildCells = new ArrayList&lt;Cell&gt;();</b>
+<i>124</i>&nbsp;        Level level;
+<b class="fc"><i>125</i>&nbsp;        for(int i=0; i&lt;5; i++){</b>
+<b class="fc"><i>126</i>&nbsp;            for(int j=0; j&lt;5; j++){</b>
+<b class="fc"><i>127</i>&nbsp;                for(Level l: Level.values()) {</b>
+<b class="fc"><i>128</i>&nbsp;                    if (getSinglePlayer(playerNumber).getGodCard().isFeasibleBuild(board.getCell(i, j), getSinglePlayer(playerNumber).getSingleWorker(workerNumber),l)) {</b>
+<b class="fc"><i>129</i>&nbsp;                        Cell cell = new Cell(i, j);</b>
+<b class="fc"><i>130</i>&nbsp;                        cell.setLevel(l);</b>
+<b class="fc"><i>131</i>&nbsp;                        availableBuildCells.add(cell);</b>
+<i>132</i>&nbsp;                    }
+<i>133</i>&nbsp;                }
+<i>134</i>&nbsp;            }
+<i>135</i>&nbsp;        }
+<b class="fc"><i>136</i>&nbsp;        return availableBuildCells;</b>
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-06-21 01:07</div>
+</div>
+</body>
+</html>
