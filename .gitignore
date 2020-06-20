@@ -20,9 +20,12 @@ GC16.iml
 !/deliverables/report/.css
 !/deliverables/report/.img
 !/deliverables/report/index.html
+!/deliverables/report/it.polimi.ingsw.model/
+!deliverables/report/it.polimi.ingsw.model.God/
+!deliverables/report/it.polimi.ingsw.controller/
 /deliverables/report/it.polimi.ingsw.model/*
-!deliverables/report/it.polimi.ingsw.model.God/*
-!deliverables/report/it.polimi.ingsw.controller/*
+deliverables/report/it.polimi.ingsw.model.God/*
+deliverables/report/it.polimi.ingsw.controller/*
 !/deliverables/report/it.polimi.ingsw.model.God/index.html
 !/deliverables/report/it.polimi.ingsw.model/index.html
 !/deliverables/report/it.polimi.ingsw.controller/index.html
