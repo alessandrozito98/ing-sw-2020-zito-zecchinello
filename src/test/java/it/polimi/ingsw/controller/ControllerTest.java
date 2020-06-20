@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.connection.Server;
 import it.polimi.ingsw.connection.SocketClientConnection;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.God.God;
@@ -7,19 +8,23 @@ import it.polimi.ingsw.model.God.Pan;
 import it.polimi.ingsw.observer.messages.BuildRequest;
 import it.polimi.ingsw.observer.messages.EndTurnRequest;
 import it.polimi.ingsw.observer.messages.MoveRequest;
+import it.polimi.ingsw.view.RemoteView;
 import it.polimi.ingsw.view.View;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class ControllerTest {
 
-    Board board = new Board();
-    Game gameTest;
-    Controller controllerTest = new Controller(gameTest,new ArrayList<SocketClientConnection>());
+    ArrayList<SocketClientConnection> waitingConnectionTest = new ArrayList<SocketClientConnection>();
+    Board boardTest = new Board();
+    Game gameTest = new Game(boardTest);
+    Controller controllerTest;
     Worker workerTest;
     Worker workerTest2;
 
@@ -31,18 +36,19 @@ public class ControllerTest {
     Player playerTest3;
     View view;
 
-    MoveRequest moveRequestTest;
-    BuildRequest buildRequestTest;
-    EndTurnRequest endTurnRequestTest;
+    SocketClientConnection connectionTest;
 
     @Before
-    public void setUp () {
-
-        gameTest = new Game(board);
+    public void setUp () throws IOException {
+        controllerTest = new Controller(gameTest,waitingConnectionTest);
 
         workerTest = new Worker(1,WorkerColor.RED);
         workerTest2 = new Worker(2, WorkerColor.RED);
+        workerTest.setPosition(boardTest.getCell(1,1));
+        workerTest2.setPosition(boardTest.getCell(0,0));
 
+        boardTest.getCell(1,1).addWorker(workerTest);
+        boardTest.getCell(0,0).addWorker(workerTest2);
 
         workersTest = new ArrayList<Worker>();
         workersTest.add(workerTest);
@@ -54,13 +60,12 @@ public class ControllerTest {
         playerTest2 = new Player("B",2,workersTest, godCardTest);
         playerTest3 = new Player("C",3,workersTest,godCardTest);
 
-        moveRequestTest = new MoveRequest(view, playerTest, 1,1 ,1);
-        buildRequestTest = new BuildRequest(view, playerTest,1,1,1,Level.LEVEL1);
-        endTurnRequestTest = new EndTurnRequest(playerTest);
-
         gameTest.addPlayer(playerTest);
         gameTest.addPlayer(playerTest2);
         gameTest.addPlayer(playerTest3);
+
+        connectionTest = new SocketClientConnection(new Socket(), new Server());
+        view = new RemoteView(playerTest, connectionTest, gameTest.getBoardCopy());
     }
 
     @Test
@@ -76,20 +81,28 @@ public class ControllerTest {
     }
 
     @Test
-    public void handleMove() {
+    public void handleMove() throws IOException {
+        controllerTest.setPlayerTurn(1);
+        MoveRequest moveRequestTest = new MoveRequest(view, playerTest, workerTest.getWorkerNumber(), boardTest.getCell(1,2).getX(), boardTest.getCell(1,2).getY());
+        controllerTest.handleMove(moveRequestTest);
+        assertEquals(workerTest.getPosition().getX(), 1);
+        assertEquals(workerTest.getPosition().getY(),2);
     }
 
     @Test
-    public void handleBuild() {
+    public void handleBuild() throws IOException {
+        controllerTest.setPlayerTurn(1);
+        BuildRequest buildRequestTest = new BuildRequest(view, playerTest, workerTest.getWorkerNumber(), boardTest.getCell(1,2).getX(), boardTest.getCell(1,2).getY(), Level.LEVEL1);
+        controllerTest.handleBuild(buildRequestTest);
+        assertEquals(boardTest.getCell(1,2).getLevel(), Level.LEVEL1);
     }
 
     @Test
     public void manageTurn() {
-
+        controllerTest.setPlayerTurn(1);
+        EndTurnRequest endTurnRequestTest = new EndTurnRequest(playerTest);
+        controllerTest.manageTurn(endTurnRequestTest);
+        assertEquals(controllerTest.getPlayerTurn(),2);
     }
 
-    @Test
-    public void loseControl() {
-
-    }
 }
