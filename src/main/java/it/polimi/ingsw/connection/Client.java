@@ -32,20 +32,25 @@ public class Client {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
+
                     while (isActive()) {
-                        Object inputObject = socketIn.readObject();
-                        if(inputObject instanceof String){
-                            System.out.println((String)inputObject);
-                        } else if (inputObject instanceof Board){
-                            ((Board)inputObject).printBoard();
-                        } else {
-                            throw new IllegalArgumentException();
+                        try {
+                            Object inputObject = socketIn.readObject();
+                            if (inputObject instanceof String) {
+                                System.out.println((String) inputObject);
+                                if(inputObject.equals("Game canceled!! A client has disconnected\nPress ENTER to close")||inputObject.equals("YOU WIN\nPress ENTER to close")||inputObject.equals("YOU LOSE\nPress ENTER to close")){
+                                    setActive(false);
+                                }
+                            } else if (inputObject instanceof Board) {
+                                ((Board) inputObject).printBoard();
+                            } else {
+                                throw new IllegalArgumentException();
+                            }
+                        } catch (Exception e) {
+                            setActive(false);
                         }
                     }
-                } catch (Exception e){
-                    setActive(false);
-                }
+
             }
         });
         t.start();
@@ -56,15 +61,17 @@ public class Client {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
+
                     while (isActive()) {
-                        String inputLine = stdin.nextLine();
-                        socketOut.println(inputLine);
-                        socketOut.flush();
+                        try {
+                            String inputLine = stdin.nextLine();
+                            socketOut.println(inputLine);
+                            socketOut.flush();
+                        } catch (Exception e) {
+                            setActive(false);
+                        }
                     }
-                }catch(Exception e){
-                    setActive(false);
-                }
+
             }
         });
         t.start();
@@ -81,8 +88,8 @@ public class Client {
         try{
             Thread t0 = asyncReadFromSocket(socketIn);
             Thread t1 = asyncWriteToSocket(stdin, socketOut);
-            t0.join();
             t1.join();
+            t0.join();
         } catch(InterruptedException | NoSuchElementException e){
             System.out.println("Connection closed from the client side");
         } finally {

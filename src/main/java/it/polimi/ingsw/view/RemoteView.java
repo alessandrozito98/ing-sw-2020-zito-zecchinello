@@ -250,9 +250,9 @@ public class RemoteView extends View {
     @Override
     public void updateWin(Win message) throws IOException {
         if(message.getPlayer()==this.player){
-            connection.send((String)"YOU WIN");
+            connection.send((String)"YOU WIN\nPress ENTER to close");
         }else{
-            connection.send((String)"YOU LOSE");
+            connection.send((String)"YOU LOSE\nPress ENTER to close");
         }
         connection.setEndGame();
     }

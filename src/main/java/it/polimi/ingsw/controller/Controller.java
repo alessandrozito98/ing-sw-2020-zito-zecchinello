@@ -137,7 +137,7 @@ public class Controller implements Observer {
     public void updateEndGame() {
         for(SocketClientConnection c : connections){
             try{
-                c.send("Game canceled!! A client has disconnected");
+                c.send("Game canceled!! A client has disconnected\nPress ENTER to close");
                 c.setEndGame();
             } catch (IOException e) {
                 c.setEndGame();
