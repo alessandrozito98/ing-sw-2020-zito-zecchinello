@@ -140,7 +140,7 @@ public class Controller implements Observer {
                 c.send("Game canceled!! A client has disconnected\nPress ENTER to close");
                 c.setEndGame();
             } catch (IOException e) {
-                c.setEndGame();
+                c.getServer().incrementClosingCount();
             }
         }
     }

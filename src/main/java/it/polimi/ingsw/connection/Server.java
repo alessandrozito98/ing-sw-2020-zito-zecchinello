@@ -21,6 +21,7 @@ public class Server {
 
     private int numberOfPlayers = 0;
     int firstPlayer =0;
+    private int closingCount = 0;
     private Map<SocketClientConnection, String> names = new HashMap<>();
     private ArrayList<EnumGodCard> availableGodCards = new ArrayList<EnumGodCard>();
     private Map<SocketClientConnection, EnumGodCard> chosenGodCards = new HashMap<>();
@@ -29,15 +30,21 @@ public class Server {
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     }
-//INIZIOOOO
-    /*public void closeAllConnection(SocketClientConnection con) {
-        for (SocketClientConnection s : waitingConnection){
-            if(s!=con) {
-                s.closeConnection();
-            }
-        }
-    }*/
-//FINEEEEE
+
+    public void removeAllConnection() {
+        waitingConnection.clear();
+        workerMap.clear();
+        chosenGodCards.clear();
+        availableGodCards.clear();
+        numberOfPlayers = 0;
+        firstPlayer = 0;
+        closingCount = 0;
+    }
+
+    public void incrementClosingCount(){
+        closingCount++;
+        if(closingCount==numberOfPlayers) removeAllConnection();
+    }
     public synchronized void lobby(SocketClientConnection c, String loginName) throws IOException {
         waitingConnection.add(c);
         String name = loginName;
@@ -155,7 +162,7 @@ public class Server {
             //da togliere, usata solo per test stupido
             System.out.println(firstPlayer);
 
-            Board board = new Board();
+                Board board = new Board();
 
             // posizionamento workers
             for(int i=0;i<numberOfPlayers;i++){

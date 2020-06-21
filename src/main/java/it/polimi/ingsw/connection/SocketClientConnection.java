@@ -47,6 +47,8 @@ public class SocketClientConnection extends Observable implements Runnable {
         return view;
     }
 
+    public Server getServer(){ return server;}
+
     public synchronized void closeConnection() throws IOException {
         send("Connection closed!");
         try {
@@ -83,6 +85,8 @@ public class SocketClientConnection extends Observable implements Runnable {
                 if(activeGame) view.chooseAction();
             }
             socket.close();
+            server.incrementClosingCount();
+            //System.out.println("connessioni cancellate");
         } catch (IOException | NoSuchElementException | InterruptedException e) {
             System.err.println("Error!" + e.getMessage());
         }
