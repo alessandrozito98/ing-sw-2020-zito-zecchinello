@@ -33,10 +33,10 @@
 
 ### Build instructions
 
-The jar are built using the [Maven Shade Plugin](https://maven.apache.org/plugins/maven-shade-plugin/)
+The jar are built using the [Maven Install Plugin](https://maven.apache.org/plugins/maven-install-plugin/)
 If you want to build yourself the executables jar files run:
 ```
-mvn clean package
+mvn install
 ```
 
 ### How to start
@@ -45,7 +45,7 @@ Requires java 14+
 
 Run:
 ```
-java -jar server.jar
+java -jar Server.jar
 ```
 
 The following parameters will be asked in order:
@@ -61,15 +61,25 @@ Requires java 14+
 
 Run:
 ```
-java -jar client.jar
+java -jar Client.jar
 ````
 
 The following parameters will be asked in order
-1. Socket server port
-2. Nickname
+1. Ip Address
+2. Socket server port
+3. Nickname
+4. (only for the first player connected) Number of players (between 2 or 3)
+5. (only for the first player connected) N Gods from the list where N = number of players
+6. (only for the other players that aren't the first one) His God
+7. (only for the first player connected) the player that will start
 
 Example:
 ```
+127.0.0.1
 2020
 user
+2
+PAN, APOLLO
+PAN
+1
 ```
