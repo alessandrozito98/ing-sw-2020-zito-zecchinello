@@ -143,7 +143,7 @@ public class RemoteView extends View {
         }
         while(level.equals(Level.GROUND)){
             connection.send((Board)boardCopy);
-            connection.send((String) "Choose the level block you want to build:\n'1' for Level 1 "+ANSI_BG_PURPLE+"  "+ANSI_RESET+"\n'2' for Level 2 "+ANSI_BG_CYAN+"  "+ANSI_RESET+"\n'3' for Level 3 "+ANSI_BG_YELLOW+"  "+ANSI_RESET+"\n'd' for Dome    "+ ANSI_BRIGHT_BG_BLACK +"  "+ANSI_RESET);
+            connection.send((String) "Choose the level block you want to build:\n'1' for Level 1 "+ANSI_BG_PURPLE+"  "+ANSI_RESET+"\n'2' for Level 2 "+ANSI_BG_CYAN+"  "+ANSI_RESET+"\n'3' for Level 3 "+ANSI_BG_YELLOW+"  "+ANSI_RESET+"\n'd' for Dome    "+ ANSI_BRIGHT_BG_WHITE +"  "+ANSI_RESET);
             String s = connection.read();
             if (s.equals("1")) {
                 level = Level.LEVEL1;

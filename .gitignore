@@ -30,3 +30,6 @@ deliverables/report/it.polimi.ingsw.controller/*
 !/deliverables/report/it.polimi.ingsw.model/index.html
 !/deliverables/report/it.polimi.ingsw.controller/index.html
 
+#Ignoring META-INF and out
+src/main/java/META-INF
+out

@@ -14,7 +14,6 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    private static final int PORT = 2020;
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
     private ArrayList<SocketClientConnection> waitingConnection = new ArrayList<SocketClientConnection>();
@@ -27,7 +26,7 @@ public class Server {
     private Map<SocketClientConnection, EnumGodCard> chosenGodCards = new HashMap<>();
     private Map<SocketClientConnection, ArrayList<Worker>> workerMap = new HashMap<>();
 
-    public Server() throws IOException {
+    public Server(int PORT) throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     }
 
