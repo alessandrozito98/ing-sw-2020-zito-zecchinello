@@ -146,20 +146,14 @@ public class Controller implements Observer {
     }
 
     public int loseControl(Player player) {
-        Player loseControlPlayer;
-        if (game.getPlayers().indexOf(player) == game.getPlayers().size() - 1) {
-            loseControlPlayer = game.getPlayers().get(0);
-        } else {
-            loseControlPlayer = game.getPlayers().get(game.getPlayers().indexOf(player) + 1);
-        }
         int actionCounter = 0;
         for (int i = 1; i < 3; i++) {
-            if (loseControlPlayer.getGodCard().getAvailableBuildNumber() != 0) {
-                if (!game.checkBuilding(loseControlPlayer.getPlayerNumber(), i, game.getBoardCopy()).isEmpty()) {
+            if (player.getGodCard().getAvailableBuildNumber() != 0) {
+                if (!game.checkBuilding(player.getPlayerNumber(), i, game.getBoardCopy()).isEmpty()) {
                     actionCounter++;
                 }
             }
-            if (!game.checkMovement(loseControlPlayer.getPlayerNumber(), i, game.getBoardCopy()).isEmpty()) {
+            if (!game.checkMovement(player.getPlayerNumber(), i, game.getBoardCopy()).isEmpty()) {
                 actionCounter++;
             }
         }

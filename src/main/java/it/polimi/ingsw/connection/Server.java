@@ -153,7 +153,6 @@ public class Server {
                 }
             }
             if(firstPlayer!=1){
-                SocketClientConnection oldFirst = waitingConnection.get(0);
                 SocketClientConnection first = waitingConnection.get(firstPlayer-1);
                 while(waitingConnection.get(0)!=first) {
                     SocketClientConnection temp = waitingConnection.remove(0);
@@ -161,7 +160,7 @@ public class Server {
                 }
             }
             //da togliere, usata solo per test stupido
-            System.out.println(firstPlayer);
+            System.out.println("first player:"+firstPlayer);
 
                 Board board = new Board();
 
