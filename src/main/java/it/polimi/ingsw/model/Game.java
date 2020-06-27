@@ -50,13 +50,13 @@ public class Game extends Observable {
 
     //esegue il movimento di un worker e notifica le view del cambiamento
     public void performMove(Player player, int workerNumber, int xPosition, int yPosition) throws IOException {
-        System.out.println("arrivato a inizio performMove");
+        //System.out.println("arrivato a inizio performMove");
         // creo questo attributo per avere un codice più leggibile nelle 2 righe successive
         God godCard = player.getGodCard();
         Level oldLevel = player.getSingleWorker(workerNumber).getPosition().getLevel();
         godCard.move(this.board.getCell(xPosition,yPosition),player.getSingleWorker(workerNumber));
         notifyBoardChange(new BoardChange(getBoardCopy(),godCard.getAvailableMoveNumber(),godCard.getAvailableBuildNumber(),godCard.getHasMoved(),godCard.getHasBuilt(), player));
-        System.out.println("arrivato a fine performMove");
+        //System.out.println("arrivato a fine performMove");
         if(godCard.winControl(oldLevel,player.getSingleWorker(workerNumber).getPosition().getLevel())) {
             notifyWin(new Win(player));
         }

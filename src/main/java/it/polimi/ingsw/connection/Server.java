@@ -38,6 +38,7 @@ public class Server {
         numberOfPlayers = 0;
         firstPlayer = 0;
         closingCount = 0;
+        System.out.println("all connection removed");
     }
 
     public void incrementClosingCount(){

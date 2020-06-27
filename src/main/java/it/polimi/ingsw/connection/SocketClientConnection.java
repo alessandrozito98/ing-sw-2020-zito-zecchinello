@@ -62,6 +62,9 @@ public class SocketClientConnection extends Observable implements Runnable {
         out.reset();
         out.writeObject(message);
         out.flush();
+        if(message.equals("YOU WIN\nPress ENTER to close")){
+            server.removeAllConnection();
+        }
     }
 
     public String read() throws NoSuchElementException{
@@ -84,8 +87,8 @@ public class SocketClientConnection extends Observable implements Runnable {
                 waitMyTurn();
                 if(activeGame) view.chooseAction();
             }
-            socket.close();
             server.incrementClosingCount();
+            socket.close();
             //System.out.println("connessioni cancellate");
         } catch (IOException | NoSuchElementException | InterruptedException e) {
             System.err.println("Error!" + e.getMessage());

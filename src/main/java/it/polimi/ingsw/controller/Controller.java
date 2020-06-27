@@ -46,7 +46,7 @@ public class Controller implements Observer {
 
     public synchronized void handleMove(MoveRequest message) throws IOException {
         if(playerTurn==message.getPlayer().getPlayerNumber()) {
-            System.out.println("arrivato a inizio handleMove");
+            //System.out.println("arrivato a inizio handleMove");
             if (loseControl(message.getPlayer()) == 0) {
                 setChosenWorker(-1);
                 if(game.getPlayers().indexOf(game.getSinglePlayer(playerTurn)) == game.getPlayers().size()-1) {
@@ -72,7 +72,7 @@ public class Controller implements Observer {
                     message.getView().reportError("Error! this move is not feasible!");
                 }
             }
-            System.out.println("arrivato a fine handleMove");
+            //System.out.println("arrivato a fine handleMove");
         }
         else {
             message.getView().reportError("Error! It's not your turn!");

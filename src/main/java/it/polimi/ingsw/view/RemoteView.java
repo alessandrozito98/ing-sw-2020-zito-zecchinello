@@ -103,6 +103,11 @@ public class RemoteView extends View {
         notifyMoveRequest(new MoveRequest(this,this.player,workerNumber,xCell,yCell));
     }
 
+    /**
+     *
+     * @throws IOException
+     * @throws NoSuchElementException
+     */
     public void buildHandler() throws IOException, NoSuchElementException {
         int workerNumber = -1;
         int xCell = -1;
