@@ -35,6 +35,7 @@ public class Server {
         workerMap.clear();
         chosenGodCards.clear();
         availableGodCards.clear();
+        names.clear();
         numberOfPlayers = 0;
         firstPlayer = 0;
         closingCount = 0;
