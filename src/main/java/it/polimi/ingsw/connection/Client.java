@@ -28,6 +28,13 @@ public class Client {
         this.active = active;
     }
 
+    /**
+     * create a thread that read objects from socket and print them on the Client screen
+     * @param socketIn
+     * Object Input Stream stream which objects are read
+     * @return
+     * returns the created thread
+     */
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn){
         Thread t = new Thread(new Runnable() {
             @Override
@@ -57,6 +64,15 @@ public class Client {
         return t;
     }
 
+    /**
+     * create a thread that read objects from the client keyboard and send them to the socket
+     * @param stdin
+     * scanner that reads the strings written by the keyboard
+     * @param socketOut
+     * Output Stream where strings are sent
+     * @return
+     * returns the created thread
+     */
     public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut){
         Thread t = new Thread(new Runnable() {
             @Override

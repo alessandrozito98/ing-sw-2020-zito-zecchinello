@@ -25,16 +25,30 @@ public class SocketClientConnection extends Observable implements Runnable {
         this.server = server;
     }
 
+    /**
+     * set the attribute myTurn with the param t
+     * if t is true, the method wake up the thread of this instance
+     * @param t
+     * a boolean value
+     */
     public synchronized void setMyTurn(boolean t){
         myTurn = t;
         if(t) notify();
     }
 
+    /**
+     * set activeGame to false and wake up the thread of this instance
+     */
     public synchronized void setEndGame(){
         activeGame = false;
         notify();
     }
 
+    /**
+     * put the thread of this instance in wait until it is the turn of this connection
+     * @throws InterruptedException
+     * throws a new InterruptedExecption when an Interrupted exception of some sort has occurred.
+     */
     public synchronized void waitMyTurn() throws InterruptedException {
         while(!myTurn) wait();
     }
@@ -58,6 +72,13 @@ public class SocketClientConnection extends Observable implements Runnable {
         }
     }
 
+    /**
+     * Send a message to the Object Output Stream
+     * @param message
+     * the message sent by the method
+     * @throws IOException
+     * throws a new IOExecption when an I/O exception of some sort has occurred.
+     */
     public synchronized void send(Object message) throws IOException {
         out.reset();
         out.writeObject(message);
@@ -67,6 +88,13 @@ public class SocketClientConnection extends Observable implements Runnable {
         }
     }
 
+    /**
+     * Read the nextLine from the Input Stream
+     * @return
+     * Return the string read
+     * @throws NoSuchElementException
+     * throws a new NoSuchElementExecption when there is no nextLine.
+     */
     public String read() throws NoSuchElementException{
         String read;
         read = in.nextLine();

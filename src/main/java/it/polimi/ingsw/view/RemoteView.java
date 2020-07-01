@@ -28,6 +28,9 @@ public class RemoteView extends View {
         this.hasBuilt = false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void chooseAction(){
         String action = " ";
         try {
@@ -63,6 +66,9 @@ public class RemoteView extends View {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void moveHandler() throws IOException, NoSuchElementException {
         int workerNumber = -1;
         int xCell = -1;
@@ -104,9 +110,7 @@ public class RemoteView extends View {
     }
 
     /**
-     *
-     * @throws IOException
-     * @throws NoSuchElementException
+     * {@inheritDoc}
      */
     public void buildHandler() throws IOException, NoSuchElementException {
         int workerNumber = -1;
@@ -165,10 +169,16 @@ public class RemoteView extends View {
         notifyBuildRequest(new BuildRequest(this,this.player,workerNumber,xCell,yCell,level));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void endTurnHandler(){
         notifyEndTurnRequest(new EndTurnRequest(this.player));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void reportError(Object message) throws IOException {
         connection.send((String)message);
     }

@@ -30,6 +30,9 @@ public class Server {
         this.serverSocket = new ServerSocket(PORT);
     }
 
+    /**
+     * remove all connections to start a new game
+     */
     public void removeAllConnection() {
         waitingConnection.clear();
         workerMap.clear();
@@ -42,10 +45,24 @@ public class Server {
         System.out.println("all connection removed");
     }
 
+    /**
+     *
+     called by a connection when it is closing
+     */
     public void incrementClosingCount(){
         closingCount++;
         if(closingCount==numberOfPlayers) removeAllConnection();
     }
+
+    /**
+     * Central method called by the SocketClientConnetions to initialize the game
+     * @param c
+     * the connection who called this method
+     * @param loginName
+     * the userName of the connection
+     * @throws IOException
+     * throws a new IOExecption when an I/O exception of some sort has occurred.
+     */
     public synchronized void lobby(SocketClientConnection c, String loginName) throws IOException {
         waitingConnection.add(c);
         String name = loginName;
