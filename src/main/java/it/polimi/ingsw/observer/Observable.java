@@ -16,7 +16,7 @@ public class Observable {
         }
     }
 
-    public void removeObserver(Observer observer){
+    public void removeObserver(Observer observer) {
         synchronized (observers) {
             observers.remove(observer);
         }
@@ -33,17 +33,14 @@ public class Observable {
     public void notifyBoardChange(BoardChange message) throws IOException {
         synchronized (observers) {
             for(Observer observer : observers){
-                observer.updateBoardChange(message);  //QUI DEVO INSERIRE UN METODO UPDATE, MA NON POSSO DIRE A PRIORI QUALE
-                                                // SIA PERCHÉ NON LO SO SE STA COSTRUENDO O SI STA MUOVENDO. IN PIU' NON
-                                                // E' CORRETTO COSì PERCHÉ L'ATTRIBUTO MESSAGE IN UPDATEBUILD DEVE ESSERE
-                                                // DI TIPO BUILDREQUEST, NON DI BOARDCHANGEMESSAGE
+                observer.updateBoardChange(message);
             }
         }
     }
 
-    public void notifyResetTurn(ResetTurn message){
+    public void notifyResetTurn(ResetTurn message) {
         synchronized (observers) {
-            for(Observer observer : observers){
+            for(Observer observer : observers) {
                 observer.updateResetTurn(message);
             }
         }

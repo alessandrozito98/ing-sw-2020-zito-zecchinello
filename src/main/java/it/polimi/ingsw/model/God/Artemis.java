@@ -17,6 +17,9 @@ public class Artemis extends God {
     public Cell getFirstMovePosition(){ return this.firstMovePosition; }
     public void setFirstMovePosition(Cell cell){ this.firstMovePosition = cell; }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void move(Cell cell, Worker worker) {
         worker.getPosition().removeWorker();
@@ -30,6 +33,9 @@ public class Artemis extends God {
         setHasMoved(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFeasibleMove(Cell cell, Worker worker) {
         if(this.firstMovePosition==cell){
@@ -38,6 +44,9 @@ public class Artemis extends God {
         return super.isFeasibleMove(cell, worker);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resetTurn() {
         super.resetTurn();

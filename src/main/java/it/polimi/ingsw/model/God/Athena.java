@@ -15,6 +15,9 @@ public class Athena extends God {
 
     public ArrayList<Player> getPlayers(){return this.players;}
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();

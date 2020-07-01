@@ -2,6 +2,9 @@ package it.polimi.ingsw.model;
 
 import java.io.Serializable;
 
+/**
+ * Represent a cell, a 1/25 part of the board.
+ */
 public class Cell implements Serializable {
 
     private final int x;
@@ -36,13 +39,20 @@ public class Cell implements Serializable {
         return worker;
     }
 
+    /**
+     * It places a worker to a cell.
+     * @param worker
+     * The worker that we want to add.
+     */
     public void addWorker(Worker worker) {
 
         if (this.worker == null) {
             this.worker = worker;
         }
     }
-
+    /**
+     * It removes a worker from a cell.
+     */
     public void removeWorker() {
         this.worker = null;
     }

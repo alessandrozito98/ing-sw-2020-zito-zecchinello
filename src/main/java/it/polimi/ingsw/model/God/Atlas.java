@@ -11,6 +11,9 @@ public class Atlas extends God {
         super(game);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level) {
 

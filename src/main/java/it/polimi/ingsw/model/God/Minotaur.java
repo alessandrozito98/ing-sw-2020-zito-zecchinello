@@ -10,6 +10,9 @@ public class Minotaur extends God {
 
     public Board getBoard(){return this.board;}
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void move(Cell cell, Worker worker) {
         if(cell.getWorker()!=null){
@@ -27,6 +30,9 @@ public class Minotaur extends God {
         setHasMoved(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFeasibleMove(Cell cell, Worker worker) {
 

@@ -2,6 +2,9 @@ package it.polimi.ingsw.model;
 
 import java.io.Serializable;
 
+/**
+ * This class represent a Worker, the constructor of the buildings.
+ */
 public class Worker implements Serializable {
 
     private int workerNumber;

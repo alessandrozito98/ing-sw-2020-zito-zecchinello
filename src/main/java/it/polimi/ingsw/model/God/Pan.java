@@ -9,6 +9,9 @@ public class Pan extends God {
         super(game);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean winControl(Level oldLevel, Level newLevel) {
         if((oldLevel!=newLevel&&newLevel==Level.LEVEL3)||(newLevel.ordinal()<=oldLevel.ordinal()-2)){

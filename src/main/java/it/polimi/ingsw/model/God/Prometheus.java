@@ -14,6 +14,9 @@ public class Prometheus extends God {
         this.canMoveUp = true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void build(Cell cell, Worker worker, Level level) {
         cell.setLevel(level);
@@ -24,6 +27,9 @@ public class Prometheus extends God {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void move(Cell cell, Worker worker) {
         worker.getPosition().removeWorker();
@@ -35,6 +41,9 @@ public class Prometheus extends God {
         setAvailableBuildNumber(1);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resetTurn() {
         this.availableMoveNumber = 1;

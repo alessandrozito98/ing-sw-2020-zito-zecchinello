@@ -16,6 +16,9 @@ public class Demeter extends God {
     public Cell getFirstBuildPosition(){ return this.firstBuildPosition; }
     public void setFirstBuildPosition(Cell cell){ this.firstBuildPosition = cell; }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void build(Cell cell, Worker worker, Level level) {
         if(this.firstBuildPosition==null) {
@@ -28,6 +31,9 @@ public class Demeter extends God {
         cell.setLevel(level);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level) {
         if(this.firstBuildPosition==cell){
@@ -36,6 +42,9 @@ public class Demeter extends God {
         return super.isFeasibleBuild(cell, worker, level);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resetTurn() {
         super.resetTurn();

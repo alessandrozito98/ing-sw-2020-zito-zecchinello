@@ -2,6 +2,9 @@ package it.polimi.ingsw.observer.messages;
 
 import it.polimi.ingsw.model.Player;
 
+/**
+ * Request to end a player turn
+ */
 public class EndTurnRequest {
 
     private final Player player;

@@ -12,6 +12,9 @@ public class Apollo extends God {
         super(game);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void move(Cell cell, Worker worker) {
         if(cell.getWorker()!=null){
@@ -30,6 +33,9 @@ public class Apollo extends God {
         setHasMoved(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFeasibleMove(Cell cell, Worker worker) {
 

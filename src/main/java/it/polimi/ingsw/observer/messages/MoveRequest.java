@@ -3,6 +3,9 @@ package it.polimi.ingsw.observer.messages;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.View;
 
+/**
+ * Request to move a worker in a new cell
+ */
 public class MoveRequest {
     private final View view;
     private final Player player;
@@ -30,11 +33,11 @@ public class MoveRequest {
         return workerNumber;
     }
 
-    public int getxPosition() {
+    public int getXPosition() {
         return xPosition;
     }
 
-    public int getyPosition() {
+    public int getYPosition() {
         return yPosition;
     }
 }

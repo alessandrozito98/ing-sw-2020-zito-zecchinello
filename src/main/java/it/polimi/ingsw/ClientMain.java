@@ -7,13 +7,12 @@ import java.util.Scanner;
 
 public class ClientMain {
     public static void main(String[] args) throws InterruptedException {
-
         Scanner scn = new Scanner(System.in);
         String ip = "";
         int port = 0;
 
         System.out.println("Welcome to the Santorini game!");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         System.out.print("Please type in ip address: ");
         ip = scn.nextLine();
         System.out.print("\nPlease type in port number: ");

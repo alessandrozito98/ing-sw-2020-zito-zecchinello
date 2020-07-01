@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.Level;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.view.View;
 
+/**
+ * Message request of new build
+ */
 public class BuildRequest {
     private final View view;
     private final Player player;
@@ -12,7 +15,7 @@ public class BuildRequest {
     private final int yPosition;
     private final Level level;
 
-    public BuildRequest(View view, Player player, int workerNumber, int xPosition, int yPosition, Level level){
+    public BuildRequest(View view, Player player, int workerNumber, int xPosition, int yPosition, Level level) {
         this.view = view;
         this.player = player;
         this.workerNumber = workerNumber;
@@ -33,11 +36,11 @@ public class BuildRequest {
         return workerNumber;
     }
 
-    public int getxPosition() {
+    public int getXPosition() {
         return xPosition;
     }
 
-    public int getyPosition() {
+    public int getYPosition() {
         return yPosition;
     }
 

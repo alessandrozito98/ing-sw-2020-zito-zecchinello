@@ -19,7 +19,7 @@
 | Socket | [![GREEN](https://placehold.it/15/44bb44/44bb44)](#) |
 | CLI | [![GREEN](https://placehold.it/15/44bb44/44bb44)](#) |
 | GUI | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
-| Multiple games | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| Multiple games | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
 | Persistence | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
 | Undo | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
 | Advanced Gods | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
@@ -65,7 +65,7 @@ java -jar Client.jar
 ````
 
 The following parameters will be asked in order
-1. Ip Address
+1. ip address
 2. Socket server port
 3. Nickname
 4. (only for the first player connected) Number of players (between 2 or 3)
@@ -83,3 +83,18 @@ PAN, APOLLO
 PAN
 1
 ```
+
+### Test Coverage
+
+#### Model
+91%
+
+#### Contrller 
+51 %
+
+
+For the test coverage, there are some HTML files in
+```
+/deliverables/report/
+```
+that show the complete coverage of each class of both Model and Controller package.

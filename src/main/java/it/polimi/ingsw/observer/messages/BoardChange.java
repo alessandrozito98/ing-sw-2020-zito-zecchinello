@@ -3,6 +3,10 @@ package it.polimi.ingsw.observer.messages;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Player;
 
+/**
+ * Message that notifies to all the player that the board has changed, after a new move/build.
+ */
+
 public class BoardChange {
     private final Board boardCopy;
     private final int availableMoveNumber;
@@ -11,7 +15,7 @@ public class BoardChange {
     private final boolean hasBuilt;
     private final Player player;
 
-    public BoardChange(Board boardCopy, int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt, Player player){
+    public BoardChange(Board boardCopy, int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt, Player player) {
         this.boardCopy = boardCopy;
         this.availableMoveNumber = availableMoveNumber;
         this.availableBuildNumber = availableBuildNumber;

@@ -2,7 +2,11 @@ package it.polimi.ingsw.observer.messages;
 
 import it.polimi.ingsw.model.Player;
 
+/**
+ * Message that reset the number of all the actions of a player.
+ */
 public class ResetTurn {
+
     private final int availableMoveNumber;
     private final int availableBuildNumber;
     private final boolean hasMoved;
@@ -10,7 +14,7 @@ public class ResetTurn {
     private final Player previousPlayer;
     private final Player nextPlayer;
 
-    public ResetTurn(int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt, Player previousPlayer, Player nextPlayer){
+    public ResetTurn(int availableMoveNumber, int availableBuildNumber, boolean hasMoved, boolean hasBuilt, Player previousPlayer, Player nextPlayer) {
         this.availableMoveNumber = availableMoveNumber;
         this.availableBuildNumber = availableBuildNumber;
         this.hasMoved = hasMoved;

@@ -88,7 +88,7 @@ public class Server {
             while(availableGodCards.size()!=numberOfPlayers){
                 try {
                     for (EnumGodCard g : godCards) {
-                        c1.send((String) g.toString());
+                        c1.send((String) g.toString() + ": " + g.description);
                     }
                     String s = c1.read();
                     EnumGodCard god = Enum.valueOf(EnumGodCard.class ,s.toUpperCase());
@@ -117,7 +117,7 @@ public class Server {
                 while(chosenGodCards.size()<i) {
                     try {
                         for (EnumGodCard g : availableGodCards) {
-                            connection.send((String) g.toString());
+                            connection.send((String) g.toString() + ": " + g.description);
                         }
                         String s = connection.read();
                         EnumGodCard god = Enum.valueOf(EnumGodCard.class, s.toUpperCase());
