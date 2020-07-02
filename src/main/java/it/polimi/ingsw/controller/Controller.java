@@ -61,7 +61,7 @@ public class Controller implements Observer {
      * throws a new IOExecption when an I/O exception of some sort has occurred.
      */
     public synchronized void handleMove(MoveRequest message) throws IOException {
-        if(playerTurn==message.getPlayer().getPlayerNumber()) {
+        if(playerTurn == message.getPlayer().getPlayerNumber()) {
             if (loseControl(message.getPlayer()) == 0) {
                 setChosenWorker(-1);
                 if(game.getPlayers().indexOf(game.getSinglePlayer(playerTurn)) == game.getPlayers().size() - 1) {
@@ -87,7 +87,6 @@ public class Controller implements Observer {
                     message.getView().reportError("Error! This move is not feasible!");
                 }
             }
-            //System.out.println("arrivato a fine handleMove");
         }
         else {
             message.getView().reportError("Error! It's not your turn!");
@@ -167,7 +166,7 @@ public class Controller implements Observer {
 
     @Override
     public void updateEndGame() {
-        for(SocketClientConnection c : connections){
+        for(SocketClientConnection c : connections) {
             try{
                 c.send("Game canceled!! A client has disconnected\nPress ENTER to close");
                 c.setEndGame();

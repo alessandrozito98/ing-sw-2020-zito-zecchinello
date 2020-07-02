@@ -7,13 +7,15 @@ import java.util.ArrayList;
 public class Athena extends God {
     private ArrayList<Player> players;
 
-    public Athena(Game game){
+    public Athena(Game game) {
         super(game);
         this.players = game.getPlayers();
 
     }
 
-    public ArrayList<Player> getPlayers(){return this.players;}
+    public ArrayList<Player> getPlayers(){
+        return this.players;
+    }
 
     /**
      * {@inheritDoc}
@@ -21,9 +23,9 @@ public class Athena extends God {
     @Override
     public void move(Cell cell, Worker worker) {
         Level oldLevel = worker.getPosition().getLevel();
-        if(cell.getLevel().ordinal()==oldLevel.ordinal()+1){
+        if(cell.getLevel().ordinal() == oldLevel.ordinal() + 1) {
             for (Player player:players) {
-                if(!(player.getGodCard() instanceof Athena)){
+                if(!(player.getGodCard() instanceof Athena)) {
                     player.getGodCard().setCanMoveUp(false);
                 }
             }
@@ -31,8 +33,8 @@ public class Athena extends God {
         worker.getPosition().removeWorker();
         cell.addWorker(worker);
         worker.setPosition(cell);
-        setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
-        setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        setAvailableMoveNumber(this.getAvailableMoveNumber() - 1);
+        setAvailableBuildNumber(this.getAvailableBuildNumber() + 1);
         setHasMoved(true);
     }
 }

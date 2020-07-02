@@ -18,7 +18,7 @@ public class Game extends Observable {
 
     public Game(Board board){
         this.board = board;
-        this.players= new ArrayList<Player>();
+        this.players= new ArrayList<>();
     }
 
 
@@ -124,20 +124,20 @@ public class Game extends Observable {
         //Removing the Worker
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if(board.getCell(i,j).getWorker() == player.getSingleWorker(1) || getBoard().getCell(i,j).getWorker() == player.getSingleWorker(2)) {
+                if(board.getCell(i, j).getWorker() == player.getSingleWorker(1) || getBoard().getCell(i, j).getWorker() == player.getSingleWorker(2)) {
                     board.getCell(i,j).removeWorker();
                 }
             }
         }
         //Removing the player
         Player nextPlayer;
-        if(players.indexOf(player)==players.size()-1) {
-            nextPlayer=players.get(0);
+        if(players.indexOf(player) == players.size() - 1) {
+            nextPlayer = players.get(0);
         }
         else {
-            nextPlayer=players.get(players.indexOf(player)+1);
+            nextPlayer = players.get(players.indexOf(player) + 1);
         }
-        notifyPlayerLose(new PlayerLose(getBoardCopy(),player,nextPlayer));
+        notifyPlayerLose(new PlayerLose(getBoardCopy(), player, nextPlayer));
         players.remove(player);
     }
 
@@ -154,7 +154,7 @@ public class Game extends Observable {
      */
     // crea un ArrayList che identifica le celle su cui un worker può fare una move
     public ArrayList<Cell> checkMovement(int playerNumber, int workerNumber, Board board) {
-        ArrayList<Cell> availableMoveCells = new ArrayList<Cell>();
+        ArrayList<Cell> availableMoveCells = new ArrayList<>();
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 5; j++){
                 if(getSinglePlayer(playerNumber).getGodCard().isFeasibleMove(board.getCell(i, j), getSinglePlayer(playerNumber).getSingleWorker(workerNumber))) {
@@ -180,7 +180,7 @@ public class Game extends Observable {
     public ArrayList<Cell> checkBuilding(int playerNumber, int workerNumber, Board board) {
         ArrayList<Cell> availableBuildCells = new ArrayList<Cell>();
         for(int i=0; i<5; i++){
-            for(int j=0; j<5; j++){
+            for(int j = 0; j < 5; j++) {
                 for(Level l: Level.values()) {
                     if (getSinglePlayer(playerNumber).getGodCard().isFeasibleBuild(board.getCell(i, j), getSinglePlayer(playerNumber).getSingleWorker(workerNumber), l)) {
                         Cell cell = new Cell(i, j);

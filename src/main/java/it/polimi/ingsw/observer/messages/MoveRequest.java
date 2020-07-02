@@ -13,7 +13,7 @@ public class MoveRequest {
     private final int xPosition;
     private final int yPosition;
 
-    public MoveRequest(View view, Player player, int workerNumber, int xPosition, int yPosition){
+    public MoveRequest(View view, Player player, int workerNumber, int xPosition, int yPosition) {
         this.view = view;
         this.player = player;
         this.workerNumber = workerNumber;

@@ -19,9 +19,9 @@ public class ClientMain {
         port = Integer.parseInt(scn.nextLine());
 
         Client client = new Client(ip, port);
-        try{
+        try {
             client.run();
-        }catch (IOException e){
+        } catch (IOException e){
             System.err.println(e.getMessage());
         }
     }

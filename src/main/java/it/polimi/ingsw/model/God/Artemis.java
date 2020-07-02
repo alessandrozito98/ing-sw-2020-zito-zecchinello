@@ -38,7 +38,7 @@ public class Artemis extends God {
      */
     @Override
     public boolean isFeasibleMove(Cell cell, Worker worker) {
-        if(this.firstMovePosition==cell){
+        if(this.firstMovePosition == cell) {
             return false;
         }
         return super.isFeasibleMove(cell, worker);

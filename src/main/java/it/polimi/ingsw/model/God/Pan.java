@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.Level;
 
 public class Pan extends God {
 
-    public Pan(Game game){
+    public Pan(Game game) {
         super(game);
     }
 
@@ -14,7 +14,7 @@ public class Pan extends God {
      */
     @Override
     public boolean winControl(Level oldLevel, Level newLevel) {
-        if((oldLevel!=newLevel&&newLevel==Level.LEVEL3)||(newLevel.ordinal()<=oldLevel.ordinal()-2)){
+        if((oldLevel != newLevel && newLevel == Level.LEVEL3) || (newLevel.ordinal() <= oldLevel.ordinal() - 2)) {
             return true;
         }
         return false;

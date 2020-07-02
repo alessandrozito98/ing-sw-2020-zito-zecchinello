@@ -24,7 +24,7 @@ public enum EnumGodCard {
         this.description = description;
     }
 
-    public God createGod(Game game){
+    public God createGod(Game game) {
         switch(this){
             case APOLLO: return new Apollo(game);
             case ARTEMIS: return new Artemis(game);

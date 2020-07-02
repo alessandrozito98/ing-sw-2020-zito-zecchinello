@@ -65,15 +65,15 @@ public class Board implements Cloneable, Serializable {
                     System.out.print("  "+ ANSI_BG_WHITE +" "+ANSI_RESET);
                 }
                 for(int k = 0; k < 5; k++) {
-                    if(j == 1){
+                    if(j == 1) {
                         System.out.print(this.board[k][i].getLevel().label + "    ");
                         if (this.board[k][i].getWorker() == null) {
                             System.out.print("    " + ANSI_RESET + ANSI_BG_WHITE + " " + ANSI_RESET);
                         } else {
-                            System.out.print(ANSI_RESET + this.board[k][i].getWorker().getColor().label + ANSI_WHITE +this.board[k][i].getWorker().getWorkerNumber() +this.board[k][i].getLevel().label+ "   " + ANSI_RESET + ANSI_BG_WHITE + " " + ANSI_RESET);
+                            System.out.print(ANSI_RESET + this.board[k][i].getWorker().getColor().label + ANSI_WHITE + this.board[k][i].getWorker().getWorkerNumber() + this.board[k][i].getLevel().label + "   " + ANSI_RESET + ANSI_BG_WHITE + " " + ANSI_RESET);
                         }
-                    } else{
-                        System.out.print(this.board[k][i].getLevel().label + "        "+ANSI_RESET+ ANSI_BG_WHITE +" "+ANSI_RESET);
+                    } else {
+                        System.out.print(this.board[k][i].getLevel().label + "        " + ANSI_RESET + ANSI_BG_WHITE + " " + ANSI_RESET);
                     }
                 }
                 System.out.println();

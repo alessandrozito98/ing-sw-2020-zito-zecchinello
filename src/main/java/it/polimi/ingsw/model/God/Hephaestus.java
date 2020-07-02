@@ -20,7 +20,7 @@ public class Hephaestus extends God {
      */
     @Override
     public void build(Cell cell, Worker worker, Level level) {
-        if(this.firstBuildPosition==null) {
+        if(this.firstBuildPosition == null) {
             this.firstBuildPosition = cell;
         }
         else {
@@ -35,11 +35,11 @@ public class Hephaestus extends God {
      */
     @Override
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level) {
-        if(this.firstBuildPosition==null){
+        if(this.firstBuildPosition == null) {
             return super.isFeasibleBuild(cell, worker, level);
         }
-        else{
-            if((this.firstBuildPosition == cell) && (level.ordinal() == (cell.getLevel().ordinal() + 1)) && (level != Level.DOME)){
+        else {
+            if((this.firstBuildPosition == cell) && (level.ordinal() == (cell.getLevel().ordinal() + 1)) && (level != Level.DOME)) {
                 return true;
             }
             return false;

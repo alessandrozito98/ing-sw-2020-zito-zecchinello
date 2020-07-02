@@ -31,7 +31,7 @@ public class RemoteView extends View {
     /**
      * {@inheritDoc}
      */
-    public void chooseAction(){
+    public void chooseAction() {
         String action = " ";
         try {
             while (action.equals(" ")) {
@@ -61,7 +61,7 @@ public class RemoteView extends View {
             if (action.equalsIgnoreCase("end turn")) {
                 endTurnHandler();
             }
-        } catch (IOException | NoSuchElementException e){
+        } catch (IOException | NoSuchElementException e) {
             notifyEndGame();
         }
     }
@@ -73,7 +73,7 @@ public class RemoteView extends View {
         int workerNumber = -1;
         int xCell = -1;
         int yCell = -1;
-        while(!(workerNumber == 1||workerNumber == 2)){
+        while(!(workerNumber == 1 || workerNumber == 2)) {
             connection.send((Board)boardCopy);
             connection.send((String) "Choose which worker you want to move, 1 or 2?");
             try {
@@ -88,7 +88,7 @@ public class RemoteView extends View {
                 connection.send((String) "Error!");
             }
         }
-        while (xCell<0&&yCell<0){
+        while (xCell < 0 && yCell < 0){
             connection.send((Board)boardCopy);
             connection.send((String)"Choose the coordinates 'x,y' of the destination cell from 0 to 4:");
             try {
@@ -96,17 +96,17 @@ public class RemoteView extends View {
                 String[] coordinates = s.split(",");
                 int x = Integer.parseInt(coordinates[0]);
                 int y = Integer.parseInt(coordinates[1]);
-                if(x<0||x>4||y<0||y>4){
+                if(x < 0 || x > 4 || y < 0 || y > 4) {
                     connection.send((String)"Error! cell does not exist");
-                }else{
+                }else {
                     xCell = x;
                     yCell = y;
                 }
-            }catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 connection.send((String)"Error! Write the coordinates with this format 'x,y'");
             }
         }
-        notifyMoveRequest(new MoveRequest(this,this.player,workerNumber,xCell,yCell));
+        notifyMoveRequest(new MoveRequest(this, this.player, workerNumber, xCell, yCell));
     }
 
     /**
@@ -117,7 +117,7 @@ public class RemoteView extends View {
         int xCell = -1;
         int yCell = -1;
         Level level = Level.GROUND;
-        while(!(workerNumber == 1||workerNumber == 2)){
+        while(!(workerNumber == 1 || workerNumber == 2)) {
             connection.send((Board)boardCopy);
             connection.send((String) "Choose which worker should build, 1 or 2?");
             try {
@@ -132,7 +132,7 @@ public class RemoteView extends View {
                 connection.send((String) "Error!");
             }
         }
-        while (xCell<0&&yCell<0){
+        while (xCell < 0 && yCell < 0){
             connection.send((Board)boardCopy);
             connection.send((String)"Choose the coordinates 'x,y' of the destination cell of the build from 0 to 4:");
             try {
@@ -140,33 +140,33 @@ public class RemoteView extends View {
                 String[] coordinates = s.split(",");
                 int x = Integer.parseInt(coordinates[0]);
                 int y = Integer.parseInt(coordinates[1]);
-                if(x<0||x>4||y<0||y>4){
+                if(x < 0 || x > 4 || y < 0 || y > 4) {
                     connection.send((String)"Error! cell does not exist");
                 }else{
                     xCell = x;
                     yCell = y;
                 }
-            }catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
+            }catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 connection.send((String)"Error! Write the coordinates with this format 'x,y'");
             }
         }
-        while(level.equals(Level.GROUND)){
+        while(level.equals(Level.GROUND)) {
             connection.send((Board)boardCopy);
-            connection.send((String) "Choose the level block you want to build:\n'1' for Level 1 "+ANSI_BG_PURPLE+"  "+ANSI_RESET+"\n'2' for Level 2 "+ANSI_BG_CYAN+"  "+ANSI_RESET+"\n'3' for Level 3 "+ANSI_BG_YELLOW+"  "+ANSI_RESET+"\n'd' for Dome    "+ ANSI_BRIGHT_BG_WHITE +"  "+ANSI_RESET);
+            connection.send((String) "Choose the level block you want to build:\n'1' for Level 1 " + ANSI_BG_PURPLE+ "  " + ANSI_RESET + "\n'2' for Level 2 " + ANSI_BG_CYAN + "  " + ANSI_RESET + "\n'3' for Level 3 "+ ANSI_BG_YELLOW + "  " + ANSI_RESET + "\n'd' for Dome    " + ANSI_BRIGHT_BG_WHITE + "  " + ANSI_RESET);
             String s = connection.read();
             if (s.equals("1")) {
                 level = Level.LEVEL1;
-            }else if(s.equals("2")) {
+            } else if(s.equals("2")) {
                 level = Level.LEVEL2;
-            }else if(s.equals("3")){
+            } else if(s.equals("3")) {
                 level = Level.LEVEL3;
-            }else if(s.equalsIgnoreCase("d")){
+            } else if(s.equalsIgnoreCase("d")) {
                 level = Level.DOME;
-            }else{
+            } else {
                 connection.send((String) "Error!");
             }
         }
-        notifyBuildRequest(new BuildRequest(this,this.player,workerNumber,xCell,yCell,level));
+        notifyBuildRequest(new BuildRequest(this, this.player, workerNumber, xCell, yCell, level));
     }
 
     /**
@@ -235,7 +235,7 @@ public class RemoteView extends View {
     public void updateBoardChange(BoardChange message) throws IOException {
         setBoardCopy(message.getBoardCopy());
         connection.send((Board)this.boardCopy);
-        if(message.getPlayer()==this.player){
+        if(message.getPlayer() == this.player) {
             this.availableMoveNumber = message.getAvailableMoveNumber();
             this.availableBuildNumber = message.getAvailableBuildNumber();
             this.hasMoved = message.getHasMoved();
@@ -245,7 +245,7 @@ public class RemoteView extends View {
 
     @Override
     public void updateResetTurn(ResetTurn message) {
-        if(message.getPreviousPlayer()==this.player){
+        if(message.getPreviousPlayer() == this.player) {
             this.availableMoveNumber = message.getAvailableMoveNumber();
             this.availableBuildNumber = message.getAvailableBuildNumber();
             this.hasMoved = message.getHasMoved();
@@ -264,9 +264,9 @@ public class RemoteView extends View {
 
     @Override
     public void updateWin(Win message) throws IOException {
-        if(message.getPlayer()==this.player){
+        if(message.getPlayer()==this.player) {
             connection.send((String)"YOU WIN\nPress ENTER to close");
-        }else{
+        }else {
             connection.send((String)"YOU LOSE\nPress ENTER to close");
         }
         connection.setEndGame();

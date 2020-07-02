@@ -63,28 +63,26 @@ public abstract class God {
      * @return
      * 'true' if the move is feasible, 'false' if not
      */
-    public boolean isFeasibleMove(Cell cell,Worker worker){
+    public boolean isFeasibleMove(Cell cell,Worker worker) {
 
         if(cell.getWorker()!=null) {
             return false;
         }
 
-        if(cell.getLevel()==Level.DOME){
+        if(cell.getLevel() == Level.DOME) {
             return false;
         }
 
-        if(cell.getLevel().ordinal()>(worker.getPosition().getLevel().ordinal()+1)){
+        if(cell.getLevel().ordinal() > (worker.getPosition().getLevel().ordinal() + 1)) {
             return false;
         }
 
-        if(!this.getCanMoveUp()&&(cell.getLevel().ordinal()==(worker.getPosition().getLevel().ordinal()+1))){
+        if(!this.getCanMoveUp() && (cell.getLevel().ordinal() == (worker.getPosition().getLevel().ordinal() + 1))) {
             return false;
         }
 
         if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
-            if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
-                return true;
-            }
+            return cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY();
         }
         return false;
     }
@@ -100,24 +98,22 @@ public abstract class God {
      * @return
      * 'true' if the build is feasible, 'false' if not
      */
-    public boolean isFeasibleBuild(Cell cell, Worker worker, Level level){
+    public boolean isFeasibleBuild(Cell cell, Worker worker, Level level) {
 
-        if(cell.getWorker()!=null) {
+        if(cell.getWorker() != null) {
             return false;
         }
 
-        if(cell.getLevel()==Level.DOME){
+        if(cell.getLevel() == Level.DOME) {
             return false;
         }
 
-        if(!(cell.getLevel().ordinal()==(level.ordinal()-1))){
+        if(!(cell.getLevel().ordinal()==(level.ordinal() - 1))) {
             return false;
         }
 
         if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
-            if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
-                return true;
-            }
+            return cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY();
         }
         return false;
     }
@@ -171,8 +167,8 @@ public abstract class God {
      * @return
      * If he was won or not.
      */
-    public boolean winControl(Level oldLevel, Level newLevel){
-        if(oldLevel!=newLevel&&newLevel==Level.LEVEL3){
+    public boolean winControl(Level oldLevel, Level newLevel) {
+        if(oldLevel!=newLevel&&newLevel == Level.LEVEL3) {
             return true;
         }
         return false;
@@ -181,7 +177,7 @@ public abstract class God {
     /**
      * It resets the available actions at the beginning of the turn.
      */
-    public void resetTurn(){
+    public void resetTurn() {
         this.availableMoveNumber = 1;
         this.availableBuildNumber = 0;
         this.canMoveUp = true;

@@ -13,7 +13,7 @@ public class Client {
     private String ip;
     private int port;
 
-    public Client(String ip, int port){
+    public Client(String ip, int port) {
         this.ip = ip;
         this.port = port;
     }
@@ -35,7 +35,7 @@ public class Client {
      * @return
      * returns the created thread
      */
-    public Thread asyncReadFromSocket(final ObjectInputStream socketIn){
+    public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -45,7 +45,7 @@ public class Client {
                             Object inputObject = socketIn.readObject();
                             if (inputObject instanceof String) {
                                 System.out.println((String) inputObject);
-                                if(inputObject.equals("Game canceled!! A client has disconnected\nPress ENTER to close")||inputObject.equals("YOU WIN\nPress ENTER to close")||inputObject.equals("YOU LOSE\nPress ENTER to close")){
+                                if(inputObject.equals("Game cancelled!! A client has disconnected\nPress ENTER to close") || inputObject.equals("YOU WIN\nPress ENTER to close") || inputObject.equals("YOU LOSE\nPress ENTER to close")) {
                                     setActive(false);
                                 }
                             } else if (inputObject instanceof Board) {
@@ -57,7 +57,6 @@ public class Client {
                             setActive(false);
                         }
                     }
-
             }
         });
         t.start();
@@ -73,7 +72,7 @@ public class Client {
      * @return
      * returns the created thread
      */
-    public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut){
+    public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut) {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -101,12 +100,12 @@ public class Client {
         PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
         Scanner stdin = new Scanner(System.in);
 
-        try{
+        try {
             Thread t0 = asyncReadFromSocket(socketIn);
             Thread t1 = asyncWriteToSocket(stdin, socketOut);
             t1.join();
             t0.join();
-        } catch(InterruptedException | NoSuchElementException e){
+        } catch(InterruptedException | NoSuchElementException e) {
             System.out.println("Connection closed from the client side");
         } finally {
             stdin.close();

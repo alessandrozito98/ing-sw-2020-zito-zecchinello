@@ -17,22 +17,20 @@ public class Atlas extends God {
     @Override
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level) {
 
-        if(cell.getWorker()!=null) {
+        if(cell.getWorker() != null) {
             return false;
         }
 
-        if(cell.getLevel()==Level.DOME){
+        if(cell.getLevel() == Level.DOME) {
             return false;
         }
 
-        if(!(cell.getLevel().ordinal() == (level.ordinal() - 1)) && !(level == Level.DOME)){
+        if(!(cell.getLevel().ordinal() == (level.ordinal() - 1)) && !(level == Level.DOME)) {
             return false;
         }
 
         if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
-            if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
-                return true;
-            }
+            return cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY();
         }
         return false;
     }

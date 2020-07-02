@@ -11,7 +11,7 @@ public class ServerMain {
         Scanner scn = new Scanner(System.in);
         int port = 0;
         System.out.println("Starting server...");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         try {
             System.out.println("Type in port number: ");
             port = Integer.parseInt(scn.nextLine());

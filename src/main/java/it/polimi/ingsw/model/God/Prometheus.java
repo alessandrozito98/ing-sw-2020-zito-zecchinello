@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.Worker;
 
 public class Prometheus extends God {
 
-    public Prometheus(Game game){
+    public Prometheus(Game game) {
         super(game);
         this.availableMoveNumber = 1;
         this.availableBuildNumber = 1;
@@ -20,9 +20,9 @@ public class Prometheus extends God {
     @Override
     public void build(Cell cell, Worker worker, Level level) {
         cell.setLevel(level);
-        setAvailableBuildNumber(this.getAvailableBuildNumber()-1);
+        setAvailableBuildNumber(this.getAvailableBuildNumber() - 1);
         setHasBuilt(true);
-        if(this.availableMoveNumber==1){
+        if(this.availableMoveNumber == 1) {
             this.setCanMoveUp(false);
         }
     }
@@ -35,8 +35,8 @@ public class Prometheus extends God {
         worker.getPosition().removeWorker();
         cell.addWorker(worker);
         worker.setPosition(cell);
-        setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
-        setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        setAvailableMoveNumber(this.getAvailableMoveNumber() - 1);
+        setAvailableBuildNumber(this.getAvailableBuildNumber() + 1);
         setHasMoved(true);
         setAvailableBuildNumber(1);
     }

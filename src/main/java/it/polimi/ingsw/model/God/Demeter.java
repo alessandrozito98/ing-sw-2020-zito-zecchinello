@@ -36,7 +36,7 @@ public class Demeter extends God {
      */
     @Override
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level) {
-        if(this.firstBuildPosition==cell){
+        if(this.firstBuildPosition==cell) {
             return false;
         }
         return super.isFeasibleBuild(cell, worker, level);

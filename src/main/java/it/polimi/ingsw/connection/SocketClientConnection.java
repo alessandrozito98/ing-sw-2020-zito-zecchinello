@@ -31,15 +31,17 @@ public class SocketClientConnection extends Observable implements Runnable {
      * @param t
      * a boolean value
      */
-    public synchronized void setMyTurn(boolean t){
+    public synchronized void setMyTurn(boolean t) {
         myTurn = t;
-        if(t) notify();
+        if(t) {
+            notify();
+        }
     }
 
     /**
      * set activeGame to false and wake up the thread of this instance
      */
-    public synchronized void setEndGame(){
+    public synchronized void setEndGame() {
         activeGame = false;
         notify();
     }
@@ -50,7 +52,9 @@ public class SocketClientConnection extends Observable implements Runnable {
      * throws a new InterruptedExecption when an Interrupted exception of some sort has occurred.
      */
     public synchronized void waitMyTurn() throws InterruptedException {
-        while(!myTurn) wait();
+        while(!myTurn) {
+            wait();
+        }
     }
 
     public void setView(View view) {
@@ -61,15 +65,8 @@ public class SocketClientConnection extends Observable implements Runnable {
         return view;
     }
 
-    public Server getServer(){ return server;}
-
-    public synchronized void closeConnection() throws IOException {
-        send("Connection closed!");
-        try {
-            socket.close();
-        } catch (IOException e) {
-            System.err.println("Error when closing socket!");
-        }
+    public Server getServer(){
+        return server;
     }
 
     /**
@@ -83,7 +80,7 @@ public class SocketClientConnection extends Observable implements Runnable {
         out.reset();
         out.writeObject(message);
         out.flush();
-        if(message.equals("YOU WIN\nPress ENTER to close")){
+        if(message.equals("YOU WIN\nPress ENTER to close")) {
             server.removeAllConnection();
         }
     }
@@ -95,7 +92,7 @@ public class SocketClientConnection extends Observable implements Runnable {
      * @throws NoSuchElementException
      * throws a new NoSuchElementExecption when there is no nextLine.
      */
-    public String read() throws NoSuchElementException{
+    public String read() throws NoSuchElementException {
         String read;
         read = in.nextLine();
         return read;
@@ -111,13 +108,14 @@ public class SocketClientConnection extends Observable implements Runnable {
             String read = in.nextLine();
             name = read;
             server.lobby(this, name);
-            while(activeGame){
+            while(activeGame) {
                 waitMyTurn();
-                if(activeGame) view.chooseAction();
+                if(activeGame) {
+                    view.chooseAction();
+                }
             }
             server.incrementClosingCount();
             socket.close();
-            //System.out.println("connessioni cancellate");
         } catch (IOException | NoSuchElementException | InterruptedException e) {
             System.err.println("Error!" + e.getMessage());
         }

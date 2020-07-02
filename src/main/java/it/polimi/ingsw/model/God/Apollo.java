@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.Worker;
 
 public class Apollo extends God {
 
-    public Apollo(Game game){
+    public Apollo(Game game) {
         super(game);
     }
 
@@ -17,7 +17,7 @@ public class Apollo extends God {
      */
     @Override
     public void move(Cell cell, Worker worker) {
-        if(cell.getWorker()!=null){
+        if(cell.getWorker() != null) {
             cell.getWorker().setPosition(worker.getPosition());
             worker.getPosition().removeWorker();
             worker.getPosition().addWorker(cell.getWorker());
@@ -28,8 +28,8 @@ public class Apollo extends God {
         }
         cell.addWorker(worker);
         worker.setPosition(cell);
-        setAvailableMoveNumber(this.getAvailableMoveNumber()-1);
-        setAvailableBuildNumber(this.getAvailableBuildNumber()+1);
+        setAvailableMoveNumber(this.getAvailableMoveNumber() - 1);
+        setAvailableBuildNumber(this.getAvailableBuildNumber() + 1);
         setHasMoved(true);
     }
 
@@ -39,26 +39,24 @@ public class Apollo extends God {
     @Override
     public boolean isFeasibleMove(Cell cell, Worker worker) {
 
-        if(cell.getWorker()!=null&&(cell.getWorker().getColor()==worker.getColor())) {
+        if(cell.getWorker() != null && (cell.getWorker().getColor() == worker.getColor())) {
             return false;
         }
 
-        if(cell.getLevel()== Level.DOME){
+        if(cell.getLevel() == Level.DOME) {
             return false;
         }
 
-        if(cell.getLevel().ordinal()>(worker.getPosition().getLevel().ordinal()+1)){
+        if(cell.getLevel().ordinal() > (worker.getPosition().getLevel().ordinal() + 1)) {
             return false;
         }
 
-        if(!this.getCanMoveUp()&& cell.getLevel().ordinal()== worker.getPosition().getLevel().ordinal()+1){
+        if(!this.getCanMoveUp() && cell.getLevel().ordinal() == worker.getPosition().getLevel().ordinal() + 1) {
             return false;
         }
 
         if(cell.getX() == worker.getPosition().getX() - 1 || cell.getX() == worker.getPosition().getX() + 1 || cell.getX() == worker.getPosition().getX()) {
-            if (cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY()) {
-                return true;
-            }
+            return cell.getY() == worker.getPosition().getY() - 1 || cell.getY() == worker.getPosition().getY() + 1 || cell.getY() == worker.getPosition().getY();
         }
         return false;
     }
