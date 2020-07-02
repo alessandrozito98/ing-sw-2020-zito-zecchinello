@@ -35,5 +35,5 @@ src/main/java/META-INF
 out
 
 #ignoring all the javadoc junk files
-/deliverables/javadoc/*
+/deliverables/javadoc/
 !/deliverables/javadoc/it
