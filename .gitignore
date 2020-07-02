@@ -16,19 +16,8 @@ buildNumber.properties
 GC16.iml
 
 #ignoring all coverage test not necessary
-/deliverables/report/*
-!/deliverables/report/.css
-!/deliverables/report/.img
-!/deliverables/report/index.html
-!/deliverables/report/it.polimi.ingsw.model/
-!deliverables/report/it.polimi.ingsw.model.God/
-!deliverables/report/it.polimi.ingsw.controller/
-/deliverables/report/it.polimi.ingsw.model/*
-deliverables/report/it.polimi.ingsw.model.God/*
-deliverables/report/it.polimi.ingsw.controller/*
-!/deliverables/report/it.polimi.ingsw.model.God/index.html
-!/deliverables/report/it.polimi.ingsw.model/index.html
-!/deliverables/report/it.polimi.ingsw.controller/index.html
+/deliverables/report/
+
 
 #Ignoring META-INF and out
 src/main/java/META-INF
@@ -36,4 +25,4 @@ out
 
 #ignoring all the javadoc junk files
 /deliverables/javadoc/
-!/deliverables/javadoc/it
+
