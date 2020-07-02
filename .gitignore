@@ -15,6 +15,9 @@ buildNumber.properties
 .idea
 GC16.iml
 
+#Ignoring .uml file
+/deliverables/UML/GC16.uml
+
 #ignoring all coverage test not necessary
 /deliverables/report/
 
