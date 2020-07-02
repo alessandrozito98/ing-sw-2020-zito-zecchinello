@@ -60,6 +60,8 @@ public abstract class God {
      * The new position.
      * @param worker
      * The worker that has to be moved.
+     * @return
+     * 'true' if the move is feasible, 'false' if not
      */
     public boolean isFeasibleMove(Cell cell,Worker worker){
 
@@ -95,6 +97,8 @@ public abstract class God {
      * The worker that has to build.
      * @param level
      * The level that has to be built.
+     * @return
+     * 'true' if the build is feasible, 'false' if not
      */
     public boolean isFeasibleBuild(Cell cell, Worker worker, Level level){
 

@@ -33,3 +33,7 @@ deliverables/report/it.polimi.ingsw.controller/*
 #Ignoring META-INF and out
 src/main/java/META-INF
 out
+
+#ignoring all the javadoc junk files
+/deliverables/javadoc/*
+!/deliverables/javadoc/it

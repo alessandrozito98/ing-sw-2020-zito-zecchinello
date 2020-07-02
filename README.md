@@ -97,4 +97,4 @@ For the test coverage, there are some HTML files in
 ```
 /deliverables/report/
 ```
-that show the complete coverage of each class of both Model and Controller package.
+that show the complete coverage of each class of both model and controller packages.
