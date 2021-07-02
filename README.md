@@ -28,7 +28,7 @@
 
 ### Build instructions
 
-The jar are built using the [Maven Install Plugin](https://maven.apache.org/plugins/maven-install-plugin/)
+The jar were built using the [Maven Install Plugin](https://maven.apache.org/plugins/maven-install-plugin/)
 If you want to build yourself the executables jar files run:
 ```
 mvn install
@@ -90,6 +90,6 @@ PAN
 
 For the test coverage, there are some HTML files in
 ```
-/deliverables/report/
+deliverables/report/
 ```
 that show the complete coverage of each class of both model and controller packages.
