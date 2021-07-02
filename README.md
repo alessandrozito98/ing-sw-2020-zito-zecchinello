@@ -12,6 +12,22 @@
 
 [![GREEN](https://placehold.it/15/44bb44/44bb44)](#) = implemented and tested
 
+
+| Functionality | Status |
+|:-----------------------|:------------------------------------:|
+| Basic rules | [![GREEN](http://placehold.it/15/44bb44/44bb44)]() |
+| Complete rules | [![GREEN](http://placehold.it/15/44bb44/44bb44)]() |
+| Socket |[![GREEN](http://placehold.it/15/44bb44/44bb44)]() |
+| CLI |[![GREEN](http://placehold.it/15/44bb44/44bb44)]() |
+| GUI | [![RED](http://placehold.it/15/f03c15/f03c15)]() |
+| Multiple games | [![RED](http://placehold.it/15/f03c15/f03c15)]()|
+| 5 Advanced Gods | [![RED](http://placehold.it/15/f03c15/f03c15)]() |
+| Persistence | [![RED](http://placehold.it/15/f03c15/f03c15)]() |
+| Undo Function | [![RED](http://placehold.it/15/f03c15/f03c15)]() |
+
+
+
+
 | Functionality | State |
 |:-----------------------|:------------------------------------:| 
 | Basic rules | [![GREEN](https://placehold.it/15/44bb44/44bb44)](#) |
