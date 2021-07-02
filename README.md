@@ -6,6 +6,9 @@
 
 #### Legend
 
+#### Legend
+[![RED](http://placehold.it/15/f03c15/f03c15)]() Not Implemented &nbsp;&nbsp;&nbsp;&nbsp;[![YELLOW](http://placehold.it/15/ffdd00/ffdd00)]() Implementing&nbsp;&nbsp;&nbsp;&nbsp;[![GREEN](http://placehold.it/15/44bb44/44bb44)]() Implemented
+
 [![RED](https://placehold.it/15/f03c15/f03c15)]() = not implemented yet
 
 [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)]() = being implemented
